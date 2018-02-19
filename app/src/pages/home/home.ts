@@ -56,13 +56,11 @@ export class HomePage {
     this.pubquiz = gPubquiz
     this.round = 0
     this.question = 0
+
     this.answer = []
-    console.log('before')
-    // console.log(this.pubquiz)
     for (let n = 0;n < this.pubquiz.rounds[this.round].questions.length;n++) {
-      this.answer.push('My answer #' + (n+1))
+      this.answer.push('')
     }
-    console.log('after')
   }
 
   ionViewDidLoad() {

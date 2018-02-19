@@ -6,7 +6,7 @@
 
 <ion-content> question {{question}}
   <ion-label color="primary">{{pubquiz.rounds[round].questions[question].question}}</ion-label>
-  <ion-input type="answer" placeholder={{answer[question]}}></ion-input>
+  <ion-input type="text" [(ngModel)]="answer[question]" placeholder="..."></ion-input>
 
   <button ion-button (click)="previousQuestion()" *ngIf="question > 0">&lt;</button>
   <button ion-button (click)="nextQuestion()" *ngIf="question < pubquiz.rounds[round].questions.length-1">&gt;</button>
