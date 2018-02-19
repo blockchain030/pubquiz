@@ -51,7 +51,7 @@ export class RatePage {
   pubquiz: any;
   round: any;     // index
   question: any;  // index
-  approval: any[];
+  answer: any[];
 
   constructor(public navCtrl: NavController) {
     this.pubquiz = gPubquiz
@@ -82,22 +82,22 @@ export class RatePage {
   }
 
   disapprove(userId) {
-    console.log('disapprove', userId)
+    // console.log('disapprove', userId)
     for (let answer of this.pubquiz.rounds[this.round].questions[this.question].answers) {
       if (answer.userId === userId) {
         answer.approve = false;
       }
-      console.log(answer)
+      // console.log(answer)
     }
   }
   
   approve(userId) {
-    console.log('approve', userId)
+    // console.log('approve', userId)
     for (let answer of this.pubquiz.rounds[this.round].questions[this.question].answers) {
       if (answer.userId === userId) {
         answer.approve = true;
       }
-      console.log(answer)
+      // console.log(answer)
     }
   }
   
