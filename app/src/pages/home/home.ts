@@ -37,7 +37,7 @@ let gPubquiz = {
 }
 // console.log(gPubquiz)
 
-import Web3 from 'web3';
+// import Web3 from 'web3';
 
 @Component({
   selector: 'page-home',
@@ -45,18 +45,29 @@ import Web3 from 'web3';
 })
 export class HomePage {
 
-  web3: any;
-  round: any = 0;
-  question: any = 0;
-  pubquiz: any = gPubquiz;
+  // web3: any;
+  
+  pubquiz: any;
+  round: any;     // index
+  question: any;  // index
+  answer: any[];
 
   constructor(public navCtrl: NavController) {
-    console.log(this.round, this.question, JSON.stringify(this.pubquiz, null, 4))
+    this.pubquiz = gPubquiz
+    this.round = 0
+    this.question = 0
+    this.answer = []
+    console.log('before')
+    // console.log(this.pubquiz)
+    for (let n = 0;n < this.pubquiz.rounds[this.round].questions.length;n++) {
+      this.answer.push('My answer #' + (n+1))
+    }
+    console.log('after')
   }
 
   ionViewDidLoad() {
 
-      this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+      // this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
       // console.log(this.web3);
 
@@ -71,7 +82,21 @@ export class HomePage {
       // });
   }
 
-  web3Version() {
-    return this.web3&&this.web3.version||'unknown';
+  previousQuestion() {
+    this.question = Math.max(0, this.question-1) 
+    // console.log('previousQuestion', this.question)
   }
+
+  nextQuestion() {
+    this.question = Math.min(this.pubquiz.rounds[this.round].questions.length-1, this.question+1)
+    // console.log('nextQuestion', this.question)
+  }
+
+  submitRound() {
+    alert(JSON.stringify(this.answer, null, 4))
+  }
+
+  // web3Version() {
+  //   return this.web3&&this.web3.version||'unknown';
+  // }
 }

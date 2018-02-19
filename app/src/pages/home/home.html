@@ -1,68 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>{{pubquiz.rounds[round].title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <!-- Real floating action button, fixed. It will not scroll with the content -->
-    <!-- <ion-fab top right edge>
-      <button ion-fab mini><ion-icon name="add"></ion-icon></button>
-      <ion-fab-list>
-        <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-      </ion-fab-list>
-    </ion-fab>
-      
-    <ion-list>
-        <ion-item>
-          <ion-label color="primary">Inline Label</ion-label>
-          <ion-input placeholder="Text Input"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label color="primary" fixed>Fixed Label</ion-label>
-          <ion-input type="tel" placeholder="Tel Input"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-input type="number" placeholder="Number Input with no label"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label color="primary" stacked>Stacked Label</ion-label>
-          <ion-input type="email" placeholder="Email Input"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label color="primary" stacked>Stacked Label</ion-label>
-          <ion-input type="password" placeholder="Password Input"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label color="primary" floating>Floating Label</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-input placeholder="Clear Input" clearInput></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-textarea placeholder="Enter a description"></ion-textarea>
-        </ion-item>
-      </ion-list>
-      
-    <ion-fab right bottom>
-      <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
-      <ion-fab-list side="left">
-        <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-        <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-      </ion-fab-list>
-    </ion-fab> -->
-  
-  </ion-content>
+<ion-content> question {{question}}
+  <ion-label color="primary">{{pubquiz.rounds[round].questions[question].question}}</ion-label>
+  <ion-input type="answer" placeholder={{answer[question]}}></ion-input>
+
+  <button ion-button (click)="previousQuestion()" *ngIf="question > 0">&lt;</button>
+  <button ion-button (click)="nextQuestion()" *ngIf="question < pubquiz.rounds[round].questions.length-1">&gt;</button>
+  <button ion-button (click)="submitRound()" *ngIf="question === pubquiz.rounds[round].questions.length-1">Submit answers of current round</button>
+</ion-content>
