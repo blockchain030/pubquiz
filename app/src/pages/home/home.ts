@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Data } from '../../providers/data';
+// import { Data } from '../../providers/data';
 import { RatePage } from '../rate/rate';
 
 // let gPubquiz2 = require('../../assets/datasets/20180219-questions.json')
@@ -93,7 +93,7 @@ export class HomePage {
 
   submitRound() {
     // alert(JSON.stringify(this.answer, null, 4))
-    this.navCtrl.push(RatePage);
+    this.navCtrl.push(RatePage, {pubquiz: this.pubquiz, round: this.round, answer: this.answer});
   }
 
   // web3Version() {

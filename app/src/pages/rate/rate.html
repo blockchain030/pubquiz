@@ -7,7 +7,7 @@
 <ion-content>
   <ion-label color="primary">Q: {{pubquiz.rounds[round].questions[question].question}}</ion-label>
   <ion-label color="primary">A: {{pubquiz.rounds[round].questions[question].answer}}</ion-label>
-  Mijn antwoord: TODO
+  My answer: {{answer[question]}}
   
   <ion-grid>
     <ion-row *ngFor="let a of pubquiz.rounds[round].questions[question].answers">

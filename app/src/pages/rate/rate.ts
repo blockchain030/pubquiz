@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Data } from '../../providers/data';
+import { NavController, NavParams } from 'ionic-angular';
+// import { Data } from '../../providers/data';
 
 let gPubquiz = {
   "rounds": [
@@ -53,32 +53,14 @@ export class RatePage {
   question: any;  // index
   answer: any[];
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.pubquiz = gPubquiz
-    this.round = 0
+    this.round = navParams.get('round')
     this.question = 0
-
-    this.answer = []
-    for (let n = 0;n < this.pubquiz.rounds[this.round].questions.length;n++) {
-      this.answer.push('')
-    }
+    this.answer = navParams.get('answer')
   }
 
   ionViewDidLoad() {
-
-      // this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-
-      // console.log(this.web3);
-
-      // this.dataService.load().then((data) => {
-      //     data.map((question,index) => {
-      //           question.id=index;
-      //           question.choices = [ "AGAIN", "TOMORROW", "LATER" ];
-      //           question.status = "NEW"
-      //         });
-      //
-      //     this.questions = data;
-      // });
   }
 
   disapprove(userId) {
@@ -115,8 +97,4 @@ export class RatePage {
     // alert(JSON.stringify(this.answer, null, 4))
     this.navCtrl.push(RatePage);
   }
-
-  // web3Version() {
-  //   return this.web3&&this.web3.version||'unknown';
-  // }
 }
