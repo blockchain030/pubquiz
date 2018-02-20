@@ -51,13 +51,14 @@ export class RatePage {
   pubquiz: any;
   round: any;     // index
   question: any;  // index
-  answer: any[];
+  playerAnswer: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    // this.pubquiz = navParams.get('pubquiz')
     this.pubquiz = gPubquiz
     this.round = navParams.get('round')
     this.question = 0
-    this.answer = navParams.get('answer')
+    this.playerAnswer = navParams.get('playerAnswer')
   }
 
   ionViewDidLoad() {
@@ -94,7 +95,6 @@ export class RatePage {
   }
 
   submitRound() {
-    // alert(JSON.stringify(this.answer, null, 4))
-    this.navCtrl.push(RatePage);
+    alert(JSON.stringify(this.pubquiz, null, 4))
   }
 }

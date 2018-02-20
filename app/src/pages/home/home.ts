@@ -51,16 +51,16 @@ export class HomePage {
   pubquiz: any;
   round: any;     // index
   question: any;  // index
-  answer: any[];
+  playerAnswer: any[];
 
   constructor(public navCtrl: NavController) {
     this.pubquiz = gPubquiz
     this.round = 0
     this.question = 0
 
-    this.answer = []
+    this.playerAnswer = []
     for (let n = 0;n < this.pubquiz.rounds[this.round].questions.length;n++) {
-      this.answer.push('')
+      this.playerAnswer.push('')
     }
   }
 
@@ -93,7 +93,7 @@ export class HomePage {
 
   submitRound() {
     // alert(JSON.stringify(this.answer, null, 4))
-    this.navCtrl.push(RatePage, {pubquiz: this.pubquiz, round: this.round, answer: this.answer});
+    this.navCtrl.push(RatePage, {pubquiz: this.pubquiz, round: this.round, playerAnswer: this.playerAnswer});
   }
 
   // web3Version() {

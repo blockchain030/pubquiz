@@ -6,9 +6,9 @@
 
 <ion-content>
   <ion-label color="primary">{{pubquiz.rounds[round].questions[question].question}}</ion-label>
-  <ion-input type="text" [(ngModel)]="answer[question]" placeholder="answer here"></ion-input>
+  <ion-input type="text" [(ngModel)]="playerAnswer[question]" placeholder="Your answer here..."></ion-input>
 
-  <button ion-button (click)="previousQuestion()" *ngIf="question > 0">&lt;</button>
-  <button ion-button (click)="nextQuestion()" *ngIf="question < pubquiz.rounds[round].questions.length-1">&gt;</button>
-  <button ion-button (click)="submitRound()" *ngIf="question === pubquiz.rounds[round].questions.length-1">Submit answers of current round</button>
+  <button ion-button (click)="previousQuestion()" [disabled]="question <= 0">&lt;</button>
+  <button ion-button (click)="nextQuestion()"     [disabled]="question >= pubquiz.rounds[round].questions.length-1">&gt;</button>
+  <button ion-button (click)="submitRound()"      [disabled]="question !== pubquiz.rounds[round].questions.length-1">Submit</button>
 </ion-content>
