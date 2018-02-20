@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{pubquiz.rounds[round].title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-label color="primary">Q: {{pubquiz.rounds[round].questions[question].question}}</ion-label>
+  <ion-label color="primary">A: {{pubquiz.rounds[round].questions[question].answer}}</ion-label>
+  ({{playerAnswer[question]}})
+  
+  <ion-grid>
+    <ion-row *ngFor="let a of pubquiz.rounds[round].questions[question].answers">
+      <ion-col><button ion-button (click)="approve(a.userId)">V</button></ion-col>
+      <ion-col>{{a.text}}<span *ngIf="!a.approve"> (WRONG)</span></ion-col>
+      <ion-col><button ion-button (click)="disapprove(a.userId)">X</button></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button ion-button (click)="previousQuestion()" [disabled]="question <= 0">&lt;</button>
+  <button ion-button (click)="nextQuestion()"     [disabled]="question >= pubquiz.rounds[round].questions.length-1">&gt;</button>
+  <button ion-button (click)="submitRound()"      [disabled]="question !== pubquiz.rounds[round].questions.length-1">Submit</button>
+</ion-content>

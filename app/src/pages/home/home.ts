@@ -1,8 +1,44 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Data } from '../../providers/data';
+// import { Data } from '../../providers/data';
+import { RatePage } from '../rate/rate';
 
-import Web3 from 'web3';
+// let gPubquiz2 = require('../../assets/datasets/20180219-questions.json')
+// console.log(gPubquiz2)
+
+let gPubquiz = {
+  "rounds": [
+    { "title": "ronde 1 - algemeen",
+      "questions": [
+      {
+        "number": "1",
+        "question": "vraag 1",
+        "answer": "antwoord 1"
+      },
+      {
+        "number": "2",
+        "question": "vraag 2",
+        "answer": "antwoord 2"
+      }
+    ]},
+    { "title": "ronde 2 - ethereum",
+      "questions": [
+      {
+        "number": "1",
+        "question": "vraag 1",
+        "answer": "antwoord 1"
+      },
+      {
+        "number": "2",
+        "question": "vraag 2",
+        "answer": "antwoord 2"
+      }
+    ]},
+  ]
+}
+// console.log(gPubquiz)
+
+// import Web3 from 'web3';
 
 @Component({
   selector: 'page-home',
@@ -10,17 +46,29 @@ import Web3 from 'web3';
 })
 export class HomePage {
 
-  web3: any;
+  // web3: any;
+  
+  pubquiz: any;
+  round: any;     // index
+  question: any;  // index
+  playerAnswer: any[];
 
   constructor(public navCtrl: NavController) {
+    this.pubquiz = gPubquiz
+    this.round = 0
+    this.question = 0
 
+    this.playerAnswer = []
+    for (let n = 0;n < this.pubquiz.rounds[this.round].questions.length;n++) {
+      this.playerAnswer.push('')
+    }
   }
 
   ionViewDidLoad() {
 
-      this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+      // this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-      console.log(this.web3);
+      // console.log(this.web3);
 
       // this.dataService.load().then((data) => {
       //     data.map((question,index) => {
@@ -33,7 +81,22 @@ export class HomePage {
       // });
   }
 
-  web3Version() {
-    return this.web3&&this.web3.version||'unknown';
+  previousQuestion() {
+    this.question = Math.max(0, this.question-1) 
+    // console.log('previousQuestion', this.question)
   }
+
+  nextQuestion() {
+    this.question = Math.min(this.pubquiz.rounds[this.round].questions.length-1, this.question+1)
+    // console.log('nextQuestion', this.question)
+  }
+
+  submitRound() {
+    // alert(JSON.stringify(this.answer, null, 4))
+    this.navCtrl.push(RatePage, {pubquiz: this.pubquiz, round: this.round, playerAnswer: this.playerAnswer});
+  }
+
+  // web3Version() {
+  //   return this.web3&&this.web3.version||'unknown';
+  // }
 }
