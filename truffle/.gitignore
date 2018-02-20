@@ -1,0 +1,5 @@
+deploy_mnemonic.key
+contracts/.placeholder
+test/.placeholder
+build
+node_modules
