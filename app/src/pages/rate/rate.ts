@@ -17,6 +17,7 @@ export class RatePage {
   round: any;     // index
   question: any;  // index
   playerAnswer: any[];
+  playerUserId: any;
   answers: any[][];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
