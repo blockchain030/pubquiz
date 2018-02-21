@@ -3,6 +3,79 @@ import { NavController } from 'ionic-angular';
 // import { Data } from '../../providers/data';
 import { RatePage } from '../rate/rate';
 
+const pubquizRef = 'QmXZCKkuabHYARSvGMHXkkB2rqWt1QG1YyLTc1qg5D8xEe'
+// console.log(pubquizRef)
+const pubquizGatewayUrl = 'https://gateway.ipfs.io/ipfs/' + pubquizRef
+// console.log(pubquizGatewayUrl)
+
+fetch(pubquizGatewayUrl)
+  .then(res => res.json())
+  .then(json => {
+    console.log(json)
+  })
+  .catch(err => console.error(err));
+
+
+// import IPFS from 'ipfs'
+// const ipfs = new IPFS({ repo: String(Math.random() + Date.now()) })
+
+
+// ipfs.once('start', (v) => {
+//   console.log('start', v)
+// })
+
+// ipfs.once('error', (v) => {
+//   console.log('error')
+// })
+  
+// ipfs.once('ready', (v) => {
+//   console.log('ready', v)
+
+//   ipfs.id((err, info) => {
+//     if (err) throw err
+//     console.log('IPFS node ready with addres', info.id)
+//   })
+
+//   ipfs.files.cat(pubquizRef, (err, file) => {
+//     if (err) throw err
+//     console.log(file.toString('utf8'))
+//   })
+// })
+
+// ipfs.once('ready', () => {
+//   console.log('IPFS node is ready')
+
+//   ipfs.files.cat(pubquizRef).then(file => {
+//     console.log(file.toString('utf8'))
+//   }).catch(ex => {
+//     console.warn(JSON.stringify(ex))
+//   })
+
+//   // ipfs.files.cat('QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY', function (err, data) {
+//   //   if (err) {
+//   //     return console.error('Error - ipfs files cat', err, res)
+//   //   }
+//   //   console.log(data.toString())
+//   // })
+// })
+
+
+// console.log(pubquizRef)
+// ipfs.files.cat(pubquizRef).then(file => {
+//   console.log(file.toString('utf8'))
+// }).catch(ex => {
+//   console.warn(JSON.stringify(ex))
+// })
+
+
+// ipfs.files.cat(pubquizRef, function (err, file) {
+//   if (err) {
+//     throw err
+//   }
+//   console.log(file.toString('utf8'))
+// })
+
+
 // let gPubquiz2 = require('../../assets/datasets/20180219-questions.json')
 // console.log(gPubquiz2)
 
