@@ -37,6 +37,7 @@ export class HomePage {
   round: any;     // index
   question: any;  // index
   playerAnswer: any[];
+  playerUserId = 101;
 
   constructor(public navCtrl: NavController) {
     // TODO: get the pubquiz from the smart contract (get the actual questions and answers from ipfs)
@@ -93,6 +94,7 @@ export class HomePage {
       pubquiz: this.pubquiz, 
       round: this.round, 
       playerAnswer: this.playerAnswer,
+      playerUserId: this.playerUserId,
     });
   }
 

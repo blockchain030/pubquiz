@@ -7,15 +7,11 @@
 <ion-content>
   <ion-label color="primary">Q: {{pubquiz.rounds[round].questions[question].question}}</ion-label>
   <ion-label color="primary">A: {{pubquiz.rounds[round].questions[question].answer}}</ion-label>
-  ({{playerAnswer[question]}})
 
-  <ion-grid>
-    <ion-row *ngFor="let answer of answers[question]">
-      <ion-col><button ion-button (click)="setApproval(answer.userId,true)">V</button></ion-col>
-      <ion-col>{{answer.text}}<span *ngIf="!answer.approve"> (WRONG)</span></ion-col>
-      <ion-col><button ion-button (click)="setApproval(answer.userId,false)">X</button></ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-item *ngFor="let answer of answers[question]">
+    <ion-label>{{answer.userId === playerUserId ? playerAnswer[question] : answer.text}}</ion-label>
+    <ion-toggle [(ngModel)]="answer.approv" [disabled]="answer.userId === playerUserId"></ion-toggle>
+  </ion-item>
 
   <button ion-button (click)="previousQuestion()" [disabled]="question <= 0">&lt;</button>
   <button ion-button (click)="nextQuestion()"     [disabled]="question >= pubquiz.rounds[round].questions.length-1">&gt;</button>
