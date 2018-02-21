@@ -2,43 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 // import { Data } from '../../providers/data';
 
-let gPubquiz = {
-  "rounds": [
-    { "title": "ronde 1 - algemeen",
-      "questions": [
-      {
-        "number": "1",
-        "question": "vraag 1",
-        "answer": "antwoord 1",
-        "answers": [{userId: 100, approve: true, text: "Antwoord player 1"}, {userId: 101, approve: true, text: "Antwoord player 2"}, {userId: 102, approve: true, text: "Antwoord player3"}, {userId: 103, approve: true, text: "Antwoord player 4"}],
-      },
-      {
-        "number": "2",
-        "question": "vraag 2",
-        "answer": "antwoord 2",
-        "answers": [{userId: 100, approve: true, text: "Antwoord player 1"}, {userId: 101, approve: true, text: "Antwoord player 2"}, {userId: 102, approve: true, text: "Antwoord player3"}, {userId: 103, approve: true, text: "Antwoord player 4"}],
-      }
-    ]},
-    { "title": "ronde 2 - ethereum",
-      "questions": [
-      {
-        "number": "1",
-        "question": "vraag 1",
-        "answer": "antwoord 1",
-        "answers": [{userId: 100, approve: true, text: "Antwoord player 1"}, {userId: 101, approve: true, text: "Antwoord player 2"}, {userId: 102, approve: true, text: "Antwoord player3"}, {userId: 103, approve: true, text: "Antwoord player 4"}],
-      },
-      {
-        "number": "2",
-        "question": "vraag 2",
-        "answer": "antwoord 2",
-        "answers": [{userId: 100, approve: true, text: "Antwoord player 1"}, {userId: 101, approve: true, text: "Antwoord player 2"}, {userId: 102, approve: true, text: "Antwoord player3"}, {userId: 103, approve: true, text: "Antwoord player 4"}],
-      }
-    ]},
-  ]
-}
-// console.log(gPubquiz)
-
 // import Web3 from 'web3';
+
 
 @Component({
   selector: 'page-rate',
@@ -52,33 +17,29 @@ export class RatePage {
   round: any;     // index
   question: any;  // index
   playerAnswer: any[];
+  answers: any[][];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // this.pubquiz = navParams.get('pubquiz')
-    this.pubquiz = gPubquiz
+    this.pubquiz = navParams.get('pubquiz')
     this.round = navParams.get('round')
     this.question = 0
     this.playerAnswer = navParams.get('playerAnswer')
+
+    this.answers = [ // TODO: get this from the smart contract
+      [{userId: 100, approve: true, text: "Round 1, question 1, answer of player 1"}, {userId: 101, approve: true, text: "Round 1, question 1, answer of player 2"}, {userId: 102, approve: true, text: "Round 1, question 1, answer of player 3"}, {userId: 103, approve: true, text: "Round 1, question 1, answer of player 4"}, {userId: 104, approve: true, text: "Round 1, question 1, answer of player 5"}],
+      [{userId: 100, approve: true, text: "Round 1, question 2, answer of player 1"}, {userId: 101, approve: true, text: "Round 1, question 2, answer of player 2"}, {userId: 102, approve: true, text: "Round 1, question 2, answer of player 3"}, {userId: 103, approve: true, text: "Round 1, question 2, answer of player 4"}, {userId: 104, approve: true, text: "Round 1, question 2, answer of player 5"}],
+    ]
+    // console.log(this.answers)
   }
 
   ionViewDidLoad() {
   }
 
-  disapprove(userId) {
-    // console.log('disapprove', userId)
-    for (let answer of this.pubquiz.rounds[this.round].questions[this.question].answers) {
+  setApproval(userId, value) {
+    // console.log('setApproval', userId, value)
+    for (let answer of this.answers[this.question]) {
       if (answer.userId === userId) {
-        answer.approve = false;
-      }
-      // console.log(answer)
-    }
-  }
-  
-  approve(userId) {
-    // console.log('approve', userId)
-    for (let answer of this.pubquiz.rounds[this.round].questions[this.question].answers) {
-      if (answer.userId === userId) {
-        answer.approve = true;
+        answer.approve = value;
       }
       // console.log(answer)
     }
@@ -95,6 +56,7 @@ export class RatePage {
   }
 
   submitRound() {
-    alert(JSON.stringify(this.pubquiz, null, 4))
+    // TODO: submit answers to smart contract
+    alert(JSON.stringify(this.answers, null, 4))
   }
 }

@@ -8,12 +8,12 @@
   <ion-label color="primary">Q: {{pubquiz.rounds[round].questions[question].question}}</ion-label>
   <ion-label color="primary">A: {{pubquiz.rounds[round].questions[question].answer}}</ion-label>
   ({{playerAnswer[question]}})
-  
+
   <ion-grid>
-    <ion-row *ngFor="let a of pubquiz.rounds[round].questions[question].answers">
-      <ion-col><button ion-button (click)="approve(a.userId)">V</button></ion-col>
-      <ion-col>{{a.text}}<span *ngIf="!a.approve"> (WRONG)</span></ion-col>
-      <ion-col><button ion-button (click)="disapprove(a.userId)">X</button></ion-col>
+    <ion-row *ngFor="let answer of answers[question]">
+      <ion-col><button ion-button (click)="setApproval(answer.userId,true)">V</button></ion-col>
+      <ion-col>{{answer.text}}<span *ngIf="!answer.approve"> (WRONG)</span></ion-col>
+      <ion-col><button ion-button (click)="setApproval(answer.userId,false)">X</button></ion-col>
     </ion-row>
   </ion-grid>
 
