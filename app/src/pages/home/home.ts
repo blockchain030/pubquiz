@@ -8,12 +8,18 @@ const pubquizRef = 'QmXZCKkuabHYARSvGMHXkkB2rqWt1QG1YyLTc1qg5D8xEe'
 const pubquizGatewayUrl = 'https://gateway.ipfs.io/ipfs/' + pubquizRef
 // console.log(pubquizGatewayUrl)
 
-fetch(pubquizGatewayUrl)
-  .then(res => res.json())
-  .then(json => {
-    console.log(json)
-  })
-  .catch(err => console.error(err));
+const dummyPubquiz = {
+  "rounds": [
+    { "title": "",
+      "questions": [
+        {
+          "number": "",
+          "question": "",
+          "answer": ""
+        }
+    ]}
+  ]
+}
 
 
 // import Web3 from 'web3';
@@ -33,40 +39,15 @@ export class HomePage {
   playerAnswer: any[];
 
   constructor(public navCtrl: NavController) {
-    // TODO: get the pubquiz from the smart contract
-
-    this.pubquiz = { // TODO: get this from the smart contract (get the actual questions and answers from ipfs)
-      "rounds": [
-        { "title": "ronde 1 - algemeen",
-          "questions": [
-          {
-            "number": "1",
-            "question": "vraag 1",
-            "answer": "antwoord 1"
-          },
-          {
-            "number": "2",
-            "question": "vraag 2",
-            "answer": "antwoord 2"
-          }
-        ]},
-        { "title": "ronde 2 - ethereum",
-          "questions": [
-          {
-            "number": "1",
-            "question": "vraag 1",
-            "answer": "antwoord 1"
-          },
-          {
-            "number": "2",
-            "question": "vraag 2",
-            "answer": "antwoord 2"
-          }
-        ]},
-      ]
-    }
-    // console.log(this.pubquiz)
+    // TODO: get the pubquiz from the smart contract (get the actual questions and answers from ipfs)
     
+    this.pubquiz = dummyPubquiz  // note: dummy until we receive from the smart contract
+
+    fetch(pubquizGatewayUrl)
+      .then(res => res.json())
+      .then(json => this.pubquiz = json)
+      .catch(err => console.error(err));
+
     this.round = 0
     this.question = 0
 
