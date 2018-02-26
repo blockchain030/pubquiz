@@ -44,10 +44,10 @@ export class HomePage {
     
     this.pubquiz = dummyPubquiz  // note: dummy until we receive from the smart contract
 
-    fetch(pubquizGatewayUrl)
+    /*fetch(pubquizGatewayUrl)
       .then(res => res.json())
       .then(json => this.pubquiz = json)
-      .catch(err => console.error(err));
+      .catch(err => console.error(err)); */
 
     this.round = 0
     this.question = 0
