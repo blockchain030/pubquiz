@@ -1,80 +1,83 @@
-<ion-header>
-	<ion-navbar>
-		<ion-title>
-			About
-		</ion-title>
-	</ion-navbar>
-</ion-header>
+	<ion-header>
+		<ion-navbar>
+			<ion-title>
+				About
+			</ion-title>
+		</ion-navbar>
+	</ion-header>
 
-<ion-content>
-	<h1>Welkom bij de Pubquiz</h1>
-	<ion-list>
-		<ion-item-sliding #item>
-			<ion-item>
-				Answer
-			</ion-item>
-			<ion-item-options side="left" (ionSwipe)="saveItem(item)">
-				<button ion-button color="secondary" expandable (click)="share(item)">
-					<!--Basic: auto-select the icon based on the platform -->
-					<ion-icon name="checkmark-circle-outline"></ion-icon>
-				Right</button>
-			</ion-item-options>
+	<ion-content>
+		<h1>Welkom bij de Pubquiz</h1>
+		<ion-list>
+			<ion-item-sliding #item>
+				<ion-item>
+					Answer
+				</ion-item>
+				<ion-item-options side="left" (ionSwipe)="saveItem(item)">
+					<button ion-button color="secondary" expandable (click)="share(item)">
+						<!--Basic: auto-select the icon based on the platform -->
+						<ion-icon name="checkmark-circle-outline"></ion-icon>
+					Right</button>
+				</ion-item-options>
 
-			<ion-item-options side="right" (ionSwipe)="saveItem(item)">
-				<button ion-button color="danger" expandable (click)="unread(item)">
-					<!--Basic: auto-select the icon based on the platform -->
-					<ion-icon name="close-circle"></ion-icon>
-				Wrong</button>
-			</ion-item-options>
-		</ion-item-sliding>
-		<ion-item-sliding (ionSwipe)="delete(item)">
-			<ion-item>Item</ion-item>
-			<ion-item-options side="left">
-				<button ion-button color="danger" expandable (click)="delete(item)">
-					<ion-icon name="close-circle"></ion-icon>
-				Delete</button>
-			</ion-item-options>
-		</ion-item-sliding>
-		<ion-item-sliding>
-			<ion-item>
-				Item 1
-			</ion-item>
-			<ion-item-options side="right" (ionSwipe)="saveItem(item)">
-				<button ion-button expandable (click)="saveItem(item)">
-					<ion-icon name="star"></ion-icon>
-				</button>
-			</ion-item-options>
-		</ion-item-sliding>
-	</ion-list>	
+				<ion-item-options side="right" (ionSwipe)="saveItem(item)">
+					<button ion-button color="danger" expandable (click)="unread(item)">
+						<!--Basic: auto-select the icon based on the platform -->
+						<ion-icon name="close-circle"></ion-icon>
+					Wrong</button>
+				</ion-item-options>
+			</ion-item-sliding>
+			<ion-item-sliding (ionSwipe)="delete(item)">
+				<ion-item>Item</ion-item>
+				<ion-item-options side="left">
+					<button ion-button color="danger" expandable (click)="delete(item)">
+						<ion-icon name="close-circle"></ion-icon>
+					Delete</button>
+				</ion-item-options>
+			</ion-item-sliding>
+			<ion-item-sliding>
+				<ion-item>
+					Item 1
+				</ion-item>
+				<ion-item-options side="right" (ionSwipe)="saveItem(item)">
+					<button ion-button expandable (click)="saveItem(item)">
+						<ion-icon name="star"></ion-icon>
+					</button>
+				</ion-item-options>
+			</ion-item-sliding>
+		</ion-list>	
 
-	  <ion-grid>
-    <ion-row *ngFor="let a of pubquiz.rounds[round].questions[question].answers">
-      <ion-col><button ion-button color ="secondary" expandable (ionSwipe)="approve(a.userId)">
-        <ion-icon name="checkmark-circle-outline"></ion-icon></button></ion-col>
-      <ion-col>{{a.text}}<span *ngIf="!a.approve"> (WRONG)</span></ion-col>
-      <ion-col><button ion-button color="danger" expandable (ionSwipe)="disapprove(a.userId)">
-      <ion-icon name="close-circle"></ion-icon></button></ion-col>
-    </ion-row>
-  </ion-grid>
+<!-- 		  <ion-grid>
+	    <ion-row *ngFor="let a of pubquiz.rounds[round].questions[question].answers">
+	      <ion-col><button ion-button color ="secondary" expandable (ionSwipe)="approve(a.userId)">
+	        <ion-icon name="checkmark-circle-outline"></ion-icon></button></ion-col>
+	      <ion-col>{{a.text}}<span *ngIf="!a.approve"> (WRONG)</span></ion-col>
+	      <ion-col><button ion-button color="danger" expandable (ionSwipe)="disapprove(a.userId)">
+	      <ion-icon name="close-circle"></ion-icon></button></ion-col>
+	    </ion-row>
+	  </ion-grid> -->
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let a of pubquiz.rounds[round].questions[question].answers">
-      <ion-item>
-        {{a.text}}
-      </ion-item>
-      <ion-item-options side="left" (ionSwipe)="approve(a.userId)">
-        <button ion-button color="secondary" expandable (click)="approve(a.userId)">
-          <!--Basic: auto-select the icon based on the platform -->
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
-        Right</button>
-      </ion-item-options>
 
-      <ion-item-options side="right" (ionSwipe)="disapprove(a.userId)">
-        <button ion-button color="danger" expandable (click)="disapprove(a.userId)">
-          <!--Basic: auto-select the icon based on the platform -->
-          <ion-icon name="close-circle"></ion-icon>
-        Wrong</button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-</ion-content>
+<!--hieronder staat de code die werkte om de lijst met antwoorden weer te geven en dan te swipen voor goed of fout. Iteratie over array werkt niet meer. -->
+
+	  <ion-list>
+	    <ion-item-sliding *ngFor="let a of pubquiz.rounds[round].questions[question].answers">
+	      <ion-item>
+	        {{a.text}}
+	      </ion-item>
+	      <ion-item-options side="left" (ionSwipe)="approve(a.userId)">
+	        <button ion-button color="secondary" expandable (click)="approve(a.userId)">
+	          <!--Basic: auto-select the icon based on the platform -->
+	          <ion-icon name="checkmark-circle-outline"></ion-icon>
+	        Right</button>
+	      </ion-item-options>
+
+	      <ion-item-options side="right" (ionSwipe)="disapprove(a.userId)">
+	        <button ion-button color="danger" expandable (click)="disapprove(a.userId)">
+	          <!--Basic: auto-select the icon based on the platform -->
+	          <ion-icon name="close-circle"></ion-icon>
+	        Wrong</button>
+	      </ion-item-options>
+	    </ion-item-sliding>
+	  </ion-list>
+	</ion-content>
