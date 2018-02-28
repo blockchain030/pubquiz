@@ -10,7 +10,7 @@
 
   <ion-item *ngFor="let answer of answers[question]">
     <ion-label>{{answer.userId === playerUserId ? playerAnswer[question] : answer.text}}</ion-label>
-    <ion-toggle [(ngModel)]="answer.approv" [disabled]="answer.userId === playerUserId"></ion-toggle>
+    <ion-toggle [(ngModel)]="answer.approve" [disabled]="answer.userId === playerUserId"></ion-toggle>
   </ion-item>
 
   <button ion-button (click)="previousQuestion()" [disabled]="question <= 0">&lt;</button>
