@@ -1,4 +1,4 @@
-var _exec = require('child_process').exec;
+var execSync = require('child_process').execSync;
 
 // http://lollyrock.com/articles/nodejs-encryption/
 
@@ -30,31 +30,19 @@ ipfsAdd = (content, password) => {
   var encrypted = encrypt(content, PASSWORD);
   // console.log(encrypted);
 
-  _exec('echo "' + encrypted + '" | ipfs add', function(error, stdout, stderr) 
-  {
-      if ( error != null ) {
-          console.error(stderr);
-          // error handling & exit
-          return;
-      }
-
-      console.log(stdout, 'with password', PASSWORD);
-  });
+  const stdout = execSync('echo "' + encrypted + '" | ipfs add');
+  // console.log(stdout.toString().split(' ')[1], 'with password', PASSWORD);
 }
 // ipfsAdd("testing one two three");
 
 
 ipfsGet = (hash, password) => {
-  _exec('ipfs cat ' + hash, function(error, stdout, stderr) 
-  {
-      if ( error != null ) {
-          console.error(stderr);
-          // error handling & exit
-          return;
-      }
-
-      console.log(decrypt(stdout.trim(), PASSWORD), 'with password', PASSWORD);
-  });
+  const stdout = execSync('ipfs cat ' + hash);
+  const s = stdout.toString().trim();
+  // console.log("[" + s + "]");
+  const decrypted = decrypt(s, PASSWORD);
+  // console.log('"' + decrypted, '" with password', PASSWORD);
+  return decrypted
 }
 const HASH = "QmeJkiwEzUfeKXjgYmwyBs4SEAibfHcnStUHSM1CgcTKve";
 const s = ipfsGet(HASH, PASSWORD);
