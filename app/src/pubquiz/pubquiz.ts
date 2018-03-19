@@ -1,4 +1,4 @@
-import IPFS from 'ipfs';
+// import IPFS from 'ipfs';
 
 export class PubQuiz {
   private title = '';
@@ -20,8 +20,8 @@ export class PubQuiz {
       round.answers.push("answer " + i);
     }
 
-    const theipfs = new IPFS();
-    theipfs.version().then(x=>console.log('version:', x));
+    // const theipfs = new IPFS();
+    // theipfs.version().then(x=>console.log('version:', x));
 
 
     //   let buffer = Buffer.from(input.value)
