@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
 const IPFS = require('ipfs');
 // console.log(IPFS);
 
 const node = new IPFS();
 // console.log(node);
 
+console.log('add to ipfs');
 (cb) => node.files.add({
     path: 'hello.txt',
     content: Buffer.from('Hello World')
@@ -19,17 +17,4 @@ const node = new IPFS();
     fileMultihash = filesAdded[0].hash;
     cb();
   });
-
-
-
-@Component({
-  selector: 'page-contact',
-  templateUrl: 'contact.html'
-})
-export class ContactPage {
-
-  constructor(public navCtrl: NavController) {
-    console.log('testt')
-  }
-
-}
+  
