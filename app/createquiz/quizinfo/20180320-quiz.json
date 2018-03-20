@@ -1,0 +1,81 @@
+{
+  "oracleinfo": {
+    "rounds": [
+      {
+        "passwordQuestions": "BCiQ2lMt",
+        "passwordAnswers": "KdA6hcbE",
+        "info": {
+          "title": "Algemene Vragen",
+          "questions": [
+            {
+              "number": "1.1",
+              "question": "Wat is de naam van de premier?",
+              "answer": "Mark Rutte"
+            },
+            {
+              "number": "1.2",
+              "question": "Wat is de hoofdstad van Nederland?",
+              "answer": "Amsterdam"
+            }
+          ]
+        }
+      },
+      {
+        "passwordQuestions": "iCKz6vqE",
+        "passwordAnswers": "xWnK9Cp0",
+        "info": {
+          "title": "Ethereum Vragen",
+          "questions": [
+            {
+              "number": "2.1",
+              "question": "Wie heeft Ethereum bedacht?",
+              "answer": "Vitalik Buterin"
+            },
+            {
+              "number": "2.2",
+              "question": "Hoeveel karakters heeft een Ethereum adres?",
+              "answer": "20"
+            }
+          ]
+        }
+      },
+      {
+        "passwordQuestions": "f1mmd622",
+        "passwordAnswers": "sThZYlJ1",
+        "info": {
+          "title": "Bitcoin Vragen",
+          "questions": [
+            {
+              "number": "3.1",
+              "question": "Wat is de gemiddelde blocktijd van Bitcoin?",
+              "answer": "antwoord 1"
+            },
+            {
+              "number": "3.2",
+              "question": "Wat is een vork",
+              "answer": "Een stuk bestek"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "playerinfo": {
+    "oracleinfo": "QmRu555SxR1D2Zcwk5SQKMBKHcrdW4pKtULLoUxEprhwz9 QmRu555SxR1D2Zcwk5SQKMBKHcrdW4pKtULLoUxEprhwz9",
+    "rounds": [
+      {
+        "questions": "QmUSziC2zFxu5vxEy2a9joo1ss1eMZjP4zLJM8wkWJeV2s QmUSziC2zFxu5vxEy2a9joo1ss1eMZjP4zLJM8wkWJeV2s",
+        "answers": "QmamhQiAsGTAT14rFKFfgL8x43czWyp86RXdTENLgfyzW7 QmamhQiAsGTAT14rFKFfgL8x43czWyp86RXdTENLgfyzW7"
+      },
+      {
+        "questions": "QmYdzNUkByQ4TZbCTinDRu1RaoQevkKoMEXeGC44n2T2aw QmYdzNUkByQ4TZbCTinDRu1RaoQevkKoMEXeGC44n2T2aw",
+        "answers": "QmV2wAGXkjedayiE41XMmiH9k9Pf96zNSBBEnNcV66muQY QmV2wAGXkjedayiE41XMmiH9k9Pf96zNSBBEnNcV66muQY"
+      },
+      {
+        "questions": "QmaZ1wYxu7awANGdqBHEqEgJXHjH8Z54PndwrG9pEt1XLC QmaZ1wYxu7awANGdqBHEqEgJXHjH8Z54PndwrG9pEt1XLC",
+        "answers": "QmUzrCNtQMFz78Sx21gKLXjH9bLcCNQs4Qw2vUX5aB3mx5 QmUzrCNtQMFz78Sx21gKLXjH9bLcCNQs4Qw2vUX5aB3mx5"
+      }
+    ]
+  },
+  "playerinfoHash": "Qmdy9sRTcKih8wfc7g7g3mrtihGcJC2AbUKingT7c963ez Qmdy9sRTcKih8wfc7g7g3mrtihGcJC2AbUKingT7c963ez"
+}
