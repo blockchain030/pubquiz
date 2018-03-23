@@ -2,8 +2,8 @@
   "oracleinfo": {
     "rounds": [
       {
-        "passwordQuestions": "BCiQ2lMt",
-        "passwordAnswers": "KdA6hcbE",
+        "passwordQuestions": "IcJ2I8T6",
+        "passwordAnswers": "mJwNz8yX",
         "info": {
           "title": "Algemene Vragen",
           "questions": [
@@ -21,8 +21,8 @@
         }
       },
       {
-        "passwordQuestions": "iCKz6vqE",
-        "passwordAnswers": "xWnK9Cp0",
+        "passwordQuestions": "t0hvm6oZ",
+        "passwordAnswers": "IqtnjWW8",
         "info": {
           "title": "Ethereum Vragen",
           "questions": [
@@ -40,15 +40,15 @@
         }
       },
       {
-        "passwordQuestions": "f1mmd622",
-        "passwordAnswers": "sThZYlJ1",
+        "passwordQuestions": "O2LGTGk5",
+        "passwordAnswers": "dPng2XH7",
         "info": {
           "title": "Bitcoin Vragen",
           "questions": [
             {
               "number": "3.1",
               "question": "Wat is de gemiddelde blocktijd van Bitcoin?",
-              "answer": "antwoord 1"
+              "answer": "10 minuten"
             },
             {
               "number": "3.2",
@@ -61,21 +61,21 @@
     ]
   },
   "playerinfo": {
-    "oracleinfo": "QmRu555SxR1D2Zcwk5SQKMBKHcrdW4pKtULLoUxEprhwz9 QmRu555SxR1D2Zcwk5SQKMBKHcrdW4pKtULLoUxEprhwz9",
+    "oracleinfo": "QmQ95DxogK13ACxy9EhYP7iEPvPbzfFsJP4BsfRuRkim4d",
     "rounds": [
       {
-        "questions": "QmUSziC2zFxu5vxEy2a9joo1ss1eMZjP4zLJM8wkWJeV2s QmUSziC2zFxu5vxEy2a9joo1ss1eMZjP4zLJM8wkWJeV2s",
-        "answers": "QmamhQiAsGTAT14rFKFfgL8x43czWyp86RXdTENLgfyzW7 QmamhQiAsGTAT14rFKFfgL8x43czWyp86RXdTENLgfyzW7"
+        "questions": "QmWZRyDeeLX7ucRttx9qxuY2xYjwC7PV5jpgZfex1gbDRr",
+        "answers": "QmVoaMNaTAF6KbjR76M2fCXUY7Px9VeuhYGjmnwKMk6iww"
       },
       {
-        "questions": "QmYdzNUkByQ4TZbCTinDRu1RaoQevkKoMEXeGC44n2T2aw QmYdzNUkByQ4TZbCTinDRu1RaoQevkKoMEXeGC44n2T2aw",
-        "answers": "QmV2wAGXkjedayiE41XMmiH9k9Pf96zNSBBEnNcV66muQY QmV2wAGXkjedayiE41XMmiH9k9Pf96zNSBBEnNcV66muQY"
+        "questions": "QmRqBssE68JcSK8B2bQyxf5pv3Zi74imRYtwen5XJdjX1n",
+        "answers": "QmZ9CMzXmvzgFxdDxEWDnvVUEzcQo35sgvsSJ2nMcyStHF"
       },
       {
-        "questions": "QmaZ1wYxu7awANGdqBHEqEgJXHjH8Z54PndwrG9pEt1XLC QmaZ1wYxu7awANGdqBHEqEgJXHjH8Z54PndwrG9pEt1XLC",
-        "answers": "QmUzrCNtQMFz78Sx21gKLXjH9bLcCNQs4Qw2vUX5aB3mx5 QmUzrCNtQMFz78Sx21gKLXjH9bLcCNQs4Qw2vUX5aB3mx5"
+        "questions": "QmSRbcDxS2EPVnTuqt9G2twxpVxK7dietyYypuwDoZik65",
+        "answers": "QmSbAx4XR292nv66ZiMdRu5iciXsnXvV8xNKwFzg3Z9zgm"
       }
     ]
   },
-  "playerinfoHash": "Qmdy9sRTcKih8wfc7g7g3mrtihGcJC2AbUKingT7c963ez Qmdy9sRTcKih8wfc7g7g3mrtihGcJC2AbUKingT7c963ez"
+  "playerinfoHash": "Qmbyg6TVWLbhzW1RMJnT7tRXYxsE9RrazJjih1et9pmohx"
 }

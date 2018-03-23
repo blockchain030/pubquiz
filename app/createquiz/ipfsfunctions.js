@@ -10,8 +10,9 @@ var crypto = require('crypto'),
 
 var getHASHfromIPFSreply = (reply) => {
   var result = reply.replace('added ', '').replace('\n', '');
+  result = result.substr(0,result.indexOf(' '));
 
-  console.log(reply, ' -> ',result)
+//  console.log(reply, ' -> ',result)
 
   if(result.length=64) {
     return result;
@@ -36,17 +37,18 @@ exports.decrypt = (text, password) => {
 
 exports.ipfsAddEncrypted = (content, password) => {
   var encrypted = this.encrypt(content, password);
-  const stdout = execSync('echo "' + encrypted + '" | ipfs add');
+  const stdout = execSync('ipfs add', { input: encrypted.toString()});
   return getHASHfromIPFSreply(stdout.toString());
 }
 
 exports.ipfsAddPlain = (content) => {
-  const stdout = execSync('echo "' + content + '" | ipfs add');
+  const stdout = execSync('ipfs add', { input: content});
   return getHASHfromIPFSreply(stdout.toString());
 }
 
 exports.ipfsGetHashPlain = (content) => {
-  const stdout = execSync('echo "' + content + '" | ipfs add --only-hash');
+  // const stdout = execSync('echo "' + content + '" | ipfs add --only-hash');
+  const stdout = execSync('ipfs add --only-hash', { input: content});
   return getHASHfromIPFSreply(stdout.toString());
 }
 
