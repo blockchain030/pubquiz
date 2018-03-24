@@ -5,21 +5,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-label color="primary">Q: {{pubquiz.rounds[round].questions[question].question}}</ion-label>
-  <ion-label color="primary">A: {{pubquiz.rounds[round].questions[question].answer}}</ion-label>
+  <ion-label color="primary">Q: {{pubquiz.rounds[round].questionsDecrypted[question]}}</ion-label>
+  <ion-label color="primary">A: {{pubquiz.rounds[round].answersDecrypted[question]}}</ion-label>
 
   <ion-item *ngFor="let answer of answers[question]">
-    <ion-label>{{answer.userId === playerUserId ? playerAnswer[question] : answer.text}}</ion-label>
+    <ion-label>{{answer.text}}</ion-label>
     <ion-toggle [(ngModel)]="answer.approve" [disabled]="answer.userId === playerUserId"></ion-toggle>
   </ion-item>
 
   <button ion-button (click)="previousQuestion()" [disabled]="question <= 0">&lt;</button>
-  <button ion-button (click)="nextQuestion()"     [disabled]="question >= pubquiz.rounds[round].questions.length-1">&gt;</button>
-  <button ion-button (click)="submitRound()"      [disabled]="question !== pubquiz.rounds[round].questions.length-1">Submit</button>
+  <button ion-button (click)="nextQuestion()"     [disabled]="question >= pubquiz.rounds[round].questionsDecrypted.length-1">&gt;</button>
+  <button ion-button (click)="submitRound()"      [disabled]="question !== pubquiz.rounds[round].questionsDecrypted.length-1">Submit</button>
 
-
-
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row *ngFor="let a of pubquiz.rounds[round].questions[question].answers">
       <ion-col><button ion-button color ="secondary" expandable (ionSwipe)="approve(a.userId)">
         <ion-icon name="checkmark-circle-outline"></ion-icon></button></ion-col>
@@ -36,19 +34,17 @@
       </ion-item>
       <ion-item-options side="left" (ionSwipe)="approve(a.userId)">
         <button ion-button color="secondary" expandable (click)="approve(a.userId)">
-          <!--Basic: auto-select the icon based on the platform -->
           <ion-icon name="checkmark-circle-outline"></ion-icon>
         Right</button>
       </ion-item-options>
 
       <ion-item-options side="right" (ionSwipe)="disapprove(a.userId)">
         <button ion-button color="danger" expandable (click)="disapprove(a.userId)">
-          <!--Basic: auto-select the icon based on the platform -->
           <ion-icon name="close-circle"></ion-icon>
         Wrong</button>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list>
+  </ion-list> -->
   
 </ion-content>
 

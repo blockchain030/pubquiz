@@ -60,15 +60,10 @@ export class HomePage {
       })
       .catch(err => console.error(err));
 
-    // setTimeout(() => console.log(JSON.stringify(this.pubquiz,null,1)), 3000)
+    // setInterval(() => console.log(JSON.stringify(this.pubquiz,null,1)), 10 * 1000)
 
     this.round = 0
     this.question = 0
-
-    // this.playerAnswer = []
-    // for (let n = 0;n < this.pubquiz.rounds[this.round].questions.length;n++) {
-    //   this.playerAnswer.push('')
-    // }
   }
 
   decrypt = (text, password, algorithm='aes-256-ctr') => {
