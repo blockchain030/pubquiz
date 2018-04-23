@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+// ES6 import
+import jsQR from "jsqr";
+ 
+
+
 /**
  * Generated class for the SignInPage page.
  *
@@ -21,5 +26,13 @@ export class SignInPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInPage');
   }
+
+// CommonJS require
+const jsQR = require("jsqr");
+  const code = jsQR(imageData, width, height);
+ 
+	if (code) {
+  		console.log("Found QR code", code);
+	}
 
 }

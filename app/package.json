@@ -31,6 +31,7 @@
     "fetch": "^1.1.0",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
+    "jsqr": "^1.0.4",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
     "truffle-contract": "^3.0.5",
