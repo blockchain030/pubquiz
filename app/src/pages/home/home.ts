@@ -5,6 +5,9 @@ import { RatePage } from '../rate/rate';
 
 import crypto from 'crypto';
 
+// import Web3 from 'web3';
+import bip39 from 'bip39';
+import hdkey from 'ethereumjs-wallet/hdkey';
 
 const secretQuizinfo = require('../../../createquiz/quizinfo/20180320-quiz.json');
 // console.log(JSON.stringify(secretQuizinfo,null,1))
@@ -23,7 +26,18 @@ const dummyPubquiz = {
 }
 
 
-// import Web3 from 'web3';
+const generateKeys = (mnemonic = "extra payment empty slim copper tube limb island swing tell front figure") => {
+  const slot = 0;
+  const path = "m/44'/60'/0'/0/" + slot;
+  const wallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(mnemonic)).derivePath(path).getWallet();
+
+  return {
+    // "mnemonic": mnemonic,
+    "private": wallet.getPrivateKey().toString('hex'),
+    "address": wallet.getAddress().toString('hex'),
+  }
+}
+// global.generateKeys = generateKeys;
 
 
 @Component({
