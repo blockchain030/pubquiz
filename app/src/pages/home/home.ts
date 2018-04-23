@@ -12,7 +12,8 @@ import Web3 from 'web3';
 const secretQuizinfo = require('../../../createquiz/quizinfo/20180320-quiz.json');
 // console.log(JSON.stringify(secretQuizinfo,null,1))
 
-const provider         = new Web3.providers.HttpProvider("http://ericvrp.xs4all.nl:8545");
+const infura_apikey    = "sCQUO1V3FOoOUWGZBtig";
+const provider         = new Web3.providers.HttpProvider('https://ropsten.infura.io/'+infura_apikey);
 const contract         = require('truffle-contract');
 const pubquizJSON      = require('../../../truffle/build/contracts/Pubquiz.json')
 const pubquizContract  = contract(pubquizJSON);
