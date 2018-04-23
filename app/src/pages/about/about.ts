@@ -2,36 +2,36 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { RatePage } from '../rate/rate';
 
-let pubquiz = {
-  "rounds": [
-    { "title": "ronde 1 - algemeen",
-      "questions": [
-      {
-        "number": "1",
-        "question": "vraag 1",
-        "answer": "antwoord 1"
-      },
-      {
-        "number": "2",
-        "question": "vraag 2",
-        "answer": "antwoord 2"
-      }
-    ]},
-    { "title": "ronde 2 - ethereum",
-      "questions": [
-      {
-        "number": "1",
-        "question": "vraag 1",
-        "answer": "antwoord 1"
-      },
-      {
-        "number": "2",
-        "question": "vraag 2",
-        "answer": "antwoord 2"
-      }
-    ]},
-  ]
-}
+// let pubquiz = {
+//   "rounds": [
+//     { "title": "ronde 1 - algemeen",
+//       "questions": [
+//       {
+//         "number": "1",
+//         "question": "vraag 1",
+//         "answer": "antwoord 1"
+//       },
+//       {
+//         "number": "2",
+//         "question": "vraag 2",
+//         "answer": "antwoord 2"
+//       }
+//     ]},
+//     { "title": "ronde 2 - ethereum",
+//       "questions": [
+//       {
+//         "number": "1",
+//         "question": "vraag 1",
+//         "answer": "antwoord 1"
+//       },
+//       {
+//         "number": "2",
+//         "question": "vraag 2",
+//         "answer": "antwoord 2"
+//       }
+//     ]},
+//   ]
+// }
 
 const pubquizRef = '20180219-questions.json';
 const pubquizGatewayUrl = 'http://localhost:8100/assets/datasets/'+ pubquizRef;

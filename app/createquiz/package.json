@@ -1,0 +1,14 @@
+{
+  "name": "createquiz",
+  "version": "1.0.0",
+  "description": "create quiz files for blockchain pubquiz",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "randomstring": "^1.1.5"
+  }
+}

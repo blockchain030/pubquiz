@@ -1,0 +1,81 @@
+{
+  "oracleinfo": {
+    "rounds": [
+      {
+        "passwordQuestions": "IcJ2I8T6",
+        "passwordAnswers": "mJwNz8yX",
+        "info": {
+          "title": "Algemene Vragen",
+          "questions": [
+            {
+              "number": "1.1",
+              "question": "Wat is de naam van de premier?",
+              "answer": "Mark Rutte"
+            },
+            {
+              "number": "1.2",
+              "question": "Wat is de hoofdstad van Nederland?",
+              "answer": "Amsterdam"
+            }
+          ]
+        }
+      },
+      {
+        "passwordQuestions": "t0hvm6oZ",
+        "passwordAnswers": "IqtnjWW8",
+        "info": {
+          "title": "Ethereum Vragen",
+          "questions": [
+            {
+              "number": "2.1",
+              "question": "Wie heeft Ethereum bedacht?",
+              "answer": "Vitalik Buterin"
+            },
+            {
+              "number": "2.2",
+              "question": "Hoeveel karakters heeft een Ethereum adres?",
+              "answer": "20"
+            }
+          ]
+        }
+      },
+      {
+        "passwordQuestions": "O2LGTGk5",
+        "passwordAnswers": "dPng2XH7",
+        "info": {
+          "title": "Bitcoin Vragen",
+          "questions": [
+            {
+              "number": "3.1",
+              "question": "Wat is de gemiddelde blocktijd van Bitcoin?",
+              "answer": "10 minuten"
+            },
+            {
+              "number": "3.2",
+              "question": "Wat is een vork",
+              "answer": "Een stuk bestek"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "playerinfo": {
+    "oracleinfo": "QmQ95DxogK13ACxy9EhYP7iEPvPbzfFsJP4BsfRuRkim4d",
+    "rounds": [
+      {
+        "questions": "QmWZRyDeeLX7ucRttx9qxuY2xYjwC7PV5jpgZfex1gbDRr",
+        "answers": "QmVoaMNaTAF6KbjR76M2fCXUY7Px9VeuhYGjmnwKMk6iww"
+      },
+      {
+        "questions": "QmRqBssE68JcSK8B2bQyxf5pv3Zi74imRYtwen5XJdjX1n",
+        "answers": "QmZ9CMzXmvzgFxdDxEWDnvVUEzcQo35sgvsSJ2nMcyStHF"
+      },
+      {
+        "questions": "QmSRbcDxS2EPVnTuqt9G2twxpVxK7dietyYypuwDoZik65",
+        "answers": "QmSbAx4XR292nv66ZiMdRu5iciXsnXvV8xNKwFzg3Z9zgm"
+      }
+    ]
+  },
+  "playerinfoHash": "Qmbyg6TVWLbhzW1RMJnT7tRXYxsE9RrazJjih1et9pmohx"
+}

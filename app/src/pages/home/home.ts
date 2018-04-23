@@ -3,21 +3,22 @@ import { NavController } from 'ionic-angular';
 // import { Data } from '../../providers/data';
 import { RatePage } from '../rate/rate';
 
-const pubquizRef = 'QmXZCKkuabHYARSvGMHXkkB2rqWt1QG1YyLTc1qg5D8xEe'
-// console.log(pubquizRef)
-const pubquizGatewayUrl = 'https://gateway.ipfs.io/ipfs/' + pubquizRef
-// console.log(pubquizGatewayUrl)
+import crypto from 'crypto';
+
+
+const secretQuizinfo = require('../../../createquiz/quizinfo/20180320-quiz.json');
+// console.log(JSON.stringify(secretQuizinfo,null,1))
+
+const IPFS_GATEWAY = 'https://gateway.ipfs.io/ipfs/'
 
 const dummyPubquiz = {
-  "rounds": [
-    { "title": "",
-      "questions": [
-        {
-          "number": "",
-          "question": "",
-          "answer": ""
-        }
-    ]}
+  "rounds": [ 
+    {
+      "title": "",
+      // "questionsDecrypted": [""],
+      // "answersDecrypted": [""],
+      // "playerAnswer": [""],
+    }
   ]
 }
 
@@ -36,7 +37,7 @@ export class HomePage {
   pubquiz: any;
   round: any;     // index
   question: any;  // index
-  playerAnswer: any[];
+  // playerAnswer: any[];
   playerUserId = 101;
 
   constructor(public navCtrl: NavController) {
@@ -44,19 +45,65 @@ export class HomePage {
     
     this.pubquiz = dummyPubquiz  // note: dummy until we receive from the smart contract
 
-    /*fetch(pubquizGatewayUrl)
+    const pubquizGatewayUrl = IPFS_GATEWAY + secretQuizinfo.playerinfoHash
+    // console.log(pubquizGatewayUrl)
+    fetch(pubquizGatewayUrl)
       .then(res => res.json())
-      .then(json => this.pubquiz = json)
-      .catch(err => console.error(err)); */
+      .then(json => {
+        // console.log(JSON.stringify(json,null,1))
+        this.pubquiz = json
+        
+        for(var roundidx=0; roundidx<this.pubquiz.rounds.length; roundidx++) {
+          this.pubquiz.rounds[roundidx].title = 'Round ' + (roundidx + 1) // XXX this is currently missing from the puquiz json in ipfs
+          this.getRound(roundidx)
+        }
+      })
+      .catch(err => console.error(err));
+
+    // setInterval(() => console.log(JSON.stringify(this.pubquiz,null,1)), 10 * 1000)
 
     this.round = 0
     this.question = 0
-
-    this.playerAnswer = []
-    for (let n = 0;n < this.pubquiz.rounds[this.round].questions.length;n++) {
-      this.playerAnswer.push('')
-    }
   }
+
+  decrypt = (text, password, algorithm='aes-256-ctr') => {
+    var decipher = crypto.createDecipher(algorithm,password);
+    var dec = decipher.update(text,'hex','utf8');
+    dec += decipher.final('utf8');
+    return dec;
+  }
+  
+  getRound = (roundidx) => {
+    const questionsGatewayUrl = IPFS_GATEWAY + this.pubquiz.rounds[roundidx].questions
+    // console.log(roundidx, questionsGatewayUrl)
+    fetch(questionsGatewayUrl)
+    .then(res => res.text())
+    .then(questionsEncrypted => {
+        // console.log(roundidx, questionsGatewayUrl, questionsEncrypted)
+        this.pubquiz.rounds[roundidx].questionsEncrypted = questionsEncrypted
+        this.pubquiz.rounds[roundidx].questionsDecrypted = JSON.parse( this.decrypt(questionsEncrypted, secretQuizinfo.oracleinfo.rounds[roundidx].passwordQuestions) )
+        // console.log(JSON.stringify(this.pubquiz,null,1))
+
+        this.pubquiz.rounds[roundidx].playerAnswer = []
+        for (let n = 0;n < this.pubquiz.rounds[this.round].questionsDecrypted.length;n++) {
+          this.pubquiz.rounds[roundidx].playerAnswer.push('')
+        }
+      })
+      .catch(err => console.error(err))
+
+      const answersGatewayUrl = IPFS_GATEWAY + this.pubquiz.rounds[roundidx].answers
+      // console.log(roundidx, questionsGatewayUrl)
+      fetch(answersGatewayUrl)
+      .then(res => res.text())
+      .then(answersEncrypted => {
+          // console.log(roundidx, answersGatewayUrl, answersEncrypted)
+          this.pubquiz.rounds[roundidx].answersEncrypted = answersEncrypted
+          this.pubquiz.rounds[roundidx].answersDecrypted = JSON.parse( this.decrypt(answersEncrypted, secretQuizinfo.oracleinfo.rounds[roundidx].passwordAnswers) )
+          // console.log(JSON.stringify(this.pubquiz,null,1))
+        })
+        .catch(err => console.error(err))
+  
+    } // end of getRound(roundidx)
 
   ionViewDidLoad() {
 
@@ -93,9 +140,13 @@ export class HomePage {
     this.navCtrl.push(RatePage, {
       pubquiz: this.pubquiz, 
       round: this.round, 
-      playerAnswer: this.playerAnswer,
+      // playerAnswer: this.playerAnswer,
       playerUserId: this.playerUserId,
     });
+  }
+
+  logObject(obj) {
+    console.log(JSON.stringify(obj, null, 1))
   }
 
   // web3Version() {
