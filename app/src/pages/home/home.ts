@@ -12,11 +12,14 @@ import Web3 from 'web3';
 const secretQuizinfo = require('../../../createquiz/quizinfo/20180320-quiz.json');
 // console.log(JSON.stringify(secretQuizinfo,null,1))
 
+declare var global:any;
+
 const provider         = new Web3.providers.HttpProvider("http://ericvrp.xs4all.nl:8545");
 const contract         = require('truffle-contract');
-const pubquizJSON      = require('../../../../truffle/build/contracts/Pubquiz.json')
+const pubquizJSON      = require('../../../truffle/build/contracts/Pubquiz.json')
 const pubquizContract  = contract(pubquizJSON);
 global.pubquizContract = pubquizContract;
+
 pubquizContract.setProvider(provider);
 
 var pubquiz;
@@ -28,7 +31,7 @@ pubquizContract.deployed().then(instance => {
 const IPFS_GATEWAY = 'https://gateway.ipfs.io/ipfs/'
 
 const dummyPubquiz = {
-  "rounds": [ 
+  "rounds": [
     {
       "title": "",
       // "questionsDecrypted": [""],
@@ -60,7 +63,7 @@ const dummyPubquiz = {
 export class HomePage {
 
   // web3: any;
-  
+
   pubquiz: any;
   round: any;     // index
   question: any;  // index
@@ -69,7 +72,7 @@ export class HomePage {
 
   constructor (public navCtrl: NavController) {
     // TODO: get the pubquiz from the smart contract (get the actual questions and answers from ipfs)
-    
+
     this.pubquiz = dummyPubquiz  // note: dummy until we receive from the smart contract
 
     const pubquizGatewayUrl = IPFS_GATEWAY + secretQuizinfo.playerinfoHash
@@ -79,7 +82,7 @@ export class HomePage {
       .then(json => {
         // console.log(JSON.stringify(json,null,1))
         this.pubquiz = json
-        
+
         for(var roundidx=0; roundidx<this.pubquiz.rounds.length; roundidx++) {
           this.pubquiz.rounds[roundidx].title = 'Round ' + (roundidx + 1) // XXX this is currently missing from the puquiz json in ipfs
           this.getRound(roundidx)
@@ -99,7 +102,7 @@ export class HomePage {
     dec += decipher.final('utf8');
     return dec;
   }
-  
+
   getRound = (roundidx) => {
     const questionsGatewayUrl = IPFS_GATEWAY + this.pubquiz.rounds[roundidx].questions
     // console.log(roundidx, questionsGatewayUrl)
@@ -129,7 +132,7 @@ export class HomePage {
           // console.log(JSON.stringify(this.pubquiz,null,1))
         })
         .catch(err => console.error(err))
-  
+
     } // end of getRound(roundidx)
 
   ionViewDidLoad() {
@@ -150,7 +153,7 @@ export class HomePage {
   }
 
   previousQuestion() {
-    this.question = Math.max(0, this.question-1) 
+    this.question = Math.max(0, this.question-1)
     // console.log('previousQuestion', this.question)
   }
 
@@ -165,8 +168,8 @@ export class HomePage {
     // TODO: submit this player's answers to the smart contract
 
     this.navCtrl.push(RatePage, {
-      pubquiz: this.pubquiz, 
-      round: this.round, 
+      pubquiz: this.pubquiz,
+      round: this.round,
       // playerAnswer: this.playerAnswer,
       playerUserId: this.playerUserId,
     });
