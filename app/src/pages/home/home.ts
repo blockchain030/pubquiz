@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 // import { Data } from '../../providers/data';
 import { RatePage } from '../rate/rate';
 
-// import crypto from 'crypto';
+import crypto from 'crypto';
 
 
 const secretQuizinfo = require('../../../createquiz/quizinfo/20180320-quiz.json');
