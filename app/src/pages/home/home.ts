@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 // import { Data } from '../../providers/data';
 import { RatePage } from '../rate/rate';
 
-import crypto from 'crypto';
+// import crypto from 'crypto';
 
 
 const secretQuizinfo = require('../../../createquiz/quizinfo/20180320-quiz.json');
@@ -40,7 +40,7 @@ export class HomePage {
   // playerAnswer: any[];
   playerUserId = 101;
 
-  constructor(public navCtrl: NavController) {
+  constructor (public navCtrl: NavController) {
     // TODO: get the pubquiz from the smart contract (get the actual questions and answers from ipfs)
     
     this.pubquiz = dummyPubquiz  // note: dummy until we receive from the smart contract
