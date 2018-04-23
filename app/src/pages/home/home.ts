@@ -14,7 +14,7 @@ const secretQuizinfo = require('../../../createquiz/quizinfo/20180320-quiz.json'
 
 const provider         = new Web3.providers.HttpProvider("http://ericvrp.xs4all.nl:8545");
 const contract         = require('truffle-contract');
-const pubquizJSON      = require('../../../../truffle/build/contracts/Pubquiz.json')
+const pubquizJSON      = require('../../../truffle/build/contracts/Pubquiz.json')
 const pubquizContract  = contract(pubquizJSON);
 global.pubquizContract = pubquizContract;
 pubquizContract.setProvider(provider);
