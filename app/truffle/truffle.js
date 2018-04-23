@@ -9,8 +9,8 @@ module.exports = {
     ropsten: {
       provider: function() { return new HDWalletProvider(mnemonic.ropsten, "https://ropsten.infura.io/"+infura_apikey) },
       network_id: 3,
-      gas: 53000,
-      gasPrice: 17 * 1000000000,
+      gas: 1000000,
+      gasPrice: 10 * 1000000000,
     },
     rinkeby: {
       provider: function() { return new HDWalletProvider(mnemonic.rinkeby, "https://rinkeby.infura.io/"+infura_apikey) },

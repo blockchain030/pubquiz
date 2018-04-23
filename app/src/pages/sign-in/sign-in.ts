@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as jsQR from "./jsQR.js";
+import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the SignInPage page.
@@ -16,7 +16,7 @@ import * as jsQR from "./jsQR.js";
 })
 export class SignInPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -66,6 +66,8 @@ export class SignInPage {
           outputMessage.hidden = true;
           outputData.parentElement.hidden = false;
           outputData.innerText = code.data;
+          // this.navParams.data.mnemonic = code.data;
+          // console.log(code.data);
         } else {
           outputMessage.hidden = false;
           outputData.parentElement.hidden = true;
@@ -73,6 +75,9 @@ export class SignInPage {
       }
       requestAnimationFrame(tick);
     }
-  }
+}
 
+  signIn() {
+    this.viewCtrl.dismiss({mnemonic: this.navParams.data.mnemonic});
+  }
 }

@@ -17,7 +17,14 @@ export class AboutPage {
   
 
   openSignIn() {
-    let myModal = this.modalCtrl.create(SignInPage);
+    let myModal = this.modalCtrl.create(SignInPage, { mnemonic: localStorage.mnemonic });
+
+    myModal.onDidDismiss(data => {
+      if (!data) return;
+      // console.log(data);
+      localStorage.mnemonic = data.mnemonic;
+    });
+
     myModal.present();
   }
 }
