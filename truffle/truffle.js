@@ -1,4 +1,11 @@
 module.exports = {
-  // See <http://truffleframework.com/docs/advanced/configuration>
-  // to customize your Truffle configuration!
+  networks: {
+    ericvrp: {
+      host: "ericvrp.xs4all.nl",
+      port: 8545,
+      network_id: "*", // Match any network id
+      gas: 4600000,
+      // gasPrice: 2000000000,
+    }
+  }
 };
