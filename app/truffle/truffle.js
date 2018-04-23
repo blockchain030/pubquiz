@@ -6,12 +6,6 @@ var infura_apikey="sCQUO1V3FOoOUWGZBtig";
 
 module.exports = {
   networks: {
-    ericvrp: {
-      host: "ericvrp.xs4all.nl",
-      port: 8545,
-      network_id: "*", // Match any network id
-      // gas: 4600000,
-    },
     ropsten: {
       provider: function() { return new HDWalletProvider(mnemonic.ropsten, "https://ropsten.infura.io/"+infura_apikey) },
       network_id: 3,
