@@ -26,7 +26,7 @@ export class SignInPage {
 
   initQRScanner = () => {
     var video = document.createElement("video");
-    var canvasElement = document.getElementById("canvas");
+    var canvasElement = <HTMLCanvasElement> document.getElementById("canvas");
     var canvas = canvasElement.getContext("2d");
     var loadingMessage = document.getElementById("loadingMessage");
     // var outputContainer = document.getElementById("output");
@@ -45,7 +45,7 @@ export class SignInPage {
     // Use facingMode: environment to attemt to get the front camera on phones
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
       video.srcObject = stream;
-      video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+      video.setAttribute("playsinline", "true"); // required to tell iOS safari we don't want fullscreen
       video.play();
       requestAnimationFrame(tick);
     });

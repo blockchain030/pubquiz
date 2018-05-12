@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { RatePage } from '../rate/rate';
+// import { NavController } from 'ionic-angular';
+// import { RatePage } from '../rate/rate';
 
 
 import { ModalController } from 'ionic-angular';

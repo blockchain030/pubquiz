@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
-    "@types/node": "^9.6.6",
+    "@types/node": "^9.6.15",
     "typescript": "2.4.2"
   },
   "description": "pubquiz DApp"
