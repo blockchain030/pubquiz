@@ -26,13 +26,13 @@ export class SignInPage {
 
   initQRScanner = () => {
     var video = document.createElement("video");
-    var canvasElement = document.getElementById("canvas");
-    var canvas = canvasElement.getContext("2d");
+    var canvasElement: any = document.getElementById("canvas");
+    var canvas: any = canvasElement.getContext("2d");
     var loadingMessage = document.getElementById("loadingMessage");
     // var outputContainer = document.getElementById("output");
     // var outputMessage = document.getElementById("outputMessage");
     // var outputData = document.getElementById("outputData");
-    
+
     const drawLine = (begin, end, color) =>  {
       canvas.beginPath();
       canvas.moveTo(begin.x, begin.y);
@@ -45,11 +45,11 @@ export class SignInPage {
     // Use facingMode: environment to attemt to get the front camera on phones
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
       video.srcObject = stream;
-      video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+      video.setAttribute("playsinline", "true"); // required to tell iOS safari we don't want fullscreen
       video.play();
       requestAnimationFrame(tick);
     });
-    
+
     const tick = () => {
       loadingMessage.innerText = "⌛ Loading video..."
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
