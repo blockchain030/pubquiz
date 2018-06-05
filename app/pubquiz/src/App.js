@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import PubquizTheme from './PubquizTheme';
+// import 'typeface-roboto'
+
+import MyAppBar from './component/MyAppBar';
+import Settings from './component/Settings';
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Blockchain030 pubquiz</h1>
-        </header>
-        <p className="App-intro">
-          Work in progress.
-        </p>
-      </div>
+      <MuiThemeProvider theme={PubquizTheme}>
+        <MyAppBar />
+        <div className="content">
+          <Settings /><Settings /><br/>
+          <Settings /><Settings />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

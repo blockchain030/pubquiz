@@ -1,4 +1,8 @@
-.App {
+.content { /* XXX 74px = appbar height + 10 */
+  margin: 74px 0px 0px 0px;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -25,4 +29,4 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */
