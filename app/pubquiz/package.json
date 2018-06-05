@@ -4,12 +4,14 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.2.0",
+    "await-delay": "^1.0.0",
     "bip39": "^2.5.0",
     "ethereumjs-wallet": "^0.6.0",
     "fetch": "^1.1.0",
     "jsqr": "^1.0.4",
     "mobx": "^4.3.1",
     "mobx-state-tree": "^2.0.5",
+    "moment": "^2.22.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4",
@@ -19,8 +21,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy-local": "npm run build && serve -s build",
+    "deploy-now": "npm run build && cd build && now --public --name pubquiz"
   }
 }
