@@ -11,10 +11,13 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+
+import HelpIcon from '@material-ui/icons/Help';
+import AboutIcon from '@material-ui/icons/Info';
+import ProfileIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
+import Divider from '@material-ui/core/Divider';
+import LogoutIcon from '@material-ui/icons/ExitToApp';
 
 
 const styles = {
@@ -42,6 +45,26 @@ class MyAppBar extends Component {
     })
   }
 
+  onClickHelp = () => {
+    console.log('onClickHelp')
+  }
+  
+  onClickAbout = () => {
+    console.log('onClickAbout')
+  }
+  
+  onClickProfile = () => {
+    console.log('onClickProfile')
+  }
+  
+  onClickSettings = () => {
+    console.log('onClickSettings')
+  }
+
+  onClickLogout = () => {
+    console.log('onClickLogout')
+  }
+  
   render() {
     const { classes } = this.props;
     return (
@@ -65,27 +88,42 @@ class MyAppBar extends Component {
             onKeyDown={this.toggleDrawer}>
             <div className={classes.list}>
               <List component="nav">
-                <ListItem button>
+
+                <ListItem button onClick={this.onClickHelp}>
                   <ListItemIcon>
-                    <InboxIcon />
+                    <HelpIcon />
                   </ListItemIcon>
-                  Inbox
+                  Help
                 </ListItem>
 
-                <ListItem button>
+                <ListItem button onClick={this.onClickAbout}>
                   <ListItemIcon>
-                    <DraftsIcon />
+                    <AboutIcon />
                   </ListItemIcon>
-                  Drafts
+                  About
                 </ListItem>
 
-                <Divider />
+                <ListItem button onClick={this.onClickProfile}>
+                  <ListItemIcon>
+                    <ProfileIcon />
+                  </ListItemIcon>
+                  Profile
+                </ListItem>
 
-                <ListItem button>
+                <ListItem button onClick={this.onClickSettings}>
                   <ListItemIcon>
                     <SettingsIcon />
                   </ListItemIcon>
                   Settings
+                </ListItem>
+
+                <Divider />
+
+                <ListItem button onClick={this.onClickLogout}>
+                  <ListItemIcon>
+                    <LogoutIcon />
+                  </ListItemIcon>
+                  Leave Quiz
                 </ListItem>
 
               </List>
