@@ -7,6 +7,8 @@ import PubquizTheme from './PubquizTheme';
 import MyAppBar from './component/MyAppBar';
 import Settings from './component/Settings';
 
+import './store/PubquizState'
+
 
 class App extends Component {
   render() {

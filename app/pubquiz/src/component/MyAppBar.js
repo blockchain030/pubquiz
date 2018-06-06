@@ -96,13 +96,6 @@ class MyAppBar extends Component {
                   Help
                 </ListItem>
 
-                <ListItem button onClick={this.onClickAbout}>
-                  <ListItemIcon>
-                    <AboutIcon />
-                  </ListItemIcon>
-                  About
-                </ListItem>
-
                 <ListItem button onClick={this.onClickProfile}>
                   <ListItemIcon>
                     <ProfileIcon />
@@ -118,6 +111,13 @@ class MyAppBar extends Component {
                 </ListItem>
 
                 <Divider />
+
+                <ListItem button onClick={this.onClickAbout}>
+                  <ListItemIcon>
+                    <AboutIcon />
+                  </ListItemIcon>
+                  About Blockchain030 Pubquiz
+                </ListItem>
 
                 <ListItem button onClick={this.onClickLogout}>
                   <ListItemIcon>
