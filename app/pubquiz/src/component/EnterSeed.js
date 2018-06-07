@@ -7,7 +7,7 @@ import jsQR from 'jsqr';
 
 @inject('store') @observer class EnterSeed extends Component {
   componentDidMount() {
-    const video = document.createElement("video");
+    let   video = document.createElement("video");
     const canvasElement = document.getElementById("canvas");
     const canvas = canvasElement.getContext("2d");
     const loadingMessage = document.getElementById("loadingMessage");
@@ -52,8 +52,12 @@ import jsQR from 'jsqr';
         } // else !videoContainsData
       } // else not enough video data (yet)
 
-      // requestAnimationFrame(tick) // max fps
-      setTimeout(function(){requestAnimationFrame(tick)}, (videoContainsData && this.props.store.page === 'enterseed' ? 20 : 2000)) // max 50 fps
+      if (this.props.store.page !== 'enterseed') { // stop the qr scanner
+        video = undefined
+        return;
+      }
+
+      setTimeout(function(){requestAnimationFrame(tick)}, videoContainsData ? 20 : 2000) // max 50 fps
     } // end of tick()
 
     // Use facingMode: environment to attemt to get the front camera on phones
