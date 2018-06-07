@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import { inject } from 'mobx-react'
+import Button from '@material-ui/core/Button';
 
 
-class Home extends Component {
+@inject('store') class Home extends Component {
+  onClickedEnterSeed = () => {
+    this.props.store.setPage('enterseed')
+  }
+
   render() {
     return (
-      <div>
-        Home is where my phone is 
-      </div>
+      <Button variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
+        Enter seed
+      </Button>
     );
   }
 }

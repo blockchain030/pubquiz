@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import { observer, inject } from 'mobx-react'
 import jsQR from 'jsqr';
 
 
-class QrScanner extends Component {
+@inject('store') @observer class EnterSeed extends Component {
   componentDidMount() {
-    // console.log('QrScanner.componentDidMount')
-
     const video = document.createElement("video");
     const canvasElement = document.getElementById("canvas");
     const canvas = canvasElement.getContext("2d");
@@ -21,7 +22,7 @@ class QrScanner extends Component {
     }
   
     const tick = () => {
-      // console.log('QrScanner.tick')
+      // console.log('EnterSeed.tick')
       let videoContainsData = false
 
       loadingMessage.innerText = "⌛ Loading video..."
@@ -45,15 +46,14 @@ class QrScanner extends Component {
             drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner , color);
             drawLine(code.location.bottomLeftCorner , code.location.topLeftCorner    , color);
             if (mnemonic12) {
-              console.log(code.data)
-              // this.navParams.data.mnemonic = code.data;
+              this.handleSeedChange(code.data)
             }
           } // else no qr code found
         } // else !videoContainsData
       } // else not enough video data (yet)
 
       // requestAnimationFrame(tick) // max fps
-      setTimeout(function(){requestAnimationFrame(tick)}, 1000 / (videoContainsData ? 50 : 1)) // max 50 fps
+      setTimeout(function(){requestAnimationFrame(tick)}, (videoContainsData && this.props.store.page === 'enterseed' ? 20 : 2000)) // max 50 fps
     } // end of tick()
 
     // Use facingMode: environment to attemt to get the front camera on phones
@@ -66,14 +66,34 @@ class QrScanner extends Component {
 
   } // end of componentDidMount()
 
+  handleSeedChange = (seed) => {
+    // console.log('handleSeedChange', seed)
+    localStorage.seed = seed       // store for after an app refresh
+    this.props.store.setSeed(seed) // update UI now
+  }
+
+  handleSeedChangeEvent = (event) => {
+    this.handleSeedChange(event.target.value)
+  }
+  
   render() {
+    const { store } = this.props;
+
     return (
       <center>
-        <div id="loadingMessage">Unable to access video stream (please make sure you have a webcam enabled)</div>
+        <div id="loadingMessage">Accessing video stream<br/>(please make sure you have a webcam enabled)</div>
         <canvas id="canvas" hidden></canvas>
+        <TextField
+          id="seed"
+          label="Enter seed"
+          fullWidth
+          value={store.seed}
+          onChange={this.handleSeedChangeEvent}
+          margin="normal"
+        />
       </center>
     );
   }
 }
 
-export default QrScanner;
+export default EnterSeed;

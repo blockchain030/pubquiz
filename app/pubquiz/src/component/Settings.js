@@ -7,7 +7,7 @@ class Settings extends Component {
     console.log('onClickedSettingsButton')
   }
 
-  render() { // Button variant="contained" 
+  render() { 
     return (
       <Button variant="contained" color="primary" onClick={this.onClickedSettingsButton}>
         I'm a settings button 

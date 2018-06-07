@@ -28,6 +28,7 @@ import { types /*, getSnapshot*/ } from "mobx-state-tree"
 
 const RootStore = types.model({
     page: "home",
+    seed: localStorage.seed ? localStorage.seed : "",
     // users: types.map(User),
     // todos: types.optional(types.map(Todo), {})
 }).views(self => ({
@@ -54,7 +55,11 @@ const RootStore = types.model({
         self.page = page
     }
 
-    return {/*addTodo,*/ setPage}
+    function setSeed(seed) {
+        self.seed = seed
+    }
+
+    return {/*addTodo,*/ setPage, setSeed}
 })
 
 
