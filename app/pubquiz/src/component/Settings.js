@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
+
 class Settings extends Component {
-  onClickedButton = () => {
-    console.log('onClickedButton')
+  onClickedSettingsButton = () => {
+    console.log('onClickedSettingsButton')
   }
 
   render() { // Button variant="contained" 
     return (
-      <Button color="primary" onClick={this.onClickedButton}>
+      <Button color="primary" onClick={this.onClickedSettingsButton}>
         I'm a settings button 
       </Button>
     );
