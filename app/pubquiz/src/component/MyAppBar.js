@@ -12,6 +12,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
+import HomeIcon from '@material-ui/icons/Home';
 import HelpIcon from '@material-ui/icons/Help';
 import AboutIcon from '@material-ui/icons/Info';
 import ProfileIcon from '@material-ui/icons/Person';
@@ -45,28 +46,14 @@ class MyAppBar extends Component {
     })
   }
 
-  onClickHelp = () => {
-    console.log('onClickHelp')
-  }
-  
-  onClickAbout = () => {
-    console.log('onClickAbout')
-  }
-  
-  onClickProfile = () => {
-    console.log('onClickProfile')
-  }
-  
-  onClickSettings = () => {
-    console.log('onClickSettings')
+  onClick = (page) => {
+    // console.log('onClick', page)
+    this.props.store.setPage(page)
   }
 
-  onClickLogout = () => {
-    console.log('onClickLogout')
-  }
-  
   render() {
     const { classes } = this.props;
+
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -89,21 +76,30 @@ class MyAppBar extends Component {
             <div className={classes.list}>
               <List component="nav">
 
-                <ListItem button onClick={this.onClickHelp}>
+                <ListItem button onClick={this.onClick.bind(this,'home')}>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  Home
+                </ListItem>
+
+                <Divider />
+
+                <ListItem button onClick={this.onClick.bind(this,'help')}>
                   <ListItemIcon>
                     <HelpIcon />
                   </ListItemIcon>
                   Help
                 </ListItem>
 
-                <ListItem button onClick={this.onClickProfile}>
+                <ListItem button onClick={this.onClick.bind(this,'profile')}>
                   <ListItemIcon>
                     <ProfileIcon />
                   </ListItemIcon>
                   Profile
                 </ListItem>
 
-                <ListItem button onClick={this.onClickSettings}>
+                <ListItem button onClick={this.onClick.bind(this,'settings')}>
                   <ListItemIcon>
                     <SettingsIcon />
                   </ListItemIcon>
@@ -112,14 +108,14 @@ class MyAppBar extends Component {
 
                 <Divider />
 
-                <ListItem button onClick={this.onClickAbout}>
+                <ListItem button onClick={this.onClick.bind(this,'about')}>
                   <ListItemIcon>
                     <AboutIcon />
                   </ListItemIcon>
                   About Blockchain030 Pubquiz
                 </ListItem>
 
-                <ListItem button onClick={this.onClickLogout}>
+                <ListItem button onClick={this.onClick.bind(this,'leavequiz')}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>

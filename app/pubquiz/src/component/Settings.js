@@ -9,7 +9,7 @@ class Settings extends Component {
 
   render() { // Button variant="contained" 
     return (
-      <Button color="primary" onClick={this.onClickedSettingsButton}>
+      <Button variant="contained" color="primary" onClick={this.onClickedSettingsButton}>
         I'm a settings button 
       </Button>
     );

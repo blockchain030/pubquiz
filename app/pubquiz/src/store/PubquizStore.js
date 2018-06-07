@@ -1,38 +1,60 @@
-import { types, getSnapshot } from "mobx-state-tree"
+import { types /*, getSnapshot*/ } from "mobx-state-tree"
+// import { values } from "mobx";
+
 
 // https://github.com/mobxjs/mobx-state-tree/blob/master/docs/getting-started.md#getting-started
 
 
-const User = types.model({
-    name: ""
-})
+// const User = types.model({
+//     name: ""
+// })
 
 
-const Todo = types.model({
-    name: "",
-    done: false
-}).actions(self => {
-    function setName(newName) {
-        self.name = newName
-    }
+// const Todo = types.model({
+//     name: "",
+//     done: false
+// }).actions(self => {
+//     function setName(newName) {
+//         self.name = newName
+//     }
 
-    function toggle() {
-        self.done = !self.done
-    }
+//     function toggle() {
+//         self.done = !self.done
+//     }
 
-    return {setName, toggle}
-})
+//     return {setName, toggle}
+// })
 
 
 const RootStore = types.model({
-    users: types.map(User),
-    todos: types.optional(types.map(Todo), {})
-}).actions(self => {
-    function addTodo(id, name) {
-        self.todos.set(id, Todo.create({ name }))
+    page: "home",
+    // users: types.map(User),
+    // todos: types.optional(types.map(Todo), {})
+}).views(self => ({
+
+    // get pendingCount() { // Computed property
+    //     return values(self.todos).filter(todo => !todo.done).length
+    // },
+
+    // get completedCount() { // Computed property
+    //     return values(self.todos).filter(todo => todo.done).length
+    // },
+
+    // getTodosWhereDoneIs(done) { // Model view
+    //     return values(self.todos).filter(todo => todo.done === done)
+    // },
+
+})).actions(self => {
+
+    // function addTodo(id, name) {
+    //     self.todos.set(id, Todo.create({ name }))
+    // }
+
+    function setPage(page) {
+        self.page = page
     }
 
-    return {addTodo}
+    return {/*addTodo,*/ setPage}
 })
 
 
@@ -44,9 +66,11 @@ const RootStore = types.model({
 // console.log("Eat (Todo):", eat.toJSON())
 
 const store = RootStore.create({
-    users: { } // users is required here because it's not marked as optional
+    // users: { } // users is required here because it's not marked as optional
 })
 // console.log("store (RootStore):", store.toJSON())
-global.store = store
-store.addTodo(1, "Eat a cake")
-console.log(getSnapshot(store)) // or: console.log(store.toJSON())
+// global.store = store
+// store.addTodo(1, "Eat a cake")
+// console.log(getSnapshot(store)) // or: console.log(store.toJSON())
+
+export default store;
