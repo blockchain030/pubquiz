@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 // import 'typeface-roboto'
 
 import PubquizTheme from './PubquizTheme';
@@ -20,14 +20,14 @@ import LeaveQuiz from './component/LeaveQuiz';
 // note: to get decorators working with create-react-app without using eject:
 //    https://www.leighhalliday.com/mobx-create-react-app-without-ejecting
 
-@observer class App extends Component {
+@inject('store') @observer class App extends Component {
   render() {
     const { store } = this.props
     // console.log(store)
 
     return (
       <MuiThemeProvider theme={PubquizTheme}>
-        <MyAppBar store={store} />
+        <MyAppBar />
         <div className='content'>
           <Paper>
             {store.page === 'home'      && <Home        />}

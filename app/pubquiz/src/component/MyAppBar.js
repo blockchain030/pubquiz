@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { inject } from 'mobx-react'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -35,7 +36,7 @@ const styles = {
 };
 
 
-class MyAppBar extends Component {
+@inject('store') class MyAppBar extends Component {
   state = {
     drawerOpen: false,
   }
