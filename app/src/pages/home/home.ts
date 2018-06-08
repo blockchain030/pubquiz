@@ -22,6 +22,7 @@ const pubquizContract  = contract(pubquizJSON);
 global.pubquizContract = pubquizContract;
 
 pubquizContract.setProvider(provider);
+console.log('pubquizContract.isDeployed()', pubquizContract.isDeployed())
 
 var pubquiz;
 pubquizContract.deployed().then(instance => {

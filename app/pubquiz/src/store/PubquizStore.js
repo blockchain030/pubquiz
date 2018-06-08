@@ -5,30 +5,46 @@ import { types /*, getSnapshot*/ } from "mobx-state-tree"
 // https://github.com/mobxjs/mobx-state-tree/blob/master/docs/getting-started.md#getting-started
 
 
-// const User = types.model({
-//     name: ""
-// })
+const Question = types.model({
+    question: "",
+    answer: "",
+})
 
 
-// const Todo = types.model({
-//     name: "",
-//     done: false
-// }).actions(self => {
-//     function setName(newName) {
-//         self.name = newName
-//     }
+const Round = types.model({
+    name: "",
+    questions: types.optional(types.map(Question), {}),
+}).actions(self => {
+    function setName(newName) {
+        self.name = newName
+    }
 
-//     function toggle() {
-//         self.done = !self.done
-//     }
+    function addQuestion(id, question_answer) {
+        self.questions.set(id, Question.create(question_answer))
+    }
 
-//     return {setName, toggle}
-// })
+    return {setName, addQuestion}
+})
+
+
+const Quiz = types.model({
+    name: "",
+    roundIndex: 0,
+    questionIndex: 0,
+    rounds: types.optional(types.map(Round), {}),
+}).actions(self => {
+    function setName(newName) {
+        self.name = newName
+    }
+
+    return {setName}
+})
 
 
 const RootStore = types.model({
     page: "home",
     seed: localStorage.seed ? localStorage.seed : "",
+    quiz: types.optional(Quiz, {}),
     // users: types.map(User),
     // todos: types.optional(types.map(Todo), {})
 }).views(self => ({
