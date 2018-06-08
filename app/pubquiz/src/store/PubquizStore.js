@@ -1,4 +1,4 @@
-import { types /*, getSnapshot*/ } from "mobx-state-tree"
+import { types } from "mobx-state-tree"
 // import { values } from "mobx";
 
 
@@ -15,15 +15,13 @@ const Round = types.model({
     name: "",
     questions: types.optional(types.map(Question), {}),
 }).actions(self => {
-    function setName(newName) {
-        self.name = newName
+
+    function addQuestion(id, question) {
+        // console.log('Round.addQuestion', id, question)
+        self.questions.set(id, Question.create(question))
     }
 
-    function addQuestion(id, question_answer) {
-        self.questions.set(id, Question.create(question_answer))
-    }
-
-    return {setName, addQuestion}
+    return {addQuestion}
 })
 
 
@@ -33,11 +31,23 @@ const Quiz = types.model({
     questionIndex: 0,
     rounds: types.optional(types.map(Round), {}),
 }).actions(self => {
-    function setName(newName) {
-        self.name = newName
+
+    function reset(name) {
+        self.name = name
+        self.roundIndex = 0
+        self.questionIndex = 0
+        self.rounds = {}
     }
 
-    return {setName}
+    function addRound(id, name, questions) {
+        // console.log('Quiz.addRound', id, name, questions)
+        self.rounds.set(id, Round.create({name}))
+        for (const questionIndex in questions) {
+            self.rounds.get(id).addQuestion(questionIndex, questions[questionIndex])
+        }
+    }
+
+    return {reset, addRound}
 })
 
 
@@ -45,8 +55,6 @@ const RootStore = types.model({
     page: "home",
     seed: localStorage.seed ? localStorage.seed : "",
     quiz: types.optional(Quiz, {}),
-    // users: types.map(User),
-    // todos: types.optional(types.map(Todo), {})
 }).views(self => ({
 
     // get pendingCount() { // Computed property
@@ -62,11 +70,6 @@ const RootStore = types.model({
     // },
 
 })).actions(self => {
-
-    // function addTodo(id, name) {
-    //     self.todos.set(id, Todo.create({ name }))
-    // }
-
     function setPage(page) {
         self.page = page
     }
@@ -75,23 +78,12 @@ const RootStore = types.model({
         self.seed = seed
     }
 
-    return {/*addTodo,*/ setPage, setSeed}
+    return {setPage, setSeed}
 })
 
 
 //
-// const john = User.create()
-// console.log("John (User):", john.toJSON())
+const store = RootStore.create()
 
-// const eat = Todo.create({ name: "eat", done: true })
-// console.log("Eat (Todo):", eat.toJSON())
-
-const store = RootStore.create({
-    // users: { } // users is required here because it's not marked as optional
-})
-// console.log("store (RootStore):", store.toJSON())
-// global.store = store
-// store.addTodo(1, "Eat a cake")
-// console.log(getSnapshot(store)) // or: console.log(store.toJSON())
-
-export default store;
+// export { Question, Round, Quiz, RootStore }
+export default store

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { inject } from 'mobx-react'
 import Button from '@material-ui/core/Button';
-import getQuiz from '../util/getQuiz'
+import resetQuiz from '../util/resetQuiz'
 
 
 @inject('store') class Home extends Component {
@@ -9,10 +9,9 @@ import getQuiz from '../util/getQuiz'
     this.props.store.setPage('enterseed')
   }
 
-  onClickedGetQuiz = () => {
-    // console.log('onClickedGetQuiz')
-    const quiz = getQuiz(this.props.store)
-    console.log(quiz)
+  onClickedResetQuiz = () => {
+    resetQuiz(this.props.store)
+    console.log( JSON.stringify(this.props.store.toJSON(),null,2) )
   }
 
   render() {
@@ -22,8 +21,8 @@ import getQuiz from '../util/getQuiz'
           Enter seed
         </Button>
 
-        <Button variant="contained" color="primary" onClick={this.onClickedGetQuiz}>
-          Get Quiz
+        <Button variant="contained" color="primary" onClick={this.onClickedResetQuiz}>
+          Reset Quiz
         </Button>
       </div>
     );
