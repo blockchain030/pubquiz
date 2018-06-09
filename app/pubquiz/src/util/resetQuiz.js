@@ -1,6 +1,6 @@
 // import crypto from 'crypto';
 
-import Web3 from 'web3';
+// import Web3 from 'web3';
 // import bip39 from 'bip39';
 // import hdkey from 'ethereumjs-wallet/hdkey';
 

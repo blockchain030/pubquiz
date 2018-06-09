@@ -3,3 +3,5 @@
 
 This is still work in progress and might not resemble the final product.
 
+Demo van be found at https://pubquiz-qdpnklyvpu.now.sh
+
