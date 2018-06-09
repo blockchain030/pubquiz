@@ -54,6 +54,7 @@ const Quiz = types.model({
 const RootStore = types.model({
     page: "home",
     seed: localStorage.seed ? localStorage.seed : "",
+    activeTab: 0,
     quiz: types.optional(Quiz, {}),
 }).views(self => ({
 
@@ -78,7 +79,11 @@ const RootStore = types.model({
         self.seed = seed
     }
 
-    return {setPage, setSeed}
+    function setActiveTab(activeTab) {
+        self.activeTab = activeTab
+    }
+
+    return {setPage, setSeed, setActiveTab}
 })
 
 

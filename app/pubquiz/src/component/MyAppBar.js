@@ -13,12 +13,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
-import HomeIcon from '@material-ui/icons/Home';
 import HelpIcon from '@material-ui/icons/Help';
 import AboutIcon from '@material-ui/icons/Info';
-import ProfileIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 
 
@@ -77,27 +75,11 @@ const styles = {
             <div className={classes.list}>
               <List component="nav">
 
-                <ListItem button onClick={this.onClick.bind(this,'home')}>
-                  <ListItemIcon>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  Home
-                </ListItem>
-
-                <Divider />
-
                 <ListItem button onClick={this.onClick.bind(this,'help')}>
                   <ListItemIcon>
                     <HelpIcon />
                   </ListItemIcon>
                   Help
-                </ListItem>
-
-                <ListItem button onClick={this.onClick.bind(this,'profile')}>
-                  <ListItemIcon>
-                    <ProfileIcon />
-                  </ListItemIcon>
-                  Profile
                 </ListItem>
 
                 <ListItem button onClick={this.onClick.bind(this,'settings')}>
@@ -107,20 +89,20 @@ const styles = {
                   Settings
                 </ListItem>
 
-                <Divider />
+                {/* <Divider /> */}
 
                 <ListItem button onClick={this.onClick.bind(this,'about')}>
                   <ListItemIcon>
                     <AboutIcon />
                   </ListItemIcon>
-                  About Blockchain030 Pubquiz
+                  About
                 </ListItem>
 
                 <ListItem button onClick={this.onClick.bind(this,'leavequiz')}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>
-                  Leave Quiz
+                  Leave Quiz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </ListItem>
 
               </List>

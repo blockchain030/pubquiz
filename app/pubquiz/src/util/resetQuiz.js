@@ -7,14 +7,14 @@ import Web3 from 'web3';
 const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
 // console.log(JSON.stringify(secretQuizinfo,null,1))
 
-const infura_apikey    = 'sCQUO1V3FOoOUWGZBtig';
-const provider         = new Web3.providers.HttpProvider('https://ropsten.infura.io/'+infura_apikey);
-// const web3             = new Web3(provider);
-const contract         = require('truffle-contract');
-const pubquizJSON      = require('./Pubquiz.json') // XXX this is a copy!
-const pubquizContract  = contract(pubquizJSON);
-pubquizContract.setProvider(provider);
-global.pubquizContract = pubquizContract;
+// const infura_apikey    = 'sCQUO1V3FOoOUWGZBtig';
+// const provider         = new Web3.providers.HttpProvider('https://ropsten.infura.io/'+infura_apikey);
+// // const web3             = new Web3(provider);
+// const contract         = require('truffle-contract');
+// const pubquizJSON      = require('./Pubquiz.json') // XXX this is a copy of the ABI!
+// const pubquizContract  = contract(pubquizJSON);
+// pubquizContract.setProvider(provider);
+// global.pubquizContract = pubquizContract;
 // console.log('pubquizContract.isDeployed()', pubquizContract.isDeployed())
 
 // var pubquiz;
@@ -54,7 +54,7 @@ const resetQuiz = (store) => {
 
 
 
-    
+
 
     // const pubquizGatewayUrl = IPFS_GATEWAY + secretQuizinfo.playerinfoHash
     // console.log(pubquizGatewayUrl)
