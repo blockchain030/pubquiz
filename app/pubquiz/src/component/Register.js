@@ -22,8 +22,8 @@ import resetQuiz from '../util/resetQuiz'
 
   onClickedJoinGame = () => {
     resetQuiz(this.props.store)
-    console.log( JSON.stringify(this.props.store.toJSON(),null,2) )
     this.props.store.team.setRegistered(true)
+    // console.log( JSON.stringify(this.props.store.toJSON(),null,2) )
   }
 
   render() {

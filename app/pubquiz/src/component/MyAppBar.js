@@ -78,6 +78,12 @@ const styles = {
             onKeyDown={this.toggleDrawer}>
             <div className={classes.list}>
               <List component="nav">
+                <center><img src='/logo.png' alt='' width='200' /></center>
+                <ListItem divider>
+                  {store.team.name}
+                </ListItem>
+
+                {/* <Divider /> */}
 
                 <ListItem button onClick={this.onClick.bind(this,'help')}>
                   <ListItemIcon>
