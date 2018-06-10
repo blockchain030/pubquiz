@@ -12,7 +12,7 @@
     "fetch": "^1.1.0",
     "jsqr": "^1.0.4",
     "mobx": "^4.3.1",
-    "mobx-react": "^5.2.0",
+    "mobx-react": "^5.2.2",
     "mobx-state-tree": "^2.0.5",
     "moment": "^2.22.2",
     "react": "^16.4.0",

@@ -60,9 +60,9 @@ import LeaveQuiz from './component/LeaveQuiz';
             fullWidth centered
             indicatorColor="secondary"
             textColor="secondary">
-            <Tab icon={<HomeIcon    />} label="Home" />
-            <Tab icon={<ScoresIcon  />} label="Scores" />
-            <Tab icon={<ProfileIcon />} label="Profile" />
+            <Tab style={{color:'white'}} icon={<HomeIcon    style={{fontSize: 36, color:'white'}}/>} label="Home"    />
+            <Tab style={{color:'white'}} icon={<ScoresIcon  style={{fontSize: 36, color:'white'}}/>} label="Scores"  />
+            <Tab style={{color:'white'}} icon={<ProfileIcon style={{fontSize: 36, color:'white'}}/>} label="Profile" />
           </Tabs>
         </Paper>
 

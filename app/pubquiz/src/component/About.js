@@ -5,7 +5,7 @@ class About extends Component {
   render() {
     return (
       <div>
-        About
+        Created by blockchain030.nl
       </div>
     );
   }

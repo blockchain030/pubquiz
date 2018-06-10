@@ -61,7 +61,7 @@ const styles = {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Blockchain030 Pubquiz
+              Pubquiz
             </Typography>
           </Toolbar>
         </AppBar>
