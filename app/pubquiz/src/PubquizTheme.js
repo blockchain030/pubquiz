@@ -17,7 +17,12 @@ const theme = createMuiTheme({
     MuiTab: {
       root: {
         textTransform: 'none',
-        // labelColor: 'white',
+      },
+      textColorSecondary: {
+        color: 'white',
+      },
+      label: {
+        fontSize: '0.7rem !important',
       },
     }, // end of MuiTab
 
@@ -37,6 +42,6 @@ const theme = createMuiTheme({
   }, // end of overrides
 }); // end of createMuiTheme()
 
-console.log(theme)
+// console.log(theme)
 
 export default theme;

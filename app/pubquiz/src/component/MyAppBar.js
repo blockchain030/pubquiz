@@ -15,7 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 import HelpIcon from '@material-ui/icons/Help';
 import AboutIcon from '@material-ui/icons/Info';
-import SettingsIcon from '@material-ui/icons/Settings';
+// import SettingsIcon from '@material-ui/icons/Settings';
 // import Divider from '@material-ui/core/Divider';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 
@@ -50,8 +50,12 @@ const styles = {
     this.props.store.setPage(page)
   }
 
+  onClickLeaveQuiz = () => {
+    this.props.store.setRegistered(false)
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, store } = this.props;
 
     return (
       <div className={classes.root}>
@@ -82,12 +86,12 @@ const styles = {
                   Help
                 </ListItem>
 
-                <ListItem button onClick={this.onClick.bind(this,'settings')}>
+                {/* <ListItem button onClick={this.onClick.bind(this,'settings')}>
                   <ListItemIcon>
                     <SettingsIcon />
                   </ListItemIcon>
                   Settings
-                </ListItem>
+                </ListItem> */}
 
                 {/* <Divider /> */}
 
@@ -98,7 +102,7 @@ const styles = {
                   About
                 </ListItem>
 
-                <ListItem button onClick={this.onClick.bind(this,'leavequiz')}>
+                <ListItem button disabled={!store.registered} onClick={this.onClickLeaveQuiz}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>

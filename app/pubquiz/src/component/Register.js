@@ -9,20 +9,21 @@ import resetQuiz from '../util/resetQuiz'
     this.props.store.setPage('enterseed')
   }
 
-  onClickedResetQuiz = () => {
+  onClickedJoinGame = () => {
     resetQuiz(this.props.store)
     console.log( JSON.stringify(this.props.store.toJSON(),null,2) )
+    this.props.store.setRegistered(true)
   }
 
   render() {
     return (
       <div>
+        [Team name can be input here]<br/>
         <Button variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
-          Enter seed
-        </Button>
-
-        <Button variant="contained" color="primary" onClick={this.onClickedResetQuiz}>
-          Reset Quiz
+          Scan QR code of seed
+        </Button><br/>
+        <Button variant="contained" color="secondary" onClick={this.onClickedJoinGame}>
+          Join Game
         </Button>
       </div>
     );

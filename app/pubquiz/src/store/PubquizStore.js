@@ -53,6 +53,7 @@ const Quiz = types.model({
 
 const RootStore = types.model({
     page: "home",
+    registered: false,
     seed: localStorage.seed ? localStorage.seed : "",
     activeTab: 0,
     quiz: types.optional(Quiz, {}),
@@ -75,6 +76,10 @@ const RootStore = types.model({
         self.page = page
     }
 
+    function setRegistered(registered) {
+        self.registered = registered
+    }
+
     function setSeed(seed) {
         self.seed = seed
     }
@@ -83,7 +88,7 @@ const RootStore = types.model({
         self.activeTab = activeTab
     }
 
-    return {setPage, setSeed, setActiveTab}
+    return {setPage, setRegistered, setSeed, setActiveTab}
 })
 
 

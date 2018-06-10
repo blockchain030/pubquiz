@@ -3,5 +3,5 @@
 
 This is still work in progress and might not resemble the final product.
 
-Demo van be found at https://pubquiz-jsxsckrjeh.now.sh
+Demo van be found at https://pubquiz-nnbgdeycfb.now.sh
 
