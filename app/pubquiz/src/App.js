@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import HomeIcon from '@material-ui/icons/Home';
 import ScoresIcon from '@material-ui/icons/People';
 import ProfileIcon from '@material-ui/icons/Person';
-import { observer, inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 // import 'typeface-roboto'
 
 import PubquizTheme from './PubquizTheme';
@@ -43,7 +43,7 @@ import About from './component/About';
         <MyAppBar />
 
         <div className='content' style={{margin:'74px 0 100px 0'}}>
-          {store.page === 'home'      && (!store.registered ? <Register/> : <AnswerQuestion/>)}
+          {store.page === 'home'      && (!store.team.registered ? <Register/> : <AnswerQuestion/>)}
           {store.page === 'scores'    && <Scores      />}
           {store.page === 'enterseed' && <EnterSeed   />}
           {store.page === 'help'      && <Help        />}

@@ -51,7 +51,7 @@ const styles = {
   }
 
   onClickLeaveQuiz = () => {
-    this.props.store.setRegistered(false)
+    this.props.store.team.setRegistered(false)
   }
 
   render() {
@@ -102,7 +102,7 @@ const styles = {
                   About
                 </ListItem>
 
-                <ListItem button disabled={!store.registered} onClick={this.onClickLeaveQuiz}>
+                <ListItem button disabled={!store.team.registered} onClick={this.onClickLeaveQuiz}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>

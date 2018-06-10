@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import { inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import resetQuiz from '../util/resetQuiz'
 
 
-@inject('store') class Home extends Component {
+@inject('store') @observer class Home extends Component {
+  
+  handleNameChange = (name) => {
+    // console.log('handleNameChange', name)
+    this.props.store.team.setName(name) // update UI now
+  }
+  
+  handleNameChangeEvent = (event) => {
+    this.handleNameChange(event.target.value)
+  }
+
   onClickedEnterSeed = () => {
     this.props.store.setPage('enterseed')
   }
@@ -12,16 +23,27 @@ import resetQuiz from '../util/resetQuiz'
   onClickedJoinGame = () => {
     resetQuiz(this.props.store)
     console.log( JSON.stringify(this.props.store.toJSON(),null,2) )
-    this.props.store.setRegistered(true)
+    this.props.store.team.setRegistered(true)
   }
 
   render() {
+    const { team } = this.props.store
+    
     return (
       <div>
-        [Team name can be input here]<br/>
+        <TextField
+          id="name"
+          label="Team name"
+          fullWidth
+          value={team.name}
+          onChange={this.handleNameChangeEvent}
+          margin="normal"
+        /><br/>
+
         <Button variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
           Scan QR code of seed
         </Button><br/>
+
         <Button variant="contained" color="secondary" onClick={this.onClickedJoinGame}>
           Join Game
         </Button>

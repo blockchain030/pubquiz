@@ -5,6 +5,30 @@ import { types } from "mobx-state-tree"
 // https://github.com/mobxjs/mobx-state-tree/blob/master/docs/getting-started.md#getting-started
 
 
+const Team = types.model({
+    name: localStorage.name ? localStorage.name : "Team Name",
+    seed: localStorage.seed ? localStorage.seed : "",
+    registered: false,
+}).actions(self => {
+
+    function setName(name) {
+        self.name =
+        localStorage.name = name
+    }
+    
+    function setSeed(seed) {
+        self.seed =
+        localStorage.seed = seed
+    }
+
+    function setRegistered(registered) {
+        self.registered = registered
+    }
+
+    return {setName, setSeed, setRegistered}
+})
+    
+
 const Question = types.model({
     question: "",
     answer: "",
@@ -53,9 +77,8 @@ const Quiz = types.model({
 
 const RootStore = types.model({
     page: "home",
-    registered: false,
-    seed: localStorage.seed ? localStorage.seed : "",
     activeTab: 0,
+    team: types.optional(Team, {}),
     quiz: types.optional(Quiz, {}),
 }).views(self => ({
 
@@ -76,10 +99,6 @@ const RootStore = types.model({
         self.page = page
     }
 
-    function setRegistered(registered) {
-        self.registered = registered
-    }
-
     function setSeed(seed) {
         self.seed = seed
     }
@@ -88,7 +107,7 @@ const RootStore = types.model({
         self.activeTab = activeTab
     }
 
-    return {setPage, setRegistered, setSeed, setActiveTab}
+    return {setPage, setSeed, setActiveTab}
 })
 
 

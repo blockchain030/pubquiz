@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-import { observer, inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import jsQR from 'jsqr';
 
 
 @inject('store') @observer class EnterSeed extends Component {
+  
   componentDidMount() {
     let   video = document.createElement("video");
     const canvasElement = document.getElementById("canvas");
@@ -72,8 +73,7 @@ import jsQR from 'jsqr';
 
   handleSeedChange = (seed) => {
     // console.log('handleSeedChange', seed)
-    localStorage.seed = seed       // store for after an app refresh
-    this.props.store.setSeed(seed) // update UI now
+    this.props.store.team.setSeed(seed) // update UI now
   }
 
   handleSeedChangeEvent = (event) => {
@@ -91,7 +91,7 @@ import jsQR from 'jsqr';
           id="seed"
           label="Enter seed"
           fullWidth
-          value={store.seed}
+          value={store.team.seed}
           onChange={this.handleSeedChangeEvent}
           margin="normal"
         />
