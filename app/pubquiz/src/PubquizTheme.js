@@ -4,32 +4,34 @@ const theme = createMuiTheme({
   overrides: {
     MuiToolbar: {
       root: {
-        background: 'black',
-      },
-    }, // end of MuiTab
+        // background: 'black',
+        background: 'linear-gradient(45deg, black 30%, red 90%)',
 
-    MuiTabs: {
-      root: {
-        background: 'black',
       },
-    }, // end of MuiTab
+    },
 
-    MuiTab: {
-      root: {
-        textTransform: 'none',
-      },
-      textColorSecondary: {
-        color: 'white',
-      },
-      label: {
-        fontSize: '0.7rem !important',
-      },
-    }, // end of MuiTab
+    // MuiTabs: {
+    //   root: {
+    //     background: 'black',
+    //   },
+    // },
+
+    // MuiTab: {
+    //   root: {
+    //     textTransform: 'none',
+    //   },
+    //   textColorSecondary: {
+    //     color: 'white',
+    //   },
+    //   label: {
+    //     fontSize: '0.7rem !important',
+    //   },
+    // },
 
     MuiButton: {
       root: {
         textTransform: "none",
-        margin: '5px',
+        // margin: '5px',
         // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
         // borderRadius: 3,
         // border: 0,

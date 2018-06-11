@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import HomeIcon from '@material-ui/icons/Home';
-import ScoresIcon from '@material-ui/icons/People';
-import ProfileIcon from '@material-ui/icons/Person';
+// import Paper from '@material-ui/core/Paper';
+// import Tabs from '@material-ui/core/Tabs';
+// import Tab from '@material-ui/core/Tab';
+// import HomeIcon from '@material-ui/icons/Home';
+// import ScoresIcon from '@material-ui/icons/People';
+// import ProfileIcon from '@material-ui/icons/Person';
 import { inject, observer } from 'mobx-react'
 // import 'typeface-roboto'
 
@@ -42,7 +42,7 @@ import About from './component/About';
       
         <MyAppBar />
 
-        <div className='content' style={{margin:'74px 0 100px 0'}}>
+        <div className='content' style={{margin:'70px 0 0 0'}}>
           {store.page === 'home'      && (!store.team.registered ? <Register/> : <AnswerQuestion/>)}
           {store.page === 'scores'    && <Scores      />}
           {store.page === 'enterseed' && <EnterSeed   />}
@@ -52,7 +52,7 @@ import About from './component/About';
           {store.page === 'about'     && <About       />}
         </div>
 
-        <Paper style={{position:'fixed', left:0, bottom:0,width:'100%'}}>
+        {/* <Paper style={{position:'fixed', left:0, bottom:0,width:'100%'}}>
           <Tabs
             value={store.activeTab}
             onChange={this.onChangeActiveTab}
@@ -63,7 +63,7 @@ import About from './component/About';
             <Tab icon={<ScoresIcon  style={{fontSize: 40}}/>} label="Scores"  />
             <Tab icon={<ProfileIcon style={{fontSize: 40}}/>} label="Profile" />
           </Tabs>
-        </Paper>
+        </Paper> */}
 
       </MuiThemeProvider>
     );

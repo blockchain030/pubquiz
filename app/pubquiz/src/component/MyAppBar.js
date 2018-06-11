@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,6 +13,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
+import HomeIcon from '@material-ui/icons/Home';
 import HelpIcon from '@material-ui/icons/Help';
 import AboutIcon from '@material-ui/icons/Info';
 // import SettingsIcon from '@material-ui/icons/Settings';
@@ -34,7 +35,7 @@ const styles = {
 };
 
 
-@inject('store') class MyAppBar extends Component {
+@inject('store') @observer class MyAppBar extends Component {
   state = {
     drawerOpen: false,
   }
@@ -65,7 +66,7 @@ const styles = {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Pubquiz
+              Pubquiz - {store.page}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -83,7 +84,12 @@ const styles = {
                   {store.team.name}
                 </ListItem>
 
-                {/* <Divider /> */}
+                <ListItem button onClick={this.onClick.bind(this,'home')}>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  Home
+                </ListItem>
 
                 <ListItem button onClick={this.onClick.bind(this,'help')}>
                   <ListItemIcon>
@@ -101,7 +107,7 @@ const styles = {
 
                 {/* <Divider /> */}
 
-                <ListItem button onClick={this.onClick.bind(this,'about')}>
+                <ListItem button divider onClick={this.onClick.bind(this,'about')}>
                   <ListItemIcon>
                     <AboutIcon />
                   </ListItemIcon>

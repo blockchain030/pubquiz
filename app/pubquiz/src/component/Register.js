@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import resetQuiz from '../util/resetQuiz'
@@ -29,8 +30,8 @@ import resetQuiz from '../util/resetQuiz'
   render() {
     const { team } = this.props.store
     
-    return (
-      <div>
+    return (<center>
+      <Paper style={{width:'90%', padding:'15px'}}>
         <TextField
           id="name"
           label="Team name"
@@ -38,16 +39,16 @@ import resetQuiz from '../util/resetQuiz'
           value={team.name}
           onChange={this.handleNameChangeEvent}
           margin="normal"
-        /><br/>
+        /><br/><br/>
 
-        <Button variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
+        <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
           Scan QR code of seed
-        </Button><br/>
+        </Button><br/><br/>
 
-        <Button variant="contained" color="secondary" onClick={this.onClickedJoinGame}>
-          Join Game
+        <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={this.onClickedJoinGame}>
+          Join Quiz
         </Button>
-      </div>
+      </Paper></center>
     );
   }
 }
