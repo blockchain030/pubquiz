@@ -38,7 +38,8 @@ import RightIcon from '@material-ui/icons/ChevronRight';
     const { quiz } = this.props.store
     const { rounds } = quiz
     const round = rounds.get(String(quiz.roundIndex))
-    const question = round.questions.get(String(quiz.questionIndex)).question
+    const question_answer = round.questions.get(String(quiz.questionIndex))
+    const question = question_answer.question
     const [ question_text, question_media ] = question.split('|')
     // console.log(question_media)
     // console.log(question_text)
@@ -70,7 +71,7 @@ import RightIcon from '@material-ui/icons/ChevronRight';
             id="answer"
             label="Answer"
             fullWidth
-            value={question.myAnswer}
+            value={question_answer.myAnswer}
             onChange={this.handleMyAnswerChangeEvent}
             margin="normal"
           />
