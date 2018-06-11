@@ -30,25 +30,29 @@ import resetQuiz from '../util/resetQuiz'
   render() {
     const { team } = this.props.store
     
-    return (<center>
-      <Paper style={{width:'90%', padding:'15px'}}>
-        <TextField
-          id="name"
-          label="Team name"
-          fullWidth
-          value={team.name}
-          onChange={this.handleNameChangeEvent}
-          margin="normal"
-        /><br/><br/>
+    return (
+      <center>
+        
+        <Paper style={{width:'90%', padding:'15px'}}>
+          <TextField
+            id="name"
+            label="Team name"
+            fullWidth
+            value={team.name}
+            onChange={this.handleNameChangeEvent}
+            margin="normal"
+          /><br/><br/>
 
-        <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
-          Scan QR code of seed
-        </Button><br/><br/>
+          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
+            Scan QR code of seed
+          </Button><br/><br/>
 
-        <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={this.onClickedJoinGame}>
-          Join Quiz
-        </Button>
-      </Paper></center>
+          <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={this.onClickedJoinGame}>
+            Join Quiz
+          </Button>
+        </Paper>
+
+      </center>
     );
   }
 }

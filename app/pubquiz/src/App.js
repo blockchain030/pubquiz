@@ -42,7 +42,7 @@ import About from './component/About';
       
         <MyAppBar />
 
-        <div className='content' style={{margin:'70px 0 0 0'}}>
+        <div className='content' style={{margin:'70px 0px 80px'}}>
           {store.page === 'home'      && (!store.team.registered ? <Register/> : <AnswerQuestion/>)}
           {store.page === 'scores'    && <Scores      />}
           {store.page === 'enterseed' && <EnterSeed   />}

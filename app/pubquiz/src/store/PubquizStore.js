@@ -85,7 +85,15 @@ const Quiz = types.model({
         }
     }
 
-    return {reset, addRound}
+    function setRoundIndex(roundIndex) {
+        self.roundIndex = roundIndex
+    }
+
+    function setQuestionIndex(questionIndex) {
+        self.questionIndex = questionIndex
+    }
+
+    return {reset, addRound, setRoundIndex, setQuestionIndex}
 })
 
 

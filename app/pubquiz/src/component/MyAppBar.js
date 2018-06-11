@@ -67,7 +67,7 @@ const styles = {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              {store.quiz.name || "Pubquiz - register"}
+              {store.quiz.name || "Register for Pubquiz"}
             </Typography>
           </Toolbar>
         </AppBar>

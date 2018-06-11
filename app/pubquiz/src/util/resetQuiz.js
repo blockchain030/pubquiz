@@ -40,7 +40,7 @@ const resetQuiz = (store) => {
     // console.log('resetQuiz')
     // TODO: get the pubquiz from the smart contract (get the actual questions and answers from ipfs)
 
-    store.quiz.reset('Blockchain030 Pubquiz')
+    store.quiz.reset('Blockchain quiz')
     const rounds = secretQuizinfo.oracleinfo.rounds
     // console.log(rounds.length + ' rounds')
 
