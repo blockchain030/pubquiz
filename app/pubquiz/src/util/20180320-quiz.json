@@ -9,12 +9,12 @@
           "questions": [
             {
               "number": "1.1",
-              "question": "Wat is de naam van de premier?",
+              "question": "Wat is de naam van de premier?|http://i.dailymail.co.uk/1/2017/03/13/13/wire-211163-1489413285-950_634x823.jpg",
               "answer": "Mark Rutte"
             },
             {
               "number": "1.2",
-              "question": "Wat is de hoofdstad van Nederland?",
+              "question": "Wat is de hoofdstad van Nederland?|https://www.youtube.com/watch?v=4tEJDxl7uxo&t=2s",
               "answer": "Amsterdam"
             }
           ]

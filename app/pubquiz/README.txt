@@ -25,3 +25,5 @@ Can the user always see the scores or only when the quizmaster allows it.
 For now no playerslist
 For now no team icon
 Leave Quiz add confirmation dialog
+During grading a rood kruis, (bijv.) yin/yan symbol, geen checkbox ipv checkbox
+Suggestion: add a training-round

@@ -32,6 +32,14 @@ const Team = types.model({
 const Question = types.model({
     question: "",
     answer: "",
+    myAnswer: "",
+}).actions(self => {
+
+    function setMyAnswer(myAnswer) {
+        self.myAnswer = myAnswer
+    }
+
+    return {setMyAnswer}
 })
 
 
@@ -54,7 +62,13 @@ const Quiz = types.model({
     roundIndex: 0,
     questionIndex: 0,
     rounds: types.optional(types.map(Round), {}),
-}).actions(self => {
+}).views(self => ({
+
+    // get nRounds() { // Computed property
+    //     return values(self.todos).filter(todo => !todo.done).length
+    // },
+    
+})).actions(self => {
 
     function reset(name) {
         self.name = name

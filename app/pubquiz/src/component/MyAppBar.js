@@ -53,6 +53,7 @@ const styles = {
 
   onClickLeaveQuiz = () => {
     this.props.store.team.setRegistered(false)
+    this.props.store.quiz.reset("")
   }
 
   render() {
@@ -66,7 +67,7 @@ const styles = {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Pubquiz - {store.page}
+              {store.quiz.name || "Pubquiz - register"}
             </Typography>
           </Toolbar>
         </AppBar>
