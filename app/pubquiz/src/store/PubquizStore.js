@@ -6,8 +6,8 @@ import { types } from "mobx-state-tree"
 
 
 const Team = types.model({
-    name: localStorage.name ? localStorage.name : "Team Name",
-    seed: localStorage.seed ? localStorage.seed : "",
+    name: localStorage.name ? localStorage.name : 'Team Name',
+    seed: localStorage.seed ? localStorage.seed : '',
     registered: false,
 }).actions(self => {
 
@@ -30,9 +30,9 @@ const Team = types.model({
     
 
 const Question = types.model({
-    question: "",
-    answer: "",
-    myAnswer: "",
+    question: '',
+    answer: '',
+    myAnswer: '',
 }).actions(self => {
 
     function setMyAnswer(myAnswer) {
@@ -44,7 +44,7 @@ const Question = types.model({
 
 
 const Round = types.model({
-    name: "",
+    name: '',
     questions: types.optional(types.map(Question), {}),
 }).actions(self => {
 
@@ -58,7 +58,7 @@ const Round = types.model({
 
 
 const Quiz = types.model({
-    name: "",
+    name: '',
     roundIndex: 0,
     questionIndex: 0,
     rounds: types.optional(types.map(Round), {}),
@@ -97,26 +97,33 @@ const Quiz = types.model({
 })
 
 
+
+
+const Snackbar = types.model({
+    text: '',
+    type: 'info',
+}).actions(self => {
+
+    function show(text, type='info') {
+        self.text = text
+        self.type = type
+    }
+
+    function hide() {
+        show('')
+    }
+
+    return {show, hide}
+})
+
+
 const RootStore = types.model({
-    page: "home",
-    activeTab: 0,
+    page: 'home',
+    // activeTab: 0,
+    snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),
     quiz: types.optional(Quiz, {}),
-}).views(self => ({
-
-    // get pendingCount() { // Computed property
-    //     return values(self.todos).filter(todo => !todo.done).length
-    // },
-
-    // get completedCount() { // Computed property
-    //     return values(self.todos).filter(todo => todo.done).length
-    // },
-
-    // getTodosWhereDoneIs(done) { // Model view
-    //     return values(self.todos).filter(todo => todo.done === done)
-    // },
-
-})).actions(self => {
+}).actions(self => {
     function setPage(page) {
         self.page = page
     }
@@ -125,11 +132,11 @@ const RootStore = types.model({
         self.seed = seed
     }
 
-    function setActiveTab(activeTab) {
-        self.activeTab = activeTab
-    }
+    // function setActiveTab(activeTab) {
+    //     self.activeTab = activeTab
+    // }
 
-    return {setPage, setSeed, setActiveTab}
+    return {setPage, setSeed /*, setActiveTab*/}
 })
 
 

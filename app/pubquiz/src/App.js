@@ -11,6 +11,7 @@ import { inject, observer } from 'mobx-react'
 
 import PubquizTheme from './PubquizTheme';
 import MyAppBar from './component/MyAppBar';
+import Snackbar from './component/Snackbar';
 
 import Register from './component/Register';
 import AnswerQuestion from './component/AnswerQuestion';
@@ -64,6 +65,8 @@ import About from './component/About';
             <Tab icon={<ProfileIcon style={{fontSize: 40}}/>} label="Profile" />
           </Tabs>
         </Paper> */}
+
+        <Snackbar snackbar={store.snackbar} />
 
       </MuiThemeProvider>
     );
