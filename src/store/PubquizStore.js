@@ -29,17 +29,31 @@ const Team = types.model({
 })
     
 
+const GradedAnswer = types.model({
+    teamName: '',
+    teamId: '',
+    answer: '',
+    grade: 0,
+})
+
+
 const Question = types.model({
     question: '',
     answer: '',
     myAnswer: '',
+    gradedAnswers: types.optional(types.array(GradedAnswer), []),
 }).actions(self => {
 
     function setMyAnswer(myAnswer) {
         self.myAnswer = myAnswer
     }
 
-    return {setMyAnswer}
+    // function setGrade(id, grade) {
+    //     console.log('Question.setGrade', id, grade)
+    //     self.grade.set(id, grade)
+    // }
+
+    return {setMyAnswer/*, setGrade*/}
 })
 
 

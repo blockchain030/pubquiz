@@ -11,7 +11,6 @@ import GradeIcon from '@material-ui/icons/Grade';
 @inject('store') @observer class AnswerQuestion extends Component {
   
   handleMyAnswerChange = (myAnswer) => {
-    // console.log('TODO: handleAnswerChange', myAnswer)
     const { quiz } = this.props.store
     quiz.currentQuestion.setMyAnswer(myAnswer) // update UI now
   }
@@ -21,13 +20,11 @@ import GradeIcon from '@material-ui/icons/Grade';
   }
 
   onClickPreviousQuestion = () => {
-    // console.log('onClickPreviousQuestion')
     const { quiz } = this.props.store
     quiz.setQuestionIndex((quiz.questionIndex + quiz.nQuestions - 1) % quiz.nQuestions)
   }
 
   onClickNextQuestion = () => {
-    // console.log('onClickNextQuestion')
     const { quiz } = this.props.store
     quiz.setQuestionIndex((quiz.questionIndex + 1) % quiz.nQuestions)
   }
@@ -36,6 +33,13 @@ import GradeIcon from '@material-ui/icons/Grade';
     const { store } = this.props
     const { currentRound } = store.quiz
     console.log('TODO: Submit my answers', currentRound.myAnswers)
+
+    console.log("TODO: Get other team's answers, names, teamid, etc...")
+    
+
+
+
+
     store.quiz.setQuestionIndex(0)
     store.setPage('grade')
   }

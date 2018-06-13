@@ -54,11 +54,15 @@ import jsQR from 'jsqr';
       } // else not enough video data (yet)
 
       if (this.props.store.page !== 'enterseed') { // stop the qr scanner
+        video.pause()
+        video.srcObject = undefined
         video = undefined
+        // console.log('video paused')
         return;
       }
 
-      setTimeout(function(){requestAnimationFrame(tick)}, videoContainsData ? 20 : 2000) // max 50 fps
+      // setTimeout(function(){requestAnimationFrame(tick)}, videoContainsData ? 20 : 2000) // max 50 fps
+      requestAnimationFrame(tick)
     } // end of tick()
 
     // Use facingMode: environment to attemt to get the front camera on phones
@@ -67,7 +71,9 @@ import jsQR from 'jsqr';
       video.setAttribute("playsinline", "true"); // required to tell iOS safari we don't want fullscreen
       video.play();
       requestAnimationFrame(tick);
-    });
+    }).catch(e => {
+      alert(e)
+    })
 
   } // end of componentDidMount()
 
