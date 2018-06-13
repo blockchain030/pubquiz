@@ -109,6 +109,15 @@ const styles = {
 
                 {/* <Divider /> */}
 
+                <ListItem button divider onClick={this.onClick.bind(this,'testcontract')}>
+                  <ListItemIcon>
+                    <AboutIcon />
+                  </ListItemIcon>
+                  Test Contract
+                </ListItem>
+
+                {/* <Divider /> */}
+
                 <ListItem button divider onClick={this.onClick.bind(this,'about')}>
                   <ListItemIcon>
                     <AboutIcon />

@@ -15,7 +15,7 @@ const Team = types.model({
         self.name =
         localStorage.name = name
     }
-    
+
     function setSeed(seed) {
         self.seed =
         localStorage.seed = seed
@@ -27,7 +27,7 @@ const Team = types.model({
 
     return {setName, setSeed, setRegistered}
 })
-    
+
 
 const GradedAnswer = types.model({
     teamName: '',
@@ -61,7 +61,7 @@ const Round = types.model({
     name: '',
     questions: types.optional(types.map(Question), {}),
 }).views(self => ({
-    
+
     get myAnswers() {
         return values(self.questions).map(q => q.myAnswer)
     },
@@ -87,11 +87,11 @@ const Quiz = types.model({
     get currentRound() {
         return self.rounds.get(String(self.roundIndex))
     },
-    
+
     get currentQuestion() { // of currentRound
         return self.currentRound.questions.get(String(self.questionIndex))
     },
-    
+
     get nRounds() {
         return self.rounds.size
     },
@@ -99,7 +99,7 @@ const Quiz = types.model({
     get nQuestions() { // of currentRound
         return self.currentRound.questions.size
     },
-    
+
 })).actions(self => {
 
     function reset(name) {
@@ -152,6 +152,7 @@ const Snackbar = types.model({
 
 const RootStore = types.model({
     page: 'home',
+    //  page: 'testcontract', 
     // activeTab: 0,
     snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),

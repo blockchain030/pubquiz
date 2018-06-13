@@ -20,6 +20,7 @@
     "react-app-rewired": "^1.5.2",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4",
+    "request": "^2.87.0",
     "truffle-contract": "^3.0.5",
     "truffle-hdwallet-provider": "0.0.5",
     "typeface-roboto": "0.0.54",
@@ -32,6 +33,7 @@
     "eject": "react-app-rewired eject",
     "deploy-local": "npm run build && serve -s build",
     "deploy-now": "npm run build && cd build && now --public --name pubquiz",
-    "deploy-pubquiz.fun": "npm run build && scp -r build/* pubquiz@pubquiz.fun:www"
+    "deploy-pubquiz.fun": "npm run build && scp -r build/* pubquiz@pubquiz.fun:www",
+    "deploy-backend": "scp -r oracle/* pubquiz@pubquiz.fun:oracle"
   }
 }

@@ -22,7 +22,7 @@ import Help from './component/Help';
 import Profile from './component/Profile';
 import Settings from './component/Settings';
 import About from './component/About';
-
+import TestContract from './component/TestContract';
 
 // note: to get decorators working with create-react-app without using eject:
 //    https://www.leighhalliday.com/mobx-create-react-app-without-ejecting
@@ -41,7 +41,7 @@ import About from './component/About';
 
     return (
       <MuiThemeProvider theme={PubquizTheme}>
-      
+
         <MyAppBar />
 
         <div className='content' style={{margin:'70px 0px 80px'}}>
@@ -53,6 +53,7 @@ import About from './component/About';
           {store.page === 'profile'   && <Profile     />}
           {store.page === 'settings'  && <Settings    />}
           {store.page === 'about'     && <About       />}
+          {store.page === 'testcontract' && <TestContract />}
         </div>
 
         {/* <Paper style={{position:'fixed', left:0, bottom:0,width:'100%'}}>

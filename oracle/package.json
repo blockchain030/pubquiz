@@ -4,13 +4,15 @@
   "description": "create quiz files for blockchain pubquiz",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy-backend": "scp -r ./* pubquiz@pubquiz.fun:oracle"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "child_process": "^1.0.2",
     "crypto": "^1.0.1",
+    "datejs": "^1.0.0-rc3",
     "lorem-ipsum": "^1.0.4",
     "randomstring": "^1.1.5"
   }
