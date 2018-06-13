@@ -3,7 +3,7 @@
 
 This is still work in progress and might not resemble the final product.
 
-Demo van be found at https://pubquiz-oekieqyrap.now.sh
+Demo van be found at https://pubquiz.fun
 
 ---
 todo:

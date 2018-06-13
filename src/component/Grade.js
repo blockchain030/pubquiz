@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import LeftIcon from '@material-ui/icons/ChevronLeft'; // https://material.io/tools/icons/?style=baseline
 import RightIcon from '@material-ui/icons/ChevronRight';
-// import GradeIcon from '@material-ui/icons/Grade';
 
 
 @inject('store') @observer class Grade extends Component {
 
   teams = [
-    { score: 0, name: 'Team 1' , answer: 'Team 1 answer' },
-    { score: 0, name: 'Team 2' , answer: 'Team 2 answer' },
-    { score: 0, name: 'Team 3' , answer: 'Team 3 answer' },
-    { score: 0, name: 'Team 4' , answer: 'Team 4 answer' },
-    { score: 0, name: 'Team 5' , answer: 'Team 5 answer' },
-    { score: 0, name: 'Team 6' , answer: 'Team 6 answer' },
-    { score: 0, name: 'Team 7' , answer: 'Team 7 answer' },
-    { score: 0, name: 'Team 8' , answer: 'Team 8 answer' },
-    { score: 0, name: 'Team 9' , answer: 'Team 9 answer' },
-    { score: 0, name: 'Team 10', answer: 'Team 10 answer' },
+    { score: 0, name: 'Team 1' , answer: 'Answer one' },
+    { score: 0, name: 'Team 2' , answer: 'Answer two' },
+    { score: 0, name: 'Team 3' , answer: 'Answer three' },
+    { score: 0, name: 'Team 4' , answer: 'Answer four' },
+    { score: 0, name: 'Team 5' , answer: 'Answer five' },
+    { score: 0, name: 'Team 6' , answer: 'Answer six' },
+    { score: 0, name: 'Team 7' , answer: 'Answer seven' },
+    { score: 0, name: 'Team 8' , answer: 'Answer eight' },
+    { score: 0, name: 'Team 9' , answer: 'Answer nine' },
+    { score: 0, name: 'Team 10', answer: 'Answer ten' },
   ]
 
   onClickPreviousQuestion = () => {
@@ -35,18 +37,29 @@ import RightIcon from '@material-ui/icons/ChevronRight';
     quiz.setQuestionIndex((quiz.questionIndex + 1) % quiz.nQuestions)
   }
 
-  renderTeam = (team) => {
+  handleChange = teamIndex => event => {
+    // console.log(teamIndex, event.target.checked)
+    this.teams[teamIndex].score = 1 - this.teams[teamIndex].score
+    this.forceUpdate()
+  };
+
+  renderTeam = (team,teamIndex) => {
     return (
-      <div>
-        {team.name} {team.answer} {team.score}
-      </div>
+      <ListItem key={teamIndex}>
+        <ListItemText primary={team.answer} secondary={team.name} />
+        <Checkbox
+            checked={team.score > 0}
+            onChange={this.handleChange(teamIndex)}
+            value={String(teamIndex)}
+            color='primary'
+        />
+      </ListItem>
     )
   }
 
   render() {
     const { quiz } = this.props.store
     const round = quiz.currentRound
-    const question_answer = quiz.currentQuestion
     const question = quiz.currentQuestion.question
     const question_text = question.split('|')[0]
     // console.log(question_media)
@@ -64,7 +77,10 @@ import RightIcon from '@material-ui/icons/ChevronRight';
           <h5>Correct: {quiz.currentQuestion.answer}</h5>
           <h5>You: {quiz.currentQuestion.myAnswer}</h5>
 
-          {this.teams.map(team => this.renderTeam(team))}
+          <List>
+            {this.teams.map((team,teamIndex) => this.renderTeam(team,teamIndex))}
+          </List>
+
         </Paper>
 
         <Button onClick={this.onClickPreviousQuestion} variant="fab" color='primary' style={{position:'fixed', left:'5px', bottom:'5px'}}>
