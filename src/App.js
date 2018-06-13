@@ -15,6 +15,7 @@ import Snackbar from './component/Snackbar';
 
 import Register from './component/Register';
 import AnswerQuestion from './component/AnswerQuestion';
+import Grade from './component/Grade';
 import Scores from './component/Scores';
 import EnterSeed from './component/EnterSeed';
 import Help from './component/Help';
@@ -28,11 +29,11 @@ import About from './component/About';
 
 @inject('store') @observer class App extends Component {
 
-  onChangeActiveTab = (event, activeTab) => {
-    const { store } = this.props
-    store.setPage(['home','scores','profile'][activeTab])
-    store.setActiveTab(activeTab)
-  }
+  // onChangeActiveTab = (event, activeTab) => {
+  //   const { store } = this.props
+  //   store.setPage(['home','scores','profile'][activeTab])
+  //   store.setActiveTab(activeTab)
+  // }
 
   render() {
     const { store } = this.props
@@ -45,6 +46,7 @@ import About from './component/About';
 
         <div className='content' style={{margin:'70px 0px 80px'}}>
           {store.page === 'home'      && (!store.team.registered ? <Register/> : <AnswerQuestion/>)}
+          {store.page === 'grade'     && <Grade/>}
           {store.page === 'scores'    && <Scores      />}
           {store.page === 'enterseed' && <EnterSeed   />}
           {store.page === 'help'      && <Help        />}

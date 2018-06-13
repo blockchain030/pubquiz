@@ -54,6 +54,7 @@ const styles = {
   onClickLeaveQuiz = () => {
     this.props.store.team.setRegistered(false)
     this.props.store.quiz.reset("")
+    this.props.store.setPage('home')
   }
 
   render() {

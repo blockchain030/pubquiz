@@ -33,8 +33,11 @@ import GradeIcon from '@material-ui/icons/Grade';
   }
 
   onClickGrade = () => {
-    const { currentRound } = this.props.store.quiz
-    console.log('myAnswers', currentRound.myAnswers)
+    const { store } = this.props
+    const { currentRound } = store.quiz
+    console.log('TODO: Submit my answers', currentRound.myAnswers)
+    store.quiz.setQuestionIndex(0)
+    store.setPage('grade')
   }
 
   renderMedia = (question_media) => {
@@ -75,7 +78,8 @@ import GradeIcon from '@material-ui/icons/Grade';
       <center>
 
         <Paper style={{width:'90%', padding:'15px'}}>
-          {round.name} (Round {quiz.roundIndex+1}/{quiz.nRounds}) Question {quiz.questionIndex+1}/{quiz.nQuestions}<br/>
+          {round.name}<br/>
+          Round {quiz.roundIndex+1} of {quiz.nRounds} - Question {quiz.questionIndex+1} of {quiz.nQuestions}<br/>
           <br/>
           {this.renderMedia(question_media)}
 
