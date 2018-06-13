@@ -44,7 +44,9 @@ class PubQuiz {
       }
 
       var hashQuestions = ipfsAddEncrypted(JSON.stringify(tmpQuestions,0,2), oracleinfo.rounds[roundidx].passwordQuestions);
+      console.log('Questions for round ' + roundidx + ' url: http://ipfs.io/ipfs/' + hashQuestions);
       var hashAnswers = ipfsAddEncrypted(JSON.stringify(tmpAnswers,0,2), oracleinfo.rounds[roundidx].passwordAnswers);
+      console.log('Answers for round ' + roundidx + ' url: http://ipfs.io/ipfs/' + hashAnswers);
 
       playerinfo.rounds.push({questions : hashQuestions, answers: hashAnswers });
     }
@@ -52,7 +54,7 @@ class PubQuiz {
     playerinfo.oracleinfo = ipfsGetHashPlain(JSON.stringify(oracleinfo));
 
     var hashplayerinfo = ipfsAddPlain(JSON.stringify(playerinfo));
-    console.log('Playerinfo hash: ' + hashplayerinfo);
+    console.log('Playerinfo data url: http://ipfs.io/ipfs/' + hashplayerinfo);
 
     return {
       oracleinfo: oracleinfo,
@@ -70,8 +72,33 @@ test = async () => {
   const decrypt = require('./ipfsfunctions').decrypt;
 
   var contents = fs.readFileSync('./datasets/20180319-questions.json').toString();
-
   var json = JSON.parse(contents);
+
+  var loremIpsum = require('lorem-ipsum');
+
+  // create new dummy questions for each run
+  // required to test with ipfs
+  var contents = { rounds: [] };
+  for(roundidx=1;roundidx<5;roundidx++) {
+    var title = loremIpsum({count: 4, units: 'words', format: 'plain'});
+    var round = { "title": title, "questions": [] }
+    for(questionidx=1;questionidx<4;questionidx++) {
+      var question = loremIpsum({count: 6, units: 'words', format: 'plain'}) + '?';
+      var answer = loremIpsum({count: 12, units: 'words', format: 'plain'});
+
+      round.questions.push({
+        "number": roundidx+'.'+questionidx,
+        "question": question,
+        "answer": answer
+      })
+    }
+    contents.rounds.push(round);
+  }
+
+  console.log(JSON.stringify(contents,0,2));
+
+  var json = contents;
+
 
   var quiz = new PubQuiz();
   var quizinfo = quiz.makePubquiz(json);
