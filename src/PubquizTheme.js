@@ -12,7 +12,7 @@ const theme = createMuiTheme({
 
     MuiPaper: {
       root: {
-        backgroundColor: '#fffe',
+        backgroundColor: '#fff',
       }
     },
 

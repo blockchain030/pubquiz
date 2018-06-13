@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { inject, observer } from 'mobx-react'
 import jsQR from 'jsqr';
 
@@ -86,11 +87,16 @@ import jsQR from 'jsqr';
     this.handleSeedChange(event.target.value)
   }
   
+  onClickClose = () => {
+    this.props.store.setPage('home')
+  }
+
   render() {
     const { store } = this.props;
 
     return (
-      <center>
+      <Paper style={{width:'90%', padding:'15px'}}>
+
         <div id="loadingMessage">Accessing video stream<br/>(please make sure you have a webcam enabled)</div>
         <canvas id="canvas" hidden></canvas>
         <TextField
@@ -101,7 +107,12 @@ import jsQR from 'jsqr';
           onChange={this.handleSeedChangeEvent}
           margin="normal"
         />
-      </center>
+
+        <Button onClick={this.onClickClose} variant="contained" color='primary' >
+          Close
+        </Button>
+
+      </Paper>
     );
   }
 }
