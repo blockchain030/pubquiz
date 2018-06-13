@@ -66,6 +66,11 @@ import jsQR from 'jsqr';
       requestAnimationFrame(tick)
     } // end of tick()
 
+    if (!navigator.mediaDevices) { // iOS <= 1.10.x
+      loadingMessage.innerText = "QR-scanning webcam not supported on this device"
+      return
+    }
+
     // Use facingMode: environment to attemt to get the front camera on phones
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
       video.srcObject = stream;
