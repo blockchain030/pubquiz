@@ -3,7 +3,7 @@
 
 This is still work in progress and might not resemble the final product.
 
-Demo van be found at https://pubquiz-dqlnfgzhqb.now.sh
+Demo van be found at https://pubquiz-syxofjpnvo.now.sh
 
 ---
 todo:

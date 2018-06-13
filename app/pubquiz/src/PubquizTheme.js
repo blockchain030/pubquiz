@@ -10,6 +10,12 @@ const theme = createMuiTheme({
       },
     },
 
+    MuiPaper: {
+      root: {
+        backgroundColor: '#fffe',
+      }
+    },
+
     // MuiTabs: {
     //   root: {
     //     background: 'black',

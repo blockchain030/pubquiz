@@ -31,9 +31,9 @@ import resetQuiz from '../util/resetQuiz'
     const { team } = this.props.store
     
     return (
-      <center>
+      // <center>
         
-        <Paper style={{width:'90%', padding:'15px'}}>
+        <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
           <TextField
             id="name"
             label="Team name"
@@ -52,7 +52,7 @@ import resetQuiz from '../util/resetQuiz'
           </Button>
         </Paper>
 
-      </center>
+      // </center>
     );
   }
 }
