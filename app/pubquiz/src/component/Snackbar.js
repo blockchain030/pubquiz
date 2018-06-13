@@ -30,7 +30,7 @@ class Snackbar extends Component {
   }
 
   componentDidMount() {
-    setInterval(this.updateState, 100);
+    setInterval(this.updateState, 100) // XXX should be able to do this better with mobx !!!
   }
 
   handleClose = () => {

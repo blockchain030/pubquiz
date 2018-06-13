@@ -34,15 +34,12 @@ import RightIcon from '@material-ui/icons/ChevronRight';
     quiz.setQuestionIndex((quiz.questionIndex + 1) % nQuestions)
   }
 
-  render() {
-    const { quiz } = this.props.store
-    const { rounds } = quiz
-    const round = rounds.get(String(quiz.roundIndex))
-    const question_answer = round.questions.get(String(quiz.questionIndex))
-    const question = question_answer.question
-    const [ question_text, question_media ] = question.split('|')
+  renderMedia = (question_media) => {
+    if (!question_media) { // nothing to show
+      return null
+    }
+
     // console.log(question_media)
-    // console.log(question_text)
 
     const isYoutube = question_media && question_media.indexOf('youtube.com') >= 0
     let embedLink
@@ -53,17 +50,32 @@ import RightIcon from '@material-ui/icons/ChevronRight';
     }
 
     return (
+      <Paper style={{width:'50%'}}>
+        {isYoutube
+          ? <iframe width='100%' title='videoQuestion' src={embedLink} frameBorder="0" allow="encrypted-media" allowFullScreen />
+          : <img src={question_media} alt='' width='98%' />
+        }
+      </Paper>
+    )
+  }
+
+  render() {
+    const { quiz } = this.props.store
+    const { rounds } = quiz
+    const round = rounds.get(String(quiz.roundIndex))
+    const question_answer = round.questions.get(String(quiz.questionIndex))
+    const question = question_answer.question
+    const [ question_text, question_media ] = question.split('|')
+    // console.log(question_media)
+    // console.log(question_text)
+
+    return (
       <center>
 
         <Paper style={{width:'90%', padding:'15px'}}>
           {round.name} (Round {quiz.roundIndex+1}/{rounds.size}) Question {quiz.questionIndex+1}/{rounds.get(String(quiz.roundIndex)).questions.size}<br/>
           <br/>
-          <Paper style={{width:'50%'}}>
-            {isYoutube
-              ? <iframe width='100%' title='videoQuestion' src={embedLink} frameBorder="0" allow="encrypted-media" allowFullScreen />
-              : <img src={question_media} alt='' width='98%' />
-            }    
-          </Paper>
+          {this.renderMedia(question_media)}
 
           <h4>{question_text}</h4>
 
