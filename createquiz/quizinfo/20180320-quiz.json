@@ -2,8 +2,8 @@
   "oracleinfo": {
     "rounds": [
       {
-        "passwordQuestions": "grIu1Gh6",
-        "passwordAnswers": "zOECiReu",
+        "passwordQuestions": "xx80rvcs",
+        "passwordAnswers": "1mu4WW4I",
         "info": {
           "title": "Algemene Vragen",
           "questions": [
@@ -21,8 +21,8 @@
         }
       },
       {
-        "passwordQuestions": "V9e9FbAj",
-        "passwordAnswers": "E1aF1ECL",
+        "passwordQuestions": "CZOsVabm",
+        "passwordAnswers": "b2YTV6tA",
         "info": {
           "title": "Ethereum Vragen",
           "questions": [
@@ -40,8 +40,8 @@
         }
       },
       {
-        "passwordQuestions": "NjdH6ZZP",
-        "passwordAnswers": "U4UjAXjt",
+        "passwordQuestions": "IsrV4ohe",
+        "passwordAnswers": "oQQBWup8",
         "info": {
           "title": "Bitcoin Vragen",
           "questions": [
@@ -61,21 +61,21 @@
     ]
   },
   "playerinfo": {
-    "oracleinfo": "QmQivfUvEKLZmve3TVhTeBC6UcVZp6C6zG24TgYnZzyTuS",
+    "oracleinfo": "QmVSx3T4ADAcpVjnVFkqsA4owNw37F9R3CxApYN7vxsmFo",
     "rounds": [
       {
-        "questions": "QmSrhrMooe7kFF9Si6VaUDa9yTvRozfwKknYUjHhdDc7aj",
-        "answers": "QmNa22LxNmhMxpZjtu2YQFTBWsyqjWT8GNDUJi323VLDJr"
+        "questions": "Qme2Lz5vMssu13STRkfsivkV2Nos9ibgNo7z7Ee5DCDWQL",
+        "answers": "QmerqZZLeX8dVJ1odAD45VCmhAC3N6ZscRYucxeUNrtSrG"
       },
       {
-        "questions": "QmNpgND7QisF2nTY3XeoEpDinkBJP9suf67dzwK1x5Z2Ec",
-        "answers": "QmQaypAgqmNzcxiKBUu5mGaZkNCcs4Z4psVpidgnGGKiPq"
+        "questions": "QmanwbS8szK49XHfXNR56nWoj3aN5GekDHwcotawd8dhCU",
+        "answers": "QmNSiUjYLydqk4qGKwYwsKg2UdBBe75ievxZxaTExvRyhC"
       },
       {
-        "questions": "QmUgu1UtLMF4u9NVKjVuqknQUEQTsMQ59n6Z4Vu3RRe6Ai",
-        "answers": "QmT9o3TuLJV24L2AnEHTqjiLcq15FMwpbF4cK9LHbXqD9J"
+        "questions": "QmeuGjvY1LEdBWPYXvztakTfGwPPcMK2VryWopicEyb9NF",
+        "answers": "QmNTeyMgD3AwSoDrw3g6jLqtwJ4X6hM4iiPPxJmRGRjjjt"
       }
     ]
   },
-  "playerinfoHash": "QmQA243ye7X6sSTbCtKPaau2zLSriHyKHXfVE43GJvAP2N"
+  "playerinfoHash": "QmdxHeozWMKLQ7iMcocaxRcqbYPxQHR4Ws2rvnBcPdAxvT"
 }

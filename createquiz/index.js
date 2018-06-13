@@ -52,6 +52,7 @@ class PubQuiz {
     playerinfo.oracleinfo = ipfsGetHashPlain(JSON.stringify(oracleinfo));
 
     var hashplayerinfo = ipfsAddPlain(JSON.stringify(playerinfo));
+    console.log('Playerinfo hash: ' + hashplayerinfo);
 
     return {
       oracleinfo: oracleinfo,
@@ -81,7 +82,7 @@ test = async () => {
   var playerinfoJSON = await ipfsGetPlain(quizinfo.playerinfoHash);
   var playerinfo = JSON.parse(playerinfoJSON);
   for(var roundidx=0; roundidx<playerinfo.rounds.length; roundidx++) {
-      console.log('+++ ROUND ' + roundidx + ' +++');
+      // console.log('+++ ROUND ' + roundidx + ' +++');
       var hashquestions = playerinfo.rounds[roundidx].questions;
       var hashanswers = playerinfo.rounds[roundidx].answers;
 
@@ -91,8 +92,8 @@ test = async () => {
       var questionsPlain = decrypt(questionsEncrypted, quizinfo.oracleinfo.rounds[roundidx].passwordQuestions)
       var answersPlain = decrypt(answersEncrypted, quizinfo.oracleinfo.rounds[roundidx].passwordAnswers)
 
-      console.log('questions:\n',questionsPlain);
-      console.log('answers:\n', answersPlain);
+      // console.log('questions:\n',questionsPlain);
+      // console.log('answers:\n', answersPlain);
     }
 }
 

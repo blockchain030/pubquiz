@@ -38,6 +38,20 @@
         "question": "Wat is een vork",
         "answer": "Een stuk bestek"
       }
+    ]},
+    ,
+    { "title": "Ethereum Vragen",
+      "questions": [
+      {
+        "number": "4.1",
+        "question": "In welk jaar is Ethereum bedacht?",
+        "answer": "2009"
+      },
+      {
+        "number": "4.2",
+        "question": "Noem de belangrijkste smart contract taal van Ethereum",
+        "answer": "Ethereum"
+      }
     ]}
   ]
 }
