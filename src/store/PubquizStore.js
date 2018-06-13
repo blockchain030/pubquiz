@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree"
-// import { values } from "mobx";
+import { values } from "mobx";
 
 
 // https://github.com/mobxjs/mobx-state-tree/blob/master/docs/getting-started.md#getting-started
@@ -46,7 +46,13 @@ const Question = types.model({
 const Round = types.model({
     name: '',
     questions: types.optional(types.map(Question), {}),
-}).actions(self => {
+}).views(self => ({
+    
+    get myAnswers() {
+        return values(self.questions).map(q => q.myAnswer)
+    },
+
+})).actions(self => {
 
     function addQuestion(id, question) {
         // console.log('Round.addQuestion', id, question)
@@ -64,9 +70,21 @@ const Quiz = types.model({
     rounds: types.optional(types.map(Round), {}),
 }).views(self => ({
 
-    // get nRounds() { // Computed property
-    //     return values(self.todos).filter(todo => !todo.done).length
-    // },
+    get currentRound() {
+        return self.rounds.get(String(self.roundIndex))
+    },
+    
+    get currentQuestion() { // of currentRound
+        return self.currentRound.questions.get(String(self.questionIndex))
+    },
+    
+    get nRounds() {
+        return self.rounds.size
+    },
+
+    get nQuestions() { // of currentRound
+        return self.currentRound.questions.size
+    },
     
 })).actions(self => {
 

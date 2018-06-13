@@ -13,8 +13,7 @@ import GradeIcon from '@material-ui/icons/Grade';
   handleMyAnswerChange = (myAnswer) => {
     // console.log('TODO: handleAnswerChange', myAnswer)
     const { quiz } = this.props.store
-    const question = quiz.rounds.get(String(quiz.roundIndex)).questions.get(String(quiz.questionIndex))
-    question.setMyAnswer(myAnswer) // update UI now
+    quiz.currentQuestion.setMyAnswer(myAnswer) // update UI now
   }
 
   handleMyAnswerChangeEvent = (event) => {
@@ -24,19 +23,18 @@ import GradeIcon from '@material-ui/icons/Grade';
   onClickPreviousQuestion = () => {
     // console.log('onClickPreviousQuestion')
     const { quiz } = this.props.store
-    const nQuestions = quiz.rounds.get(String(quiz.roundIndex)).questions.size
-    quiz.setQuestionIndex((quiz.questionIndex + nQuestions - 1) % nQuestions)
+    quiz.setQuestionIndex((quiz.questionIndex + quiz.nQuestions - 1) % quiz.nQuestions)
   }
 
   onClickNextQuestion = () => {
     // console.log('onClickNextQuestion')
     const { quiz } = this.props.store
-    const nQuestions = quiz.rounds.get(String(quiz.roundIndex)).questions.size
-    quiz.setQuestionIndex((quiz.questionIndex + 1) % nQuestions)
+    quiz.setQuestionIndex((quiz.questionIndex + 1) % quiz.nQuestions)
   }
 
   onClickGrade = () => {
-    console.log('onClickGrade')
+    const { currentRound } = this.props.store.quiz
+    console.log('myAnswers', currentRound.myAnswers)
   }
 
   renderMedia = (question_media) => {
@@ -66,10 +64,9 @@ import GradeIcon from '@material-ui/icons/Grade';
 
   render() {
     const { quiz } = this.props.store
-    const { rounds } = quiz
-    const round = rounds.get(String(quiz.roundIndex))
-    const question_answer = round.questions.get(String(quiz.questionIndex))
-    const question = question_answer.question
+    const round = quiz.currentRound
+    const question_answer = quiz.currentQuestion
+    const question = quiz.currentQuestion.question
     const [ question_text, question_media ] = question.split('|')
     // console.log(question_media)
     // console.log(question_text)
@@ -78,7 +75,7 @@ import GradeIcon from '@material-ui/icons/Grade';
       <center>
 
         <Paper style={{width:'90%', padding:'15px'}}>
-          {round.name} (Round {quiz.roundIndex+1}/{rounds.size}) Question {quiz.questionIndex+1}/{rounds.get(String(quiz.roundIndex)).questions.size}<br/>
+          {round.name} (Round {quiz.roundIndex+1}/{quiz.nRounds}) Question {quiz.questionIndex+1}/{quiz.nQuestions}<br/>
           <br/>
           {this.renderMedia(question_media)}
 
