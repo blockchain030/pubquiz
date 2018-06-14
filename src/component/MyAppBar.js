@@ -56,6 +56,8 @@ const styles = {
   }
 
   onClickLeaveQuiz = () => {
+    if (!window.confirm('Are you sure?')) return
+
     this.props.store.team.setRegistered(false)
     this.props.store.quiz.reset('')
     this.props.store.setPage('home')
@@ -97,7 +99,7 @@ const styles = {
                   Home
                 </ListItem>
 
-                <ListItem button onClick={this.onClickScores}>
+                <ListItem button disabled={!store.team.registered} onClick={this.onClickScores}>
                   <ListItemIcon>
                     <ScoresIcon />
                   </ListItemIcon>

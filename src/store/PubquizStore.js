@@ -130,6 +130,19 @@ const Quiz = types.model({
 })
 
 
+const TeamScoreInfo = types.model({
+    teamName: '',
+    teamId: '',
+    points: 0,
+})
+
+const TeamScores = types.model({
+    afterRound: 0,
+    teamScoreInfo: types.optional(types.array(TeamScoreInfo), []),
+}).actions(self => {
+
+    return {}
+})
 
 
 const Snackbar = types.model({
@@ -158,6 +171,7 @@ const RootStore = types.model({
     snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),
     quiz: types.optional(Quiz, {}),
+    teamScores: types.optional(TeamScores, {}),
 }).actions(self => {
 
     function setPage(page) {
