@@ -34,14 +34,13 @@ import GradeIcon from '@material-ui/icons/Grade';
     const { currentRound } = store.quiz
     console.log('TODO: Submit my answers', currentRound.myAnswers)
 
+    console.log("TODO: Get decryption key for answers")
+
     console.log("TODO: Get other team's answers, names, teamid, etc...")
     
-
-
-
-
     store.quiz.setQuestionIndex(0)
-    store.setPage('grade')
+    store.setNextPage('grade')
+    store.setPage('waiting')
   }
 
   renderMedia = (question_media) => {

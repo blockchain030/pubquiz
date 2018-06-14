@@ -6,7 +6,7 @@ import MaterialUISnackbar from '@material-ui/core/Snackbar';
 
 const styles = theme => ({
   snackbarContent: {
-    width: '60%',
+    width: '55%',
     flexGrow: '0',
     display: 'unset',
   },
@@ -46,7 +46,7 @@ class Snackbar extends Component {
         <MaterialUISnackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           open={this.state.open}
-          autoHideDuration={5000}
+          autoHideDuration={3000}
           onClose={this.handleClose}
           ContentProps={{
             'aria-describedby': 'message-id',

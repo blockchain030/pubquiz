@@ -152,14 +152,20 @@ const Snackbar = types.model({
 
 const RootStore = types.model({
     page: 'home',
+    nextPage: 'home',
     //  page: 'testcontract', 
     // activeTab: 0,
     snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),
     quiz: types.optional(Quiz, {}),
 }).actions(self => {
+
     function setPage(page) {
         self.page = page
+    }
+
+    function setNextPage(nextPage) {
+        self.nextPage = nextPage
     }
 
     function setSeed(seed) {
@@ -170,7 +176,7 @@ const RootStore = types.model({
     //     self.activeTab = activeTab
     // }
 
-    return {setPage, setSeed /*, setActiveTab*/}
+    return {setPage, setNextPage, setSeed /*, setActiveTab*/}
 })
 
 

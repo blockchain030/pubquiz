@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton'; // https://material.io/tools/icons/?style=baseline
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Drawer from '@material-ui/core/Drawer';
@@ -14,10 +14,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 import HomeIcon from '@material-ui/icons/Home';
+import ScoresIcon from '@material-ui/icons/List';
 import HelpIcon from '@material-ui/icons/Help';
 import AboutIcon from '@material-ui/icons/Info';
-// import SettingsIcon from '@material-ui/icons/Settings';
-// import Divider from '@material-ui/core/Divider';
+import AdminIcon from '@material-ui/icons/VerifiedUser';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 
 
@@ -47,13 +47,17 @@ const styles = {
   }
 
   onClick = (page) => {
-    // console.log('onClick', page)
     this.props.store.setPage(page)
+  }
+
+  onClickScores = () => {
+    this.props.store.setNextPage(this.props.store.page)
+    this.props.store.setPage('scores')
   }
 
   onClickLeaveQuiz = () => {
     this.props.store.team.setRegistered(false)
-    this.props.store.quiz.reset("")
+    this.props.store.quiz.reset('')
     this.props.store.setPage('home')
   }
 
@@ -93,6 +97,13 @@ const styles = {
                   Home
                 </ListItem>
 
+                <ListItem button onClick={this.onClickScores}>
+                  <ListItemIcon>
+                    <ScoresIcon />
+                  </ListItemIcon>
+                  Scores
+                </ListItem>
+
                 <ListItem button onClick={this.onClick.bind(this,'help')}>
                   <ListItemIcon>
                     <HelpIcon />
@@ -100,29 +111,18 @@ const styles = {
                   Help
                 </ListItem>
 
-                {/* <ListItem button onClick={this.onClick.bind(this,'settings')}>
-                  <ListItemIcon>
-                    <SettingsIcon />
-                  </ListItemIcon>
-                  Settings
-                </ListItem> */}
-
-                {/* <Divider /> */}
-
-                <ListItem button divider onClick={this.onClick.bind(this,'testcontract')}>
-                  <ListItemIcon>
-                    <AboutIcon />
-                  </ListItemIcon>
-                  Test Contract
-                </ListItem>
-
-                {/* <Divider /> */}
-
                 <ListItem button divider onClick={this.onClick.bind(this,'about')}>
                   <ListItemIcon>
                     <AboutIcon />
                   </ListItemIcon>
                   About
+                </ListItem>
+
+                <ListItem button divider onClick={this.onClick.bind(this,'testcontract')}>
+                  <ListItemIcon>
+                    <AdminIcon />
+                  </ListItemIcon>
+                  Test Contract
                 </ListItem>
 
                 <ListItem button disabled={!store.team.registered} onClick={this.onClickLeaveQuiz}>

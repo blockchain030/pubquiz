@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
-// import HomeIcon from '@material-ui/icons/Home';
-// import ScoresIcon from '@material-ui/icons/People';
-// import ProfileIcon from '@material-ui/icons/Person';
 import { inject, observer } from 'mobx-react'
-// import 'typeface-roboto'
 
 import PubquizTheme from './PubquizTheme';
 import MyAppBar from './component/MyAppBar';
 import Snackbar from './component/Snackbar';
 
 import Register from './component/Register';
+import Waiting from './component/Waiting';
 import AnswerQuestion from './component/AnswerQuestion';
 import Grade from './component/Grade';
 import Scores from './component/Scores';
 import EnterSeed from './component/EnterSeed';
 import Help from './component/Help';
-import Profile from './component/Profile';
-import Settings from './component/Settings';
 import About from './component/About';
 import TestContract from './component/TestContract';
 
@@ -45,15 +37,14 @@ import TestContract from './component/TestContract';
         <MyAppBar />
 
         <div className='content' style={{margin:'70px 0px 80px'}}>
-          {store.page === 'home'      && (!store.team.registered ? <Register/> : <AnswerQuestion/>)}
-          {store.page === 'grade'     && <Grade/>}
-          {store.page === 'scores'    && <Scores      />}
-          {store.page === 'enterseed' && <EnterSeed   />}
-          {store.page === 'help'      && <Help        />}
-          {store.page === 'profile'   && <Profile     />}
-          {store.page === 'settings'  && <Settings    />}
-          {store.page === 'about'     && <About       />}
-          {store.page === 'testcontract' && <TestContract />}
+          {store.page === 'home'         && (!store.team.registered ? <Register/> : <AnswerQuestion/>)}
+          {store.page === 'waiting'      && <Waiting     />}
+          {store.page === 'grade'        && <Grade       />}
+          {store.page === 'scores'       && <Scores      />}
+          {store.page === 'enterseed'    && <EnterSeed   />}
+          {store.page === 'help'         && <Help        />}
+          {store.page === 'about'        && <About       />}
+          {store.page === 'testcontract' && <TestContract/>}
         </div>
 
         {/* <Paper style={{position:'fixed', left:0, bottom:0,width:'100%'}}>

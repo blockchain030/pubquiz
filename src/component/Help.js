@@ -37,7 +37,10 @@ import Button from '@material-ui/core/Button';
             Won't you please, please help me.
           </div>
           <br/>
-          <Button onClick={this.handleClose} variant="contained" color='primary' >
+          {/* <Button onClick={this.handleClose} variant="contained" color='primary' >
+            Close
+          </Button> */}
+          <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={this.handleClose}>
             Close
           </Button>
         </Paper>

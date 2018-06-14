@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import resetQuiz from '../util/resetQuiz'
 
 
-@inject('store') @observer class Home extends Component {
+@inject('store') @observer class Register extends Component {
   
   handleNameChange = (name) => {
     // console.log('handleNameChange', name)
@@ -22,9 +22,12 @@ import resetQuiz from '../util/resetQuiz'
   }
 
   onClickedJoinGame = () => {
-    resetQuiz(this.props.store)
-    this.props.store.team.setRegistered(true)
-    // console.log( JSON.stringify(this.props.store.toJSON(),null,2) )
+    const { store } = this.props
+    resetQuiz(store)
+    store.team.setRegistered(true)
+    store.setNextPage('home')
+    store.setPage('waiting')
+    // console.log( JSON.stringify(store.toJSON(),null,2) )
   }
 
   render() {
@@ -57,4 +60,4 @@ import resetQuiz from '../util/resetQuiz'
   }
 }
 
-export default Home;
+export default Register;
