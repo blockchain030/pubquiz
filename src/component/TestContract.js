@@ -106,6 +106,9 @@ import Button from '@material-ui/core/Button';
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedTestTestTest}>
             Test Test Test
           </Button><br/><br/>
+          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.props.store.setPage.bind(this,'register')}>
+            Registration Page
+          </Button><br/><br/>
         </Paper>
     );
   }

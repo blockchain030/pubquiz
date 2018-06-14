@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "create quiz files for blockchain pubquiz",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "child_process": "^1.0.2",
     "crypto": "^1.0.1",
@@ -15,5 +10,8 @@
     "express": "^4.16.3",
     "lorem-ipsum": "^1.0.4",
     "randomstring": "^1.1.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

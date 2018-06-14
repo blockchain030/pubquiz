@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react'
 
 
-class Scores extends Component {
+@inject('store') @observer class Scores extends Component {
   render() {
-    return (
+    return (        
       <div>
-        Scores
+        TODO: Scores
       </div>
     );
   }

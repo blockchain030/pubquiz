@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import resetQuiz from '../util/resetQuiz'
 
 
-@inject('store') @observer class Home extends Component {
+@inject('store') @observer class Register extends Component {
   
   handleNameChange = (name) => {
     // console.log('handleNameChange', name)
@@ -22,18 +22,21 @@ import resetQuiz from '../util/resetQuiz'
   }
 
   onClickedJoinGame = () => {
-    resetQuiz(this.props.store)
-    this.props.store.team.setRegistered(true)
-    // console.log( JSON.stringify(this.props.store.toJSON(),null,2) )
+    const { store } = this.props
+    resetQuiz(store)
+    store.team.setRegistered(true)
+    console.log('TODO: get gameplan')
+    store.setModal('waiting')
+    store.setNextPage('home')
   }
 
   render() {
     const { team } = this.props.store
     
     return (
-      // <center>
+      <center>
         
-        <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
+        <Paper style={{width:'90%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
           <TextField
             id="name"
             label="Team name"
@@ -52,9 +55,9 @@ import resetQuiz from '../util/resetQuiz'
           </Button>
         </Paper>
 
-      // </center>
+      </center>
     );
   }
 }
 
-export default Home;
+export default Register;
