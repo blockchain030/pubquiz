@@ -33,7 +33,6 @@
     "eject": "react-app-rewired eject",
     "deploy-local": "npm run build && serve -s build",
     "deploy-now": "npm run build && cd build && now --public --name pubquiz",
-    "deploy-pubquiz.fun": "npm run build && scp -r build/* pubquiz@pubquiz.fun:www",
-    "deploy-backend": "scp -r oracle/* pubquiz@pubquiz.fun:oracle"
+    "deploy-pubquiz.fun": "npm run build && scp -r build/* pubquiz@pubquiz.fun:www"
   }
 }

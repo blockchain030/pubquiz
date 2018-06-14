@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy-backend": "scp -r ./* pubquiz@pubquiz.fun:oracle"
-  },
+    },
   "author": "",
   "license": "ISC",
   "dependencies": {
