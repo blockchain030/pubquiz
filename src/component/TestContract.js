@@ -11,7 +11,7 @@ const ipaddress = "localhost:3001"// object.lock.settings.callbackurl||'';
   doApiCall = (apicall, callback) => {
     try {
       const request = require('request');
-      const os = require('os');
+      // const os = require('os');
 
       if(ipaddress!=='') {
         var callbackURL = "http://" + ipaddress + apicall;
@@ -100,6 +100,9 @@ const ipaddress = "localhost:3001"// object.lock.settings.callbackurl||'';
           </Button><br/><br/>
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedNext}>
             Next Step
+          </Button><br/><br/>
+          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.props.store.setPage.bind(this,'register')}>
+            Registration Page
           </Button><br/><br/>
         </Paper>
     );

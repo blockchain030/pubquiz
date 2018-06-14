@@ -53,7 +53,7 @@ const Question = types.model({
     //     self.grade.set(id, grade)
     // }
 
-    return {setMyAnswer/*, setGrade*/}
+    return {setMyAnswer, /*setGrade*/}
 })
 
 
@@ -164,10 +164,9 @@ const Snackbar = types.model({
 
 
 const RootStore = types.model({
-    page: 'home',
-    nextPage: 'home',
-    //  page: 'testcontract', 
-    // activeTab: 0,
+    page: 'register',
+    nextPage: 'register',
+    modal: '',
     snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),
     quiz: types.optional(Quiz, {}),
@@ -182,15 +181,20 @@ const RootStore = types.model({
         self.nextPage = nextPage
     }
 
+    function setModal(modal) {
+        self.modal = modal
+        self.nextPage = self.page
+    }
+
+    function hideModal() {
+        self.modal = '' // '' means no modal
+    }
+
     function setSeed(seed) {
         self.seed = seed
     }
 
-    // function setActiveTab(activeTab) {
-    //     self.activeTab = activeTab
-    // }
-
-    return {setPage, setNextPage, setSeed /*, setActiveTab*/}
+    return {setPage, setNextPage, setModal, hideModal, setSeed}
 })
 
 

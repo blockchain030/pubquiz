@@ -25,18 +25,18 @@ import resetQuiz from '../util/resetQuiz'
     const { store } = this.props
     resetQuiz(store)
     store.team.setRegistered(true)
+    console.log('TODO: get gameplan')
+    store.setModal('waiting')
     store.setNextPage('home')
-    store.setPage('waiting')
-    // console.log( JSON.stringify(store.toJSON(),null,2) )
   }
 
   render() {
     const { team } = this.props.store
     
     return (
-      // <center>
+      <center>
         
-        <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
+        <Paper style={{width:'90%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
           <TextField
             id="name"
             label="Team name"
@@ -55,7 +55,7 @@ import resetQuiz from '../util/resetQuiz'
           </Button>
         </Paper>
 
-      // </center>
+      </center>
     );
   }
 }

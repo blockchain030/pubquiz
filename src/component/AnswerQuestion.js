@@ -39,8 +39,8 @@ import GradeIcon from '@material-ui/icons/Grade';
     console.log("TODO: Get other team's answers, names, teamid, etc...")
     
     store.quiz.setQuestionIndex(0)
+    store.setModal('waiting')
     store.setNextPage('grade')
-    store.setPage('waiting')
   }
 
   renderMedia = (question_media) => {

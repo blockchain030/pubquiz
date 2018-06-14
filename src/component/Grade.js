@@ -40,17 +40,16 @@ import SendIcon from '@material-ui/icons/Send';
 
   onClickSend = () => {
     const { store } = this.props
-    console.log('TODO: Send grades', this.teams.map(team => team.score))
+    console.log('TODO: Submit grades', this.teams.map(team => team.score))
     // store.quiz.setQuestionIndex(0)
 
+    store.setModal('waiting')
+
     if (store.quiz.roundIndex < store.quiz.nRounds-1) { // next round
-      store.quiz.setRoundIndex(store.quiz.roundIndex + 1, 0)
-      store.setNextPage('home')
+      store.setNextPage('home-after-next-round')
     } else { // game over
       store.setNextPage('scores')
     }
-
-    store.setPage('waiting')
   }
 
   handleChange = teamIndex => event => {

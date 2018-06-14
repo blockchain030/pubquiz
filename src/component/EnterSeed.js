@@ -93,7 +93,7 @@ import jsQR from 'jsqr';
   }
   
   onClickClose = () => {
-    this.props.store.setPage('home')
+    this.props.store.setPage('register')
   }
 
   render() {

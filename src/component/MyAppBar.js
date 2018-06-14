@@ -13,7 +13,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
-import HomeIcon from '@material-ui/icons/Home';
+// import HomeIcon from '@material-ui/icons/Home';
 import ScoresIcon from '@material-ui/icons/List';
 import HelpIcon from '@material-ui/icons/Help';
 import AboutIcon from '@material-ui/icons/Info';
@@ -46,21 +46,12 @@ const styles = {
     })
   }
 
-  onClick = (page) => {
-    this.props.store.setPage(page)
-  }
-
-  onClickScores = () => {
-    this.props.store.setNextPage(this.props.store.page)
-    this.props.store.setPage('scores')
-  }
-
   onClickLeaveQuiz = () => {
     if (!window.confirm('Are you sure?')) return
 
     this.props.store.team.setRegistered(false)
     this.props.store.quiz.reset('')
-    this.props.store.setPage('home')
+    this.props.store.setPage('register')
   }
 
   render() {
@@ -92,35 +83,35 @@ const styles = {
                   {store.team.name}
                 </ListItem>
 
-                <ListItem button onClick={this.onClick.bind(this,'home')}>
+                {/* <ListItem button onClick={store.setPage.bind(this,'home')}>
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
                   Home
-                </ListItem>
+                </ListItem> */}
 
-                <ListItem button disabled={!store.team.registered} onClick={this.onClickScores}>
+                <ListItem button disabled={!store.team.registered} onClick={store.setModal.bind(this,'scores')}>
                   <ListItemIcon>
                     <ScoresIcon />
                   </ListItemIcon>
                   Scores
                 </ListItem>
 
-                <ListItem button onClick={this.onClick.bind(this,'help')}>
+                <ListItem button onClick={store.setModal.bind(this,'help')}>
                   <ListItemIcon>
                     <HelpIcon />
                   </ListItemIcon>
                   Help
                 </ListItem>
 
-                <ListItem button divider onClick={this.onClick.bind(this,'about')}>
+                <ListItem button divider onClick={store.setModal.bind(this,'about')}>
                   <ListItemIcon>
                     <AboutIcon />
                   </ListItemIcon>
                   About
                 </ListItem>
 
-                <ListItem button divider onClick={this.onClick.bind(this,'testcontract')}>
+                <ListItem button divider onClick={store.setPage.bind(this,'testcontract')}>
                   <ListItemIcon>
                     <AdminIcon />
                   </ListItemIcon>
