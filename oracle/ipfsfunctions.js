@@ -13,8 +13,8 @@ var getHASHfromIPFSreply = (reply) => {
   result = result.substr(0,result.indexOf(' '));
 
 //  console.log(reply, ' -> ',result)
-
-  if(result.length=64) {
+  console.log('hash length' + result.length);
+  if(result.length==46) {
     return result;
   } else {
     return false;
@@ -22,45 +22,80 @@ var getHASHfromIPFSreply = (reply) => {
 }
 
 exports.encrypt = (text, password) => {
-  var cipher = crypto.createCipher(algorithm,password);
-  var crypted = cipher.update(text,'utf8','hex');
-  crypted += cipher.final('hex');
-  return crypted;
+  try {
+    var cipher = crypto.createCipher(algorithm,password);
+    var crypted = cipher.update(text,'utf8','hex');
+    crypted += cipher.final('hex');
+    return crypted;
+  } catch(ex) {
+    console.log("ipfsfunctions.encrypt - error: ", ex.message);
+    return false;
+  }
 }
 
 exports.decrypt = (text, password) => {
-  var decipher = crypto.createDecipher(algorithm,password);
-  var dec = decipher.update(text,'hex','utf8');
-  dec += decipher.final('utf8');
-  return dec;
+  try {
+    var decipher = crypto.createDecipher(algorithm,password);
+    var dec = decipher.update(text,'hex','utf8');
+    dec += decipher.final('utf8');
+    return dec;
+  } catch(ex) {
+    console.log("ipfsfunctions.decrypt - error: ", ex.message);
+    return false;
+  }
 }
 
 exports.ipfsAddEncrypted = (content, password) => {
-  var encrypted = this.encrypt(content, password);
-  const stdout = execSync('ipfs add', { input: encrypted.toString()});
-  return getHASHfromIPFSreply(stdout.toString());
+  try {
+    var encrypted = this.encrypt(content, password);
+    const stdout = execSync('ipfs add', { input: encrypted.toString()});
+    return getHASHfromIPFSreply(stdout.toString());
+  } catch(ex) {
+    console.log("ipfsfunctions.ipfsAddEncrypted - error: ", ex.message);
+    return false;
+  }
 }
 
 exports.ipfsAddPlain = (content) => {
-  const stdout = execSync('ipfs add', { input: content});
-  return getHASHfromIPFSreply(stdout.toString());
+  try {
+    const stdout = execSync('ipfs add', { input: content});
+    return getHASHfromIPFSreply(stdout.toString());
+  } catch(ex) {
+    console.log("ipfsfunctions.ipfsAddPlain - error: ", ex.message);
+    return false;
+  }
 }
 
 exports.ipfsGetHashPlain = (content) => {
-  // const stdout = execSync('echo "' + content + '" | ipfs add --only-hash');
-  const stdout = execSync('ipfs add --only-hash', { input: content});
-  return getHASHfromIPFSreply(stdout.toString());
+  try {
+    // const stdout = execSync('echo "' + content + '" | ipfs add --only-hash');
+    const stdout = execSync('ipfs add --only-hash', { input: content});
+    return getHASHfromIPFSreply(stdout.toString());
+  } catch(ex) {
+    console.log("ipfsfunctions.ipfsGetHashPlain - error: ", ex.message);
+    return false;
+  }
 }
 
 exports.ipfsGetEncrypted = (hash, password) => {
-  const stdout = execSync('ipfs cat ' + hash);
-  const s = stdout.toString().trim();
-  const decrypted = decrypt(s, PASSWORD);
-  return decrypted;
+  try {
+    const stdout = execSync('ipfs cat ' + hash);
+    const s = stdout.toString().trim();
+    const decrypted = decrypt(s, PASSWORD);
+    return decrypted;
+  } catch(ex) {
+    console.log("ipfsfunctions.ipfsGetEncrypted - error: ", ex.message);
+    return false;
+  }
 }
 
 exports.ipfsGetPlain = (hash) => {
-  const stdout = execSync('ipfs cat ' + hash);
-  const s = stdout.toString().trim();
-  return s;
+  try {
+    const stdout = execSync('ipfs cat ' + hash);
+    const s = stdout.toString().trim();
+    return s;
+  } catch(ex) {
+    console.log("ipfsfunctions.ipfsGetPlain - error: ", ex.message);
+    return false;
+  }
 }

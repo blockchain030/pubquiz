@@ -31,17 +31,11 @@ try {
     // app.route('/ipfs/getstatus')
     //   .get(pubquizOracle.ipfsstatus)
 
+  require("datejs")
   const ts = new Date();
   console.log(ts.toString("yyyy/MM/dd hh:mm:ss") + ' pubquiz oracle API server started on: ' + port);
 
   app.listen(port);
-
-  const os = require('os');
-  console.log("Platform: " + os.platform());
-  console.log("Architecture: " + os.arch());
-  console.log("hostname: " + os.hostname());
-  console.log("userinfo: " + JSON.stringify(os.userInfo()));
-
 } catch(ex) {
   console.log("api.js - fatal error" + ex.message);
 }

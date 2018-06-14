@@ -3,25 +3,21 @@ import { inject, observer } from 'mobx-react'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
-
-const ipaddress = "localhost:3001"// object.lock.settings.callbackurl||'';
-
-
 @inject('store') @observer class TestContract extends Component {
   doApiCall = (apicall, callback) => {
     try {
       const request = require('request');
-      const os = require('os');
 
-      if(ipaddress!=='') {
-        var callbackURL = "http://" + ipaddress + apicall;
+      var url = "https://pubquiz.fun/api" + apicall;
 
-        console.log('call pubquiz API: ', callbackURL)
-
-        request(callbackURL, { json: true }, callback);
-
-        return true;
+      // use local node API during testing
+      if(process.env.NODE_ENV==='development') {   // &&false -> use server during development
+        url = "http://localhost:3001" + apicall;
       }
+      console.log('call pubquiz API : ', url)
+      request(url, { json: true }, callback);
+
+      return true;
     } catch(ex) {
       console.log('TestConstract.doApiCall: error ' + ex.message)
       return false;
@@ -78,9 +74,15 @@ const ipaddress = "localhost:3001"// object.lock.settings.callbackurl||'';
 
       return true;
     });
+  }
+
+  onClickedTestTestTest = () => {
+    console.log("env: " + process.env.NODE_ENV);
+
+    alert("zie console log");
 
     return true;
-  }
+  };
 
   render() {
     // const { quiz } = this.props.store
@@ -100,6 +102,9 @@ const ipaddress = "localhost:3001"// object.lock.settings.callbackurl||'';
           </Button><br/><br/>
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedNext}>
             Next Step
+          </Button><br/><br/>
+          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedTestTestTest}>
+            Test Test Test
           </Button><br/><br/>
         </Paper>
     );

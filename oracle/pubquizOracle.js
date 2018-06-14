@@ -4,8 +4,14 @@ exports.createQuiz = function(req, res) {
   const makePubQuiz = require('./makepubquiz.js');
 
   var quiz = new makePubQuiz();
-  var questionlist = quiz.makeQuestionlist(5,3);
+  // var questionlist = quiz.makeQuestionlist(5,3);
+  var questionlist = quiz.makeQuestionlist(1,1);
   var quizinfo = quiz.makePubquiz(questionlist);
+  if(quizinfo===false) {
+    var result = { result:false, address: "", info: {} };
+    res.json(result);
+    return;
+  }
 
   const quizfolder = "./quizinfo"
   if(!fs.existsSync(quizfolder)) {
@@ -17,14 +23,14 @@ exports.createQuiz = function(req, res) {
   var filename = './quizinfo/' + ts.toString("yyyyMMdd_hhmmss") + '-quiz.json';
   fs.writeFileSync(filename, JSON.stringify(quizinfo,0,2));
 
-  var address = { result:true, address: "", info: quizinfo };
-  res.json(address);
+  var result = { result:true, address: "", info: quizinfo };
+  res.json(result);
 };
 
 // return hash of the current quiz smart contract address
 exports.getAddress = function(req, res) {
-  var address = { result:true, address: "" };
-  res.json(address);
+  var result = { result:true, address: "" };
+  res.json(result);
 };
 
 // close answer round, close check round etc.

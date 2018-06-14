@@ -8,10 +8,10 @@ module.exports = class makePubQuiz {
     // create new dummy questions for each run
     // required to test with ipfs
     var questionlist = { rounds: [] };
-    for(var roundidx=1;roundidx<nrounds;roundidx++) {
+    for(var roundidx=1;roundidx<=nrounds;roundidx++) {
       var title = loremIpsum({count: 4, units: 'words', format: 'plain'});
       var round = { "title": title, "questions": [] }
-      for(var questionidx=1;questionidx<questionsperround;questionidx++) {
+      for(var questionidx=1;questionidx<=questionsperround;questionidx++) {
         var question = loremIpsum({count: 6, units: 'words', format: 'plain'}) + '?';
         var answer = loremIpsum({count: 12, units: 'words', format: 'plain'});
 
@@ -36,8 +36,8 @@ module.exports = class makePubQuiz {
     const randomstring = require("randomstring");
 
     var playerinfo = {
-       oracleinfo: '',
-       rounds: []
+      oracleinfo: '',
+      rounds: []
     };
 
     var oracleinfo = {
@@ -62,8 +62,18 @@ module.exports = class makePubQuiz {
       }
 
       var hashQuestions = ipfsAddEncrypted(JSON.stringify(tmpQuestions,0,2), oracleinfo.rounds[roundidx].passwordQuestions);
-      console.log('Questions for round ' + roundidx + ' url: http://ipfs.io/ipfs/' + hashQuestions);
+      if(hashQuestions===false) {
+        console.log('makepubquiz.makePubquiz error: unable to add encrypted question info to IPFS. Is the IPFS daemon running??')
+        return false;
+      }
+
       var hashAnswers = ipfsAddEncrypted(JSON.stringify(tmpAnswers,0,2), oracleinfo.rounds[roundidx].passwordAnswers);
+      if(hashAnswers===false) {
+        console.log('makepubquiz.makePubquiz error: unable to add encrypted answer info to IPFS. Is the IPFS daemon running??')
+        return false;
+      }
+
+      console.log('Questions for round ' + roundidx + ' url: http://ipfs.io/ipfs/' + hashQuestions);
       console.log('Answers for round ' + roundidx + ' url: http://ipfs.io/ipfs/' + hashAnswers);
 
       playerinfo.rounds.push({questions : hashQuestions, answers: hashAnswers });
@@ -72,6 +82,11 @@ module.exports = class makePubQuiz {
     playerinfo.oracleinfo = ipfsGetHashPlain(JSON.stringify(oracleinfo));
 
     var hashplayerinfo = ipfsAddPlain(JSON.stringify(playerinfo));
+    if(hashplayerinfo===false) {
+      console.log('makepubquiz.makePubquiz error: unable to add player info to IPFS. Is the IPFS daemon running??')
+      return false;
+    }
+
     console.log('Playerinfo data url: http://ipfs.io/ipfs/' + hashplayerinfo);
 
     return {
@@ -80,4 +95,4 @@ module.exports = class makePubQuiz {
       playerinfoHash: hashplayerinfo
     };
   }
-}
+  }
