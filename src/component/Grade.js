@@ -70,6 +70,8 @@ import submitGrades from '../smartcontract/submitGrades'
   }
 
   render() {
+    if (!this.props.store.team.registered) return null // left the quiz
+
     const { quiz } = this.props.store
     const round = quiz.currentRound
     const question = quiz.currentQuestion.question

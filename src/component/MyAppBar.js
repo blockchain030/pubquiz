@@ -46,14 +46,6 @@ const styles = {
     })
   }
 
-  onClickLeaveQuiz = () => {
-    if (!window.confirm('Are you sure?')) return
-
-    this.props.store.team.setRegistered(false)
-    this.props.store.quiz.reset('')
-    this.props.store.setPage('register')
-  }
-
   render() {
     const { classes, store } = this.props;
 
@@ -118,7 +110,7 @@ const styles = {
                   Test Contract
                 </ListItem>
 
-                <ListItem button disabled={!store.team.registered} onClick={this.onClickLeaveQuiz}>
+                <ListItem button disabled={!store.team.registered} onClick={store.setModal.bind(this,'leavequiz')}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>

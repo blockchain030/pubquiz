@@ -37,8 +37,7 @@ const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
 // }
 
 const getQuiz = (store) => {
-    console.log('TODO: getQuiz')
-    // TODO: get the pubquiz from the smart contract (get the actual questions and answers from ipfs)
+    store.appendWaitingModalText('getQuiz')
 
     store.quiz.reset('Blockchain quiz')
     const rounds = secretQuizinfo.oracleinfo.rounds

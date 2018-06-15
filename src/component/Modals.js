@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Scores from './Scores'
 import Help from './Help'
 import About from './About'
 import Waiting from './Waiting'
+import LeaveQuiz from './LeaveQuiz'
 
 
 @inject('store') @observer class Modals extends Component {
@@ -43,17 +44,11 @@ import Waiting from './Waiting'
         >
 
         <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
-          {store.modal === 'scores'  && <Scores />}
-          {store.modal === 'help'    && <Help   />}
-          {store.modal === 'about'   && <About  />}
-          {store.modal === 'waiting' && <Waiting/>}
-          {store.modal !== 'waiting' && store.modal !== '' &&
-            <div>
-              <br/>
-              <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={store.hideModal}>
-                Close
-              </Button>
-            </div>}
+          {store.modal === 'scores'    && <Scores   />}
+          {store.modal === 'help'      && <Help     />}
+          {store.modal === 'about'     && <About    />}
+          {store.modal === 'leavequiz' && <LeaveQuiz/>}
+          {store.modal === 'waiting'   && <Waiting  />}
         </Paper>
 
       </Modal>

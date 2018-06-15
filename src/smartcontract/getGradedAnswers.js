@@ -1,10 +1,10 @@
 const getGradedAnswers = (store) => {
-    console.log('TODO: getGradedAnswers')
+    store.appendWaitingModalText('getGradedAnswers')
 
 
 
-    
-    console.log(store.quiz.currentQuestion.gradedAnswers.toJSON())
+
+    // console.log(store.quiz.currentQuestion.gradedAnswers.toJSON())
 }
 
 export default getGradedAnswers

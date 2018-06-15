@@ -27,9 +27,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
     // and go to store.nextPage from Modals.js
   }
 
-  render() {    
+  render() {
+    const { store } = this.props
+       
     return (        
       <center>
+        <pre>{store.waitingModalText}</pre>
         Waiting for smart contract<br/>
         <br/>
         <CircularProgress size={50}/>

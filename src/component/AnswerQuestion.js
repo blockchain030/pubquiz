@@ -70,6 +70,8 @@ import getSomeFuckingAnswers from '../smartcontract/getSomeFuckingAnswers';
   }
 
   render() {
+    if (!this.props.store.team.registered) return null // left the quiz
+
     const { quiz } = this.props.store
     const round = quiz.currentRound
     const question_answer = quiz.currentQuestion

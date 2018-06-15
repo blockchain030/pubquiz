@@ -167,6 +167,7 @@ const RootStore = types.model({
     page: 'register',
     nextPage: 'register',
     modal: '',
+    waitingModalText: '',
     snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),
     quiz: types.optional(Quiz, {}),
@@ -188,13 +189,18 @@ const RootStore = types.model({
 
     function hideModal() {
         self.modal = '' // '' means no modal
+        self.waitingModalText = ''
+    }
+
+    function appendWaitingModalText(waitingModalText) {
+        self.waitingModalText += waitingModalText + '\n'
     }
 
     function setSeed(seed) {
         self.seed = seed
     }
 
-    return {setPage, setNextPage, setModal, hideModal, setSeed}
+    return {setPage, setNextPage, setModal, hideModal, appendWaitingModalText, setSeed}
 })
 
 
