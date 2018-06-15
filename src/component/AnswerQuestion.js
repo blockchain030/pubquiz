@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import LeftIcon from '@material-ui/icons/ChevronLeft'; // https://material.io/tools/icons/?style=baseline
@@ -84,12 +85,16 @@ import getSomeFuckingAnswers from '../smartcontract/getSomeFuckingAnswers';
       <center>
 
         <Paper style={{width:'90%', padding:'15px'}}>
-          {round.name}<br/>
-          Round {quiz.roundIndex+1} of {quiz.nRounds} - Question {quiz.questionIndex+1} of {quiz.nQuestions}<br/>
-          <br/>
+          <Typography variant='caption'>
+            {round.name}<br/>
+            Round {quiz.roundIndex+1} of {quiz.nRounds} - Question {quiz.questionIndex+1} of {quiz.nQuestions} 
+          </Typography>
+
           {this.renderMedia(question_media)}
 
-          <h4>{question_text}</h4>
+          <Typography variant='subheading'>
+            {question_text}
+          </Typography>
 
           <TextField
             id="answer"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
+import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import Button from '@material-ui/core/Button';
 
 
@@ -18,7 +19,7 @@ import Button from '@material-ui/core/Button';
     const { store } = this.props
 
     return (
-      <center>
+      <Typography align='center'>
         {store.quiz.name}<br/>
         <br/>
         Are you sure you want to leave?<br/>
@@ -29,7 +30,7 @@ import Button from '@material-ui/core/Button';
         <Button style={{width:'50%'}} variant="contained" color="secondary" onClick={this.onClickLeaveQuiz}>
           Yes
         </Button>
-      </center>
+      </Typography>
     );
   }
 }

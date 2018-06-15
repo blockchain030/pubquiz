@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
+import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import Button from '@material-ui/core/Button';
 
 
@@ -9,8 +10,12 @@ import Button from '@material-ui/core/Button';
 
     return (
       <center>
-        &copy; 2018 by blockchain030.nl<br/>
-        <br/>
+        <Typography paragraph={true} align='center' variant='caption'>About</Typography>
+
+        <Typography paragraph={true}>
+          &copy; 2018 by blockchain030.nl
+        </Typography>
+
         <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={store.hideModal}>
           Close
         </Button>

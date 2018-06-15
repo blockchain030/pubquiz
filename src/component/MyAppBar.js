@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import IconButton from '@material-ui/core/IconButton'; // https://material.io/tools/icons/?style=baseline
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -72,49 +72,49 @@ const styles = {
               <List component="nav">
                 <center><img src='/logo.png' alt='' width='200' /></center>
                 <ListItem divider>
-                  {store.team.name}
+                  <Typography>{store.team.name}</Typography>
                 </ListItem>
 
                 {/* <ListItem button onClick={store.setPage.bind(this,'home')}>
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
-                  Home
+                  <Typography>Home</Typography>
                 </ListItem> */}
 
                 <ListItem button disabled={!store.team.registered} onClick={store.setModal.bind(this,'scores')}>
                   <ListItemIcon>
                     <ScoresIcon />
                   </ListItemIcon>
-                  Scores
+                  <Typography>Scores</Typography>
                 </ListItem>
 
                 <ListItem button onClick={store.setModal.bind(this,'help')}>
                   <ListItemIcon>
                     <HelpIcon />
                   </ListItemIcon>
-                  Help
+                  <Typography>Help</Typography>
                 </ListItem>
 
                 <ListItem button divider onClick={store.setModal.bind(this,'about')}>
                   <ListItemIcon>
                     <AboutIcon />
                   </ListItemIcon>
-                  About
+                  <Typography>About</Typography>
                 </ListItem>
 
                 <ListItem button divider onClick={store.setPage.bind(this,'testcontract')}>
                   <ListItemIcon>
                     <AdminIcon />
                   </ListItemIcon>
-                  Test Contract
+                  <Typography>Test Contract</Typography>
                 </ListItem>
 
                 <ListItem button disabled={!store.team.registered} onClick={store.setModal.bind(this,'leavequiz')}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>
-                  Leave Quiz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Typography>Leave Quiz</Typography>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </ListItem>
 
               </List>

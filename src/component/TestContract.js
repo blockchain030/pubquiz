@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import Button from '@material-ui/core/Button';
 
 @inject('store') @observer class TestContract extends Component {
@@ -94,6 +95,8 @@ import Button from '@material-ui/core/Button';
 
     return (
         <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
+          <Typography paragraph={true} align='center' variant='caption'>Test Contracts</Typography>
+
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedCreateQuiz}>
             Create Quiz
           </Button><br/><br/>
@@ -106,9 +109,9 @@ import Button from '@material-ui/core/Button';
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedTestTestTest}>
             Test Test Test
           </Button><br/><br/>
-          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.props.store.setPage.bind(this,'register')}>
+          <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={this.props.store.setPage.bind(this,'register')}>
             Registration Page
-          </Button><br/><br/>
+          </Button>
         </Paper>
     );
   }

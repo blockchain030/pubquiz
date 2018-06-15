@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
+import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
@@ -32,10 +33,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
        
     return (        
       <center>
-        <pre>{store.waitingModalText}</pre>
-        Waiting for smart contract<br/>
-        <br/>
+        <Typography paragraph={true} variant='caption'>Waiting for smart contract</Typography>
         <CircularProgress size={50}/>
+        <pre><Typography paragraph={true}>{store.waitingModalText}</Typography></pre>
       </center>
     );
   }

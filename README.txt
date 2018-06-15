@@ -8,7 +8,6 @@ Demo can be found at https://pubquiz.fun
 ---
 TODO (UI)
   Grade should be stored per question.
-  Add modal dialogs instead of pages for help, about, scores, waiting, EnterSeed(?)
   Icoon voor 'toevoegen aan startscherm' op Android
   favicon.ico voor Desktop
   Webcam croppen tot portait-mode
@@ -23,6 +22,8 @@ SUGGESTION/TODO OPTIONALLY (UI)
   If quizmaster decides about submit then we could use a snackbar for quizmaster messages.
 
 DONE (UI)
+  All text should be in sans-serif Roboto
+  Add modal dialogs instead of pages for help, about, scores, waiting, EnterSeed(?)
   Title is now "Pubquiz" and will become "Pubquiz - <screenname>".
   Add waiting screen (and home tab) with prefilled/quizmaster set message.
   Number 87 on quiz pages is a mistake and should not be there.

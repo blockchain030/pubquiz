@@ -4,6 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import LeftIcon from '@material-ui/icons/ChevronLeft'; // https://material.io/tools/icons/?style=baseline
@@ -83,13 +84,14 @@ import submitGrades from '../smartcontract/submitGrades'
       <center>
 
         <Paper style={{width:'90%', padding:'15px'}}>
-          {round.name}<br/>
-          Round {quiz.roundIndex+1} of {quiz.nRounds} - Question {quiz.questionIndex+1} of {quiz.nQuestions}<br/>
-          <br/>
+          <Typography variant='caption'>
+            {round.name}<br/>
+            Round {quiz.roundIndex+1} of {quiz.nRounds} - Question {quiz.questionIndex+1} of {quiz.nQuestions} 
+          </Typography>
 
-          <h4>{question_text}</h4>
-          <h5>Correct: {quiz.currentQuestion.answer}</h5>
-          <h5>You: {quiz.currentQuestion.myAnswer}</h5>
+          <Typography variant='body2'>{question_text}</Typography>
+          <Typography variant='body2'>Correct: {quiz.currentQuestion.answer}</Typography>
+          <Typography variant='body2'>You: {quiz.currentQuestion.myAnswer}</Typography>
 
           <List>
             {this.teams.map((team,teamIndex) => this.renderTeam(team,teamIndex))}
