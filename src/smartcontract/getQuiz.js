@@ -36,8 +36,8 @@ const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
 //   ]
 // }
 
-const resetQuiz = (store) => {
-    // console.log('resetQuiz')
+const getQuiz = (store) => {
+    console.log('TODO: getQuiz')
     // TODO: get the pubquiz from the smart contract (get the actual questions and answers from ipfs)
 
     store.quiz.reset('Blockchain quiz')
@@ -114,4 +114,4 @@ const resetQuiz = (store) => {
 
 // } // end of getRound(roundidx)
 
-export default resetQuiz
+export default getQuiz

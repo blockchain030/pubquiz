@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import LeftIcon from '@material-ui/icons/ChevronLeft'; // https://material.io/tools/icons/?style=baseline
 import RightIcon from '@material-ui/icons/ChevronRight';
 import GradeIcon from '@material-ui/icons/Grade';
+import getGradedAnswers from '../smartcontract/getGradedAnswers';
+import submitMyAnswers from '../smartcontract/submitMyAnswers';
+import getSomeFuckingAnswers from '../smartcontract/getSomeFuckingAnswers';
 
 
 @inject('store') @observer class AnswerQuestion extends Component {
@@ -31,12 +34,10 @@ import GradeIcon from '@material-ui/icons/Grade';
 
   onClickGrade = () => {
     const { store } = this.props
-    const { currentRound } = store.quiz
-    console.log('TODO: Submit my answers', currentRound.myAnswers)
-
-    console.log("TODO: Get decryption key for answers")
-
-    console.log("TODO: Get other team's answers, names, teamid, etc...")
+    // const { currentRound } = store.quiz
+    submitMyAnswers(store)
+    getSomeFuckingAnswers(store)
+    getGradedAnswers(store)
     
     store.quiz.setQuestionIndex(0)
     store.setModal('waiting')

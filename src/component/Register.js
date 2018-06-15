@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import resetQuiz from '../util/resetQuiz'
+import getQuiz from '../smartcontract/getQuiz'
 
 
 @inject('store') @observer class Register extends Component {
@@ -23,9 +23,8 @@ import resetQuiz from '../util/resetQuiz'
 
   onClickedJoinGame = () => {
     const { store } = this.props
-    resetQuiz(store)
+    getQuiz(store)
     store.team.setRegistered(true)
-    console.log('TODO: get gameplan')
     store.setModal('waiting')
     store.setNextPage('home')
   }

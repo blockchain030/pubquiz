@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import LeftIcon from '@material-ui/icons/ChevronLeft'; // https://material.io/tools/icons/?style=baseline
 import RightIcon from '@material-ui/icons/ChevronRight';
 import SendIcon from '@material-ui/icons/Send';
+import submitGrades from '../smartcontract/submitGrades'
 
 
 @inject('store') @observer class Grade extends Component {
@@ -27,21 +28,18 @@ import SendIcon from '@material-ui/icons/Send';
   ]
 
   onClickPreviousQuestion = () => {
-    // console.log('onClickPreviousQuestion')
     const { quiz } = this.props.store
     quiz.setQuestionIndex((quiz.questionIndex + quiz.nQuestions - 1) % quiz.nQuestions)
   }
 
   onClickNextQuestion = () => {
-    // console.log('onClickNextQuestion')
     const { quiz } = this.props.store
     quiz.setQuestionIndex((quiz.questionIndex + 1) % quiz.nQuestions)
   }
 
   onClickSend = () => {
     const { store } = this.props
-    console.log('TODO: Submit grades', this.teams.map(team => team.score))
-    // store.quiz.setQuestionIndex(0)
+    submitGrades(store)
 
     store.setModal('waiting')
 
@@ -53,7 +51,6 @@ import SendIcon from '@material-ui/icons/Send';
   }
 
   handleChange = teamIndex => event => {
-    // console.log(teamIndex, event.target.checked)
     this.teams[teamIndex].score = 1 - this.teams[teamIndex].score
     this.forceUpdate()
   };
