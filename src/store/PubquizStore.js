@@ -42,18 +42,29 @@ const Question = types.model({
     answer: '',
     myAnswer: '',
     gradedAnswers: types.optional(types.array(GradedAnswer), []),
-}).actions(self => {
+}).views(self => ({
+
+    get nAnswersToGrade() {
+        return self.gradedAnswers.length
+    },
+
+})).actions(self => {
 
     function setMyAnswer(myAnswer) {
         self.myAnswer = myAnswer
     }
 
-    // function setGrade(id, grade) {
-    //     console.log('Question.setGrade', id, grade)
-    //     self.grade.set(id, grade)
-    // }
+    function setGradedAnswer(gradedAnswer) {
+        // console.log('Question.setGradedAnswer', gradedAnswer)
+        self.gradedAnswers.push(gradedAnswer)
+    }
 
-    return {setMyAnswer, /*setGrade*/}
+    function setGrade(teamIndex, grade) {
+        // console.log('Question.setGrade', teamIndex, grade)
+        self.gradedAnswers[teamIndex].grade = grade
+    }
+
+    return {setMyAnswer, setGradedAnswer, setGrade}
 })
 
 

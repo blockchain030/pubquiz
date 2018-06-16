@@ -15,19 +15,6 @@ import submitGrades from '../smartcontract/submitGrades'
 
 @inject('store') @observer class Grade extends Component {
 
-  teams = [
-    { score: 0, name: 'Team 1' , answer: 'Answer one' },
-    { score: 0, name: 'Team 2' , answer: 'Answer two' },
-    { score: 0, name: 'Team 3' , answer: 'Answer three' },
-    { score: 0, name: 'Team 4' , answer: 'Answer four' },
-    { score: 0, name: 'Team 5' , answer: 'Answer five' },
-    { score: 0, name: 'Team 6' , answer: 'Answer six' },
-    { score: 0, name: 'Team 7' , answer: 'Answer seven' },
-    { score: 0, name: 'Team 8' , answer: 'Answer eight' },
-    { score: 0, name: 'Team 9' , answer: 'Answer nine' },
-    { score: 0, name: 'Team 10', answer: 'Answer ten' },
-  ]
-
   onClickPreviousQuestion = () => {
     const { quiz } = this.props.store
     quiz.setQuestionIndex((quiz.questionIndex + quiz.nQuestions - 1) % quiz.nQuestions)
@@ -52,16 +39,17 @@ import submitGrades from '../smartcontract/submitGrades'
   }
 
   handleChange = teamIndex => event => {
-    this.teams[teamIndex].score = 1 - this.teams[teamIndex].score
-    this.forceUpdate()
+    const { currentQuestion } = this.props.store.quiz
+    const { gradedAnswers } = currentQuestion
+    currentQuestion.setGrade(teamIndex, 1 - gradedAnswers[teamIndex].grade)
   };
 
-  renderTeam = (team,teamIndex) => {
+  renderTeam = (teamIndex, gradedAnswer) => {
     return (
       <ListItem key={teamIndex}>
-        <ListItemText primary={team.answer} secondary={team.name} />
+        <ListItemText primary={gradedAnswer.answer} secondary={gradedAnswer.name} />
         <Checkbox
-            checked={team.score > 0}
+            checked={gradedAnswer.grade > 0}
             onChange={this.handleChange(teamIndex)}
             value={String(teamIndex)}
             color='primary'
@@ -75,10 +63,10 @@ import submitGrades from '../smartcontract/submitGrades'
 
     const { quiz } = this.props.store
     const round = quiz.currentRound
-    const question = quiz.currentQuestion.question
+    const { currentQuestion } = quiz
+    const { gradedAnswers } = currentQuestion
+    const question = currentQuestion.question
     const question_text = question.split('|')[0]
-    // console.log(question_media)
-    // console.log(question_text)
 
     return (
       <center>
@@ -94,7 +82,7 @@ import submitGrades from '../smartcontract/submitGrades'
           <Typography variant='body2'>You: {quiz.currentQuestion.myAnswer}</Typography>
 
           <List>
-            {this.teams.map((team,teamIndex) => this.renderTeam(team,teamIndex))}
+            {gradedAnswers.map((gradedAnswer,teamIndex) => this.renderTeam(teamIndex,gradedAnswer))}
           </List>
 
         </Paper>
