@@ -54,8 +54,8 @@ const Question = types.model({
         self.myAnswer = myAnswer
     }
 
-    function setGradedAnswer(gradedAnswer) {
-        // console.log('Question.setGradedAnswer', gradedAnswer)
+    function pushGradedAnswer(gradedAnswer) {
+        // console.log('Question.pushGradedAnswer', gradedAnswer)
         self.gradedAnswers.push(gradedAnswer)
     }
 
@@ -64,13 +64,13 @@ const Question = types.model({
         self.gradedAnswers[teamIndex].grade = grade
     }
 
-    return {setMyAnswer, setGradedAnswer, setGrade}
+    return {setMyAnswer, pushGradedAnswer, setGrade}
 })
 
 
 const Round = types.model({
     name: '',
-    questions: types.optional(types.map(Question), {}),
+    questions: types.optional(types.array(Question), []),
 }).views(self => ({
 
     get myAnswers() {
@@ -79,12 +79,25 @@ const Round = types.model({
 
 })).actions(self => {
 
-    function addQuestion(id, question) {
-        // console.log('Round.addQuestion', id, question)
-        self.questions.set(id, Question.create(question))
+    function pushQuestion(question) {
+        // console.log('Round.pushQuestion', question)
+        self.questions.push(question)
     }
 
-    return {addQuestion}
+    function setAnswers(answers) {
+        // console.log('setAnswers', answers)
+        if (self.questions.length !== answers.length) {
+            console.error('Number of questions (' + self.questions.length + ') !== number of answers (' + answers.length + ')')
+            return
+        }
+
+        for (const i in answers) {
+            // console.log(answers[i])
+            self.questions[i].answer = answers[i]
+        }
+    }
+
+    return {pushQuestion, setAnswers}
 })
 
 
@@ -92,23 +105,23 @@ const Quiz = types.model({
     name: '',
     roundIndex: 0,
     questionIndex: 0,
-    rounds: types.optional(types.map(Round), {}),
+    rounds: types.optional(types.array(Round), []),
 }).views(self => ({
 
     get currentRound() {
-        return self.rounds.get(String(self.roundIndex))
+        return self.rounds[self.roundIndex]
     },
 
     get currentQuestion() { // of currentRound
-        return self.currentRound.questions.get(String(self.questionIndex))
+        return self.currentRound.questions[self.questionIndex]
     },
 
     get nRounds() {
-        return self.rounds.size
+        return self.rounds.length
     },
 
     get nQuestions() { // of currentRound
-        return self.currentRound.questions.size
+        return self.currentRound.questions.length
     },
 
 })).actions(self => {
@@ -117,15 +130,15 @@ const Quiz = types.model({
         self.name = name
         self.roundIndex = 0
         self.questionIndex = 0
-        self.rounds = {}
+        self.rounds = []
     }
 
-    function addRound(id, name, questions) {
-        // console.log('Quiz.addRound', id, name, questions)
-        self.rounds.set(id, Round.create({name}))
-        for (const questionIndex in questions) {
-            self.rounds.get(id).addQuestion(questionIndex, questions[questionIndex])
-        }
+    function pushRound(name, questions) {
+        // console.log('Quiz.pushRound', name, questions)
+        self.rounds.push(Round.create({name, questions}))
+        // for (const question of questions) {
+        //     self.rounds[roundIndex].pushQuestion(question)
+        // }
     }
 
     function setRoundIndex(roundIndex, questionIndex=0) {
@@ -137,7 +150,7 @@ const Quiz = types.model({
         self.questionIndex = questionIndex
     }
 
-    return {reset, addRound, setRoundIndex, setQuestionIndex}
+    return {reset, pushRound, setRoundIndex, setQuestionIndex}
 })
 
 

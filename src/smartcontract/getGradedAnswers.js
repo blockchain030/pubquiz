@@ -23,7 +23,7 @@ const getGradedAnswers = (store) => {
         // console.log('question', question.toJSON())
         for (const team of teams) {
             // console.log('team', team)
-            question.setGradedAnswer({
+            question.pushGradedAnswer({
                 teamName: team.name,
                 teamId: '#ID ' + team.name,
                 answer: team.answer,

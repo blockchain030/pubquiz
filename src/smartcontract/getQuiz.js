@@ -40,14 +40,13 @@ const getQuiz = (store) => {
     store.appendWaitingModalText('getQuiz')
 
     store.quiz.reset('Blockchain quiz')
-    const rounds = secretQuizinfo.oracleinfo.rounds
-    // console.log(rounds.length + ' rounds')
+    const { rounds } = secretQuizinfo.oracleinfo
 
     for (const roundIndex in rounds) {
         const round = rounds[roundIndex].info
         // console.log(roundIndex, round.questions)
-        const questions = round.questions.map(q => {return {question: q.question, answer: q.answer}})
-        store.quiz.addRound(roundIndex, round.title, questions)
+        const questions = round.questions.map(q => {return {question: q.question}})
+        store.quiz.pushRound(round.title, questions)
     }
 
 
