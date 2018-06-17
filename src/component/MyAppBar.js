@@ -82,7 +82,7 @@ const styles = {
                   <Typography>Home</Typography>
                 </ListItem> */}
 
-                <ListItem button disabled={!store.team.registered} onClick={store.setModal.bind(this,'scores')}>
+                <ListItem button disabled={store.teamScores.teamScoreInfo.length === 0} onClick={store.setModal.bind(this,'scores')}>
                   <ListItemIcon>
                     <ScoresIcon />
                   </ListItemIcon>

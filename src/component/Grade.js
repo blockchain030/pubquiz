@@ -11,6 +11,7 @@ import LeftIcon from '@material-ui/icons/ChevronLeft'; // https://material.io/to
 import RightIcon from '@material-ui/icons/ChevronRight';
 import SendIcon from '@material-ui/icons/Send';
 import submitGrades from '../smartcontract/submitGrades'
+import getScores from '../smartcontract/getScores'
 
 
 @inject('store') @observer class Grade extends Component {
@@ -28,6 +29,7 @@ import submitGrades from '../smartcontract/submitGrades'
   onClickSend = () => {
     const { store } = this.props
     submitGrades(store)
+    getScores(store)
 
     store.setModal('waiting')
 
@@ -47,7 +49,7 @@ import submitGrades from '../smartcontract/submitGrades'
   renderTeam = (teamIndex, gradedAnswer) => {
     return (
       <ListItem key={teamIndex}>
-        <ListItemText primary={gradedAnswer.answer} secondary={gradedAnswer.name} />
+        <ListItemText primary={gradedAnswer.answer} secondary={gradedAnswer.teamName} />
         <Checkbox
             checked={gradedAnswer.grade > 0}
             onChange={this.handleChange(teamIndex)}

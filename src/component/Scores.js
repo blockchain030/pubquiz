@@ -5,17 +5,25 @@ import Button from '@material-ui/core/Button';
 
 
 @inject('store') @observer class Scores extends Component {
+
+  renderTeamScoreInfo = (teamIndex,teamScoreInfo) => {
+    // console.log('renderTeamScoreInfo',teamIndex,teamScoreInfo)
+    return (
+      <div key={teamIndex}>
+        {teamIndex + 1}. {teamScoreInfo.teamName} - {teamScoreInfo.points} points<br/>
+      </div>
+    )
+  }
+
   render() {
     const { store } = this.props
     
     return (        
       <div>
-        <Typography paragraph={true} align='center' variant='caption'>Scores</Typography>
+        <Typography paragraph={true} align='center' variant='caption'>Scores after round {store.teamScores.afterRound + 1}</Typography>
         
         <Typography paragraph={true}>
-          1. oh<br/>
-          2. yeah<br/>
-          3. ...
+          {store.teamScores.teamScoreInfo.map((teamScoreInfo,teamIndex) => this.renderTeamScoreInfo(teamIndex,teamScoreInfo))}
         </Typography>
 
         <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={store.hideModal}>

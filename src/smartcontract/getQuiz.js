@@ -46,7 +46,7 @@ const getQuiz = (store) => {
         const round = rounds[roundIndex].info
         // console.log(roundIndex, round.questions)
         const questions = round.questions.map(q => {return {question: q.question}})
-        store.quiz.pushRound(round.title, questions)
+        store.quiz.pushRound({name:round.title, questions})
     }
 
 

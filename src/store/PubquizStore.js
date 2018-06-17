@@ -133,12 +133,8 @@ const Quiz = types.model({
         self.rounds = []
     }
 
-    function pushRound(name, questions) {
-        // console.log('Quiz.pushRound', name, questions)
-        self.rounds.push(Round.create({name, questions}))
-        // for (const question of questions) {
-        //     self.rounds[roundIndex].pushQuestion(question)
-        // }
+    function pushRound(round) {
+        self.rounds.push(round)
     }
 
     function setRoundIndex(roundIndex, questionIndex=0) {
@@ -165,16 +161,24 @@ const TeamScores = types.model({
     teamScoreInfo: types.optional(types.array(TeamScoreInfo), []),
 }).actions(self => {
 
-    return {}
+    function setAfterRound(afterRound) {
+        self.afterRound = afterRound
+    }
+
+    function setTeamScoreInfo(teamScoreInfo) {
+        self.teamScoreInfo = teamScoreInfo
+    }
+
+    return {setAfterRound, setTeamScoreInfo}
 })
 
 
 const Snackbar = types.model({
     text: '',
-    type: 'info',
+    type: types.optional(types.enumeration('SnackbarInfo', ['log','info','warning','error']), 'log')
 }).actions(self => {
 
-    function show(text, type='info') {
+    function show(text, type='log') {
         self.text = text
         self.type = type
     }
