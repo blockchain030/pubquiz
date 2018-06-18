@@ -21,6 +21,7 @@
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
     "request": "^2.87.0",
+    "source-map-explorer": "^1.5.0",
     "truffle-contract": "^3.0.5",
     "truffle-hdwallet-provider": "0.0.5",
     "typeface-roboto": "0.0.54",
@@ -29,6 +30,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
+    "analyze": "react-app-rewired build && source-map-explorer build/static/js/main.*",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
     "deploy-local": "npm run build && serve -s build",
