@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { inject, observer } from 'mobx-react'
 
+import AsyncComponent from './component/AsyncComponent'
+
 import PubquizTheme from './PubquizTheme';
 import MyAppBar from './component/MyAppBar';
 import Modals from './component/Modals';
@@ -10,8 +12,8 @@ import Snackbar from './component/Snackbar';
 import Register from './component/Register';
 import AnswerQuestion from './component/AnswerQuestion';
 import Grade from './component/Grade';
-import EnterSeed from './component/EnterSeed';
-import TestContract from './component/TestContract';
+const EnterSeed = AsyncComponent(() => import("./component/EnterSeed"));
+const TestContract = AsyncComponent(() => import("./component/TestContract"));
 
 
 // note: to get decorators working with create-react-app without using eject:
