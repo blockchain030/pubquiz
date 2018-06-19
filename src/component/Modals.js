@@ -26,7 +26,7 @@ import LeaveQuiz from './LeaveQuiz'
       if (!open) { // i.e. closed
         store.setPage(store.nextPage)
       }
-    }    
+    }
   }
 
   componentDidMount() {
@@ -44,7 +44,7 @@ import LeaveQuiz from './LeaveQuiz'
         >
 
         <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
-          {store.modal === 'scores'    && <Scores   />}
+          {store.modal === 'scores'    && <Scores   store={store}/>}
           {store.modal === 'help'      && <Help     />}
           {store.modal === 'about'     && <About    />}
           {store.modal === 'leavequiz' && <LeaveQuiz/>}

@@ -25,7 +25,7 @@ import TestContract from './component/TestContract';
     return (
       <MuiThemeProvider theme={PubquizTheme}>
 
-        <MyAppBar />
+        <MyAppBar/>
 
         <div className='content' style={{margin:'70px 0px 80px'}}>
           {store.page === 'register'     && <Register      />}
