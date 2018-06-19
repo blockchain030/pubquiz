@@ -12,8 +12,8 @@ import Snackbar from './component/Snackbar';
 import Register from './component/Register';
 import AnswerQuestion from './component/AnswerQuestion';
 import Grade from './component/Grade';
-const EnterSeed = AsyncComponent(() => import("./component/EnterSeed"));
-const TestContract = AsyncComponent(() => import("./component/TestContract"));
+const EnterSeed = AsyncComponent(() => import(/* webpackChunkName: "EnterSeed" */ "./component/EnterSeed"));
+const TestContract = AsyncComponent(() => import(/* webpackChunkName: "TestContract" */ "./component/TestContract"));
 
 
 // note: to get decorators working with create-react-app without using eject:
