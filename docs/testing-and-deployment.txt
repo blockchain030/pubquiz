@@ -1,11 +1,11 @@
 Deploying smartcontract to a truffle local development blockchain:
-> cd truffle
+> cd src/truffle
 > truffle develop
 > migrate --reset
 > exec go.js
 
 Deploying smartcontract to a Ropsten testnet:
-> cd truffle
+> cd src/truffle
 > truffle migrate --network ropsten --reset
 
 ================================================================================

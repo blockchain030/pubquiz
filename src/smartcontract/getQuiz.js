@@ -12,20 +12,21 @@ const DEVMODE          = true
 const providerUrl      = DEVMODE ? 'http://localhost:9545' : 'https://ropsten.infura.io/sCQUO1V3FOoOUWGZBtig'
 const provider         = new Web3.providers.HttpProvider(providerUrl);
 const contract         = require('truffle-contract');
-const pubquizJSON      = require('./Pubquiz.json') // '../../truffle/build/contracts/Pubquiz.json'
+const pubquizJSON      = require('../truffle/build/contracts/Pubquiz.json')
 const pubquizContract  = contract(pubquizJSON);
 pubquizContract.setProvider(provider);
 global.pubquizContract = pubquizContract;
 
 var pubquiz
 pubquizContract.deployed().then(instance => {
-  pubquiz = instance;
-  console.log('pubquiz is deployed at', instance.address, 'on', providerUrl)
+    pubquiz = instance;
+    global.pubquiz = pubquiz;
+    // console.log('Pubquiz.sol is deployed at', pubquiz.address, 'on', providerUrl)
 }).catch(e => {
     pubquiz = undefined
-    console.error('pubquiz is not deployed on', providerUrl, ' . Error:',e.message)
+    global.pubquiz = pubquiz;
+    console.error('Pubquiz.sol is not deployed on', providerUrl, ' . Error:', e.message)
 })
-global.pubquiz = pubquiz;
 
 // const IPFS_GATEWAY = 'https://gateway.ipfs.io/ipfs/'
 
