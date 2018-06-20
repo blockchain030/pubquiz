@@ -1,27 +1,31 @@
 // import crypto from 'crypto';
 
-// import Web3 from 'web3';
+import Web3 from 'web3';
 // import bip39 from 'bip39';
 // import hdkey from 'ethereumjs-wallet/hdkey';
 
 const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
 // console.log(JSON.stringify(secretQuizinfo,null,1))
 
-// const infura_apikey    = 'sCQUO1V3FOoOUWGZBtig';
-// const provider         = new Web3.providers.HttpProvider('https://ropsten.infura.io/'+infura_apikey);
-// // const web3             = new Web3(provider);
-// const contract         = require('truffle-contract');
-// const pubquizJSON      = require('./Pubquiz.json') // XXX this is a copy of the ABI!
-// const pubquizContract  = contract(pubquizJSON);
-// pubquizContract.setProvider(provider);
-// global.pubquizContract = pubquizContract;
-// console.log('pubquizContract.isDeployed()', pubquizContract.isDeployed())
+const DEVMODE          = true
 
-// var pubquiz;
-// pubquizContract.deployed().then(instance => {
-//   pubquiz = instance;
-//   global.pubquiz = instance;
-// });
+const providerUrl      = DEVMODE ? 'http://localhost:9545' : 'https://ropsten.infura.io/sCQUO1V3FOoOUWGZBtig'
+const provider         = new Web3.providers.HttpProvider(providerUrl);
+const contract         = require('truffle-contract');
+const pubquizJSON      = require('./Pubquiz.json') // '../../truffle/build/contracts/Pubquiz.json'
+const pubquizContract  = contract(pubquizJSON);
+pubquizContract.setProvider(provider);
+global.pubquizContract = pubquizContract;
+
+var pubquiz
+pubquizContract.deployed().then(instance => {
+  pubquiz = instance;
+  console.log('pubquiz is deployed at', instance.address, 'on', providerUrl)
+}).catch(e => {
+    pubquiz = undefined
+    console.error('pubquiz is not deployed on', providerUrl, ' . Error:',e.message)
+})
+global.pubquiz = pubquiz;
 
 // const IPFS_GATEWAY = 'https://gateway.ipfs.io/ipfs/'
 
