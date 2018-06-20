@@ -1,0 +1,41 @@
+Deploying smartcontract to a truffle local development blockchain:
+> cd truffle
+> truffle develop
+> migrate --reset
+> exec go.js
+
+Deploying smartcontract to a Ropsten testnet:
+> cd truffle
+> truffle migrate --network ropsten --reset
+
+================================================================================
+Running & testing with pubquiz + backend in development module
+
+1. with the API running locally (port 3001)
+
+- start IPFS daemon in a terminal window
+-ipfs daemon
+
+- start the app in a terminal window from within the /pubquiz folder
+npm start
+
+- start the api in a terminal window from within the /pubquiz/oracle folder
+  node api.js
+or
+  nodemon api.js (if you have nodemon installed and are working on the backend)
+
+2. with the API running on the server (https://pubquiz.fun/api/)
+
+change src/component/TestContract.js - line
+
+  if(process.env.NODE_ENV==='development') {
+
+to
+
+  if(process.env.NODE_ENV==='development' && false) {
+
+in this case you dont have to start IPFS / api.js
+
+There is a (temporary) page in the main menu "Test contract" for testing
+functions in the backend.
+

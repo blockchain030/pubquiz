@@ -1,0 +1,48 @@
+Nginx current config
+
+upstream api_node_js {
+    server    127.0.0.1:3001;
+}
+
+server {
+  listen 80;
+  listen 443 default_server ssl;
+
+  server_name pubquiz.fun www.pubquiz.fun;
+
+  ssl_certificate          /etc/letsencrypt/live/pubquiz.fun/fullchain.pem;
+  ssl_certificate_key  /etc/letsencrypt/live/pubquiz.fun/privkey.pem;
+
+  root /home/pubquiz/www;
+
+  index index.html index.htm index.nginx-debian.html;
+
+  if ($scheme = http) {
+    return 301 https://$server_name$request_uri;
+  }
+
+  location / {
+    # First attempt to serve request as file, then
+    # as directory, then fall back to displaying a 404.
+    try_files $uri $uri/ =404;
+
+    # kill cache (include during development)
+    add_header Last-Modified $date_gmt;
+    add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+    if_modified_since off;
+    expires off;
+    etag off;
+  }
+
+  location /api {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-NginX-Proxy true;
+
+    rewrite ^/api/?(.*) /$1 break;
+
+    proxy_pass http://api_node_js;
+    proxy_redirect off;
+  }
+}
