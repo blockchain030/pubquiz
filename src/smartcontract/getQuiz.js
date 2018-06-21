@@ -21,7 +21,7 @@ var pubquiz
 pubquizContract.deployed().then(instance => {
     pubquiz = instance;
     global.pubquiz = pubquiz;
-    // console.log('Pubquiz.sol is deployed at', pubquiz.address, 'on', providerUrl)
+    console.log('Pubquiz.sol is deployed at', pubquiz.address, 'on', providerUrl)
 }).catch(e => {
     pubquiz = undefined
     global.pubquiz = pubquiz;
