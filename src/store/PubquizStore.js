@@ -195,6 +195,7 @@ const RootStore = types.model({
     page: 'register',
     nextPage: 'register',
     modal: '',
+    nModalsShown: 0,
     tasks: types.optional(types.array(types.string), []), // tasks are performed by the Waiting modal
     snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),
@@ -213,6 +214,7 @@ const RootStore = types.model({
     function setModal(modal) {
         self.modal = modal
         self.nextPage = self.page
+        self.nModalsShown++
     }
 
     function hideModal() {

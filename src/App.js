@@ -6,7 +6,6 @@ import AsyncComponent from './component/AsyncComponent'
 
 import PubquizTheme from './PubquizTheme';
 import MyAppBar from './component/MyAppBar';
-import Modals from './component/Modals';
 import Snackbar from './component/Snackbar';
 
 import Register from './component/Register';
@@ -14,6 +13,7 @@ import AnswerQuestion from './component/AnswerQuestion';
 import Grade from './component/Grade';
 const EnterSeed = AsyncComponent(() => import(/* webpackChunkName: "EnterSeed" */ "./component/EnterSeed"));
 const TestContract = AsyncComponent(() => import(/* webpackChunkName: "TestContract" */ "./component/TestContract"));
+const Modals = AsyncComponent(() => import(/* webpackChunkName: "Modals" */ "./component/Modals"));
 
 
 // note: to get decorators working with create-react-app without using eject:
@@ -37,7 +37,7 @@ const TestContract = AsyncComponent(() => import(/* webpackChunkName: "TestContr
           {store.page === 'testcontract' && <TestContract  />}
         </div>
 
-        <Modals />
+        {store.nModalsShown > 0 && <Modals />}
         <Snackbar snackbar={store.snackbar} />
 
       </MuiThemeProvider>

@@ -113,7 +113,7 @@ import jsQR from 'jsqr';
           margin="normal"
         />
 
-        <Button onClick={this.onClickClose} variant="contained" color='primary' >
+        <Button onClick={this.onClickClose} variant="contained" color='secondary' >
           Close
         </Button>
 

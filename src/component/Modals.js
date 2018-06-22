@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
+import Grow from '@material-ui/core/Grow';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import Scores from './Scores'
@@ -44,13 +45,15 @@ import LeaveQuiz from './LeaveQuiz'
         open={this.state.open}
         >
 
-        <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
-          {store.modal === 'scores'              && <Scores store={store}/>}
-          {store.modal === 'help'                && <Help                />}
-          {store.modal === 'about'               && <About               />}
-          {store.modal === 'leaveQuiz'           && <LeaveQuiz           />}
-          {store.modal === 'waitForAsyncTasks'   && <WaitForAsyncTasks   />}
-        </Paper>
+        <Grow in={true} timeout={700}>
+          <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
+            {store.modal === 'scores'              && <Scores store={store}/>}
+            {store.modal === 'help'                && <Help                />}
+            {store.modal === 'about'               && <About               />}
+            {store.modal === 'leaveQuiz'           && <LeaveQuiz           />}
+            {store.modal === 'waitForAsyncTasks'   && <WaitForAsyncTasks   />}
+          </Paper>
+        </Grow>
 
       </Modal>
     );
