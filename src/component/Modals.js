@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react'
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
-// import Button from '@material-ui/core/Button';
 import Scores from './Scores'
 import Help from './Help'
 import About from './About'
-import Waiting from './Waiting'
+import WaitForAsyncTasks from './WaitForAsyncTasks'
 import LeaveQuiz from './LeaveQuiz'
 
 
@@ -36,6 +35,8 @@ import LeaveQuiz from './LeaveQuiz'
   render() {
     const { store } = this.props
 
+    if (store.modal === '') return null // early exit, show nothing
+
     return (
       <Modal
         aria-labelledby="simple-modal-title"
@@ -44,11 +45,11 @@ import LeaveQuiz from './LeaveQuiz'
         >
 
         <Paper style={{width:'80%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
-          {store.modal === 'scores'    && <Scores   store={store}/>}
-          {store.modal === 'help'      && <Help     />}
-          {store.modal === 'about'     && <About    />}
-          {store.modal === 'leavequiz' && <LeaveQuiz/>}
-          {store.modal === 'waiting'   && <Waiting  />}
+          {store.modal === 'scores'              && <Scores store={store}/>}
+          {store.modal === 'help'                && <Help                />}
+          {store.modal === 'about'               && <About               />}
+          {store.modal === 'leaveQuiz'           && <LeaveQuiz           />}
+          {store.modal === 'waitForAsyncTasks'   && <WaitForAsyncTasks   />}
         </Paper>
 
       </Modal>

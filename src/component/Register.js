@@ -3,7 +3,6 @@ import { inject, observer } from 'mobx-react'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import getQuiz from '../smartcontract/getQuiz'
 
 
 @inject('store') @observer class Register extends Component {
@@ -23,9 +22,9 @@ import getQuiz from '../smartcontract/getQuiz'
 
   onClickedJoinGame = () => {
     const { store } = this.props
-    getQuiz(store)
+    store.pushTask('getQuiz')
     store.team.setRegistered(true)
-    store.setModal('waiting')
+    store.setModal('waitForAsyncTasks')
     store.setNextPage('home')
   }
 

@@ -7,9 +7,6 @@ import Button from '@material-ui/core/Button';
 import LeftIcon from '@material-ui/icons/ChevronLeft'; // https://material.io/tools/icons/?style=baseline
 import RightIcon from '@material-ui/icons/ChevronRight';
 import GradeIcon from '@material-ui/icons/Grade';
-import getGradedAnswers from '../smartcontract/getGradedAnswers';
-import submitMyAnswers from '../smartcontract/submitMyAnswers';
-import getSomeFuckingAnswers from '../smartcontract/getSomeFuckingAnswers';
 
 
 @inject('store') @observer class AnswerQuestion extends Component {
@@ -35,13 +32,13 @@ import getSomeFuckingAnswers from '../smartcontract/getSomeFuckingAnswers';
 
   onClickGrade = () => {
     const { store } = this.props
-    // const { currentRound } = store.quiz
-    submitMyAnswers(store)
-    getSomeFuckingAnswers(store)
-    getGradedAnswers(store)
+
+    store.pushTask('submitMyAnswers')
+    store.pushTask('getSomeFuckingAnswers')
+    store.pushTask('getGradedAnswers')
     
     store.quiz.setQuestionIndex(0)
-    store.setModal('waiting')
+    store.setModal('waitForAsyncTasks')
     store.setNextPage('grade')
   }
 

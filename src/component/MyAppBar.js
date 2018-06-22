@@ -110,7 +110,7 @@ const styles = {
                   <Typography>Test Contract</Typography>
                 </ListItem>
 
-                <ListItem button disabled={!store.team.registered} onClick={store.setModal.bind(this,'leavequiz')}>
+                <ListItem button disabled={!store.team.registered} onClick={store.setModal.bind(this,'leaveQuiz')}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>

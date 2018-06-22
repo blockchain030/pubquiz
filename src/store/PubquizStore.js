@@ -195,7 +195,7 @@ const RootStore = types.model({
     page: 'register',
     nextPage: 'register',
     modal: '',
-    waitingModalText: '',
+    tasks: types.optional(types.array(types.string), []), // tasks are performed by the Waiting modal
     snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),
     quiz: types.optional(Quiz, {}),
@@ -220,15 +220,19 @@ const RootStore = types.model({
         self.waitingModalText = ''
     }
 
-    function appendWaitingModalText(waitingModalText) {
-        self.waitingModalText += waitingModalText + '\n'
+    function pushTask(task) { // FIFO buffer appends to the end
+        self.tasks.push(task)
+    }
+
+    function shiftTask() { // FIFO buffer removes to the beginning
+        self.tasks.shift()
     }
 
     function setSeed(seed) {
         self.seed = seed
     }
 
-    return {setPage, setNextPage, setModal, hideModal, appendWaitingModalText, setSeed}
+    return {setPage, setNextPage, setModal, hideModal, pushTask, shiftTask, setSeed}
 })
 
 

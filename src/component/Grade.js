@@ -10,8 +10,6 @@ import Button from '@material-ui/core/Button';
 import LeftIcon from '@material-ui/icons/ChevronLeft'; // https://material.io/tools/icons/?style=baseline
 import RightIcon from '@material-ui/icons/ChevronRight';
 import SendIcon from '@material-ui/icons/Send';
-import submitGrades from '../smartcontract/submitGrades'
-import getScores from '../smartcontract/getScores'
 
 
 @inject('store') @observer class Grade extends Component {
@@ -28,10 +26,11 @@ import getScores from '../smartcontract/getScores'
 
   onClickSend = () => {
     const { store } = this.props
-    submitGrades(store)
-    getScores(store)
+    
+    store.pushTask('submitGrades')
+    store.pushTask('getScores')
 
-    store.setModal('waiting')
+    store.setModal('waitForAsyncTasks')
 
     if (store.quiz.roundIndex < store.quiz.nRounds-1) { // next round
       store.setNextPage('home-after-next-round')

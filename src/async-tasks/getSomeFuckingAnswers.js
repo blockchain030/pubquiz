@@ -1,8 +1,10 @@
+import delay from 'await-delay'
+
 const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
 
 
-const getSomeFuckingAnswers = (store) => {
-    store.appendWaitingModalText('getAnswers')
+const getSomeFuckingAnswers = async (store) => {
+    await delay(1000)
 
     // note: get answers for this round only of course
 

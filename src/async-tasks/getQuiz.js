@@ -1,3 +1,5 @@
+import delay from 'await-delay'
+
 // import crypto from 'crypto';
 
 import Web3 from 'web3';
@@ -41,8 +43,8 @@ pubquizContract.deployed().then(instance => {
 //   ]
 // }
 
-const getQuiz = (store) => {
-    store.appendWaitingModalText('getQuiz')
+const getQuiz = async (store) => {
+    await delay(1000)
 
     store.quiz.reset('Blockchain quiz')
     const { rounds } = secretQuizinfo.oracleinfo
