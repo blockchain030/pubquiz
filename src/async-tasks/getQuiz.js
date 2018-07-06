@@ -3,8 +3,8 @@ import delay from 'await-delay'
 // import crypto from 'crypto';
 
 import Web3 from 'web3';
-// import bip39 from 'bip39';
-// import hdkey from 'ethereumjs-wallet/hdkey';
+import bip39 from 'bip39';
+import hdkey from 'ethereumjs-wallet/hdkey';
 
 const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
 // console.log(JSON.stringify(secretQuizinfo,null,1))
@@ -19,8 +19,23 @@ const pubquizContract  = contract(pubquizJSON);
 pubquizContract.setProvider(provider);
 global.pubquizContract = pubquizContract;
 
-var pubquiz
+function generateKeys(_mnemonic, _slot) {
+    const path = "m/44'/60'/0'/0/" + _slot;
+    const wallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(_mnemonic)).derivePath(path).getWallet();
+
+    return {
+        "private": '0x' + wallet.getPrivateKey().toString('hex'),
+        "address": '0x' + wallet.getAddress().toString('hex'),
+    }
+}
+
+var pubquiz;
+
 pubquizContract.deployed().then(instance => {
+    var info = generateKeys(global.store.team.seed, 0);
+
+    pubquizContract.defaults({from: info.address, gas: 1 * 750000, gasPrice: 5 * 2000000000});
+
     pubquiz = instance;
     global.pubquiz = pubquiz;
     console.log('Pubquiz.sol is deployed at', pubquiz.address, 'on', providerUrl)
@@ -29,19 +44,6 @@ pubquizContract.deployed().then(instance => {
     global.pubquiz = pubquiz;
     console.error('Pubquiz.sol is not deployed on', providerUrl, ' . Error:', e.message)
 })
-
-// const IPFS_GATEWAY = 'https://gateway.ipfs.io/ipfs/'
-
-// const dummyPubquiz = {
-//   "rounds": [
-//     {
-//       "title": "",
-//       // "questionsDecrypted": [""],
-//       // "answersDecrypted": [""],
-//       // "playerAnswer": [""],
-//     }
-//   ]
-// }
 
 const getQuiz = async (store) => {
     await delay(1000)
@@ -55,11 +57,6 @@ const getQuiz = async (store) => {
         const questions = round.questions.map(q => {return {question: q.question}})
         store.quiz.pushRound({name:round.title, questions})
     }
-
-
-
-
-
 
     // const pubquizGatewayUrl = IPFS_GATEWAY + secretQuizinfo.playerinfoHash
     // console.log(pubquizGatewayUrl)

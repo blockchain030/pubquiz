@@ -13,10 +13,56 @@ contract Pubquiz {
   mapping (address => Team) teams;
   address[] public teamAccts;
 
-  uint startpoints;  // number of gamepoints that each team gets when registering
+  string public currentPlayerInfoHash;
+  mapping (uint => bytes) passwordQuestions;
+  mapping (uint => bytes) passwordAnswers;
 
-  function PubQuiz() public {
-    startpoints = 30;
+  function Pubquiz() public {
+    currentPlayerInfoHash = "0xQmQA243ye7X6sSTbCtKPaau2zLSriHyKHXfVE43GJvAP2N";
+    var _password1 = "grIu1Gh6";
+    passwordQuestions[0] = bytes(_password1);
+  }
+
+  function setPasswordForQuestionsInRound(uint _round, string password) public {
+    // require(!validTeam(_address)); -> add: only oracle (contract owner) can set password
+    // sets hash for all questions in given game roun
+    passwordQuestions[_round]= bytes(password);
+  }
+
+  function getPasswordForQuestionsInRound(uint _round) view public returns (string) {
+    // require(!validTeam(_address)); -> add: only oracle (contract owner) can set password
+    // sets hash for all questions in current game round (or false if password is not yet available?)
+    return string(passwordQuestions[_round]);
+  }
+
+  function setPasswordForAnswersInRound(uint _round, string password) public {
+    // require(!validTeam(_address)); -> add: only oracle (contract owner) can set password
+    // sets hash for all questions in given game roun
+    passwordAnswers[_round]=bytes(password);
+  }
+
+  function getPasswordForAnswersInRound(uint _round) view public returns (string) {
+    // require(!validTeam(_address)); -> add: only oracle (contract owner) can set password
+    // sets hash for all questions in current game round (or false if password is not yet available?)
+    return string(passwordAnswers[_round]);
+  }
+
+  function getCurrentRoundForQuestions() view public returns (uint) {
+    uint currentround = 0;
+    uint index = 0;
+
+    while (bytes(passwordQuestions[index]).length>2) { currentround=index; index++; }
+
+    return currentround;
+  }
+
+  function getCurrentRoundForAnswers() view public returns (uint) {
+    uint currentround = 0;
+    uint index = 0;
+
+    while (bytes(passwordAnswers[index]).length>2) { currentround=index; index++; }
+
+    return currentround;
   }
 
   function setTeam(address _address, string _teamname) public {
