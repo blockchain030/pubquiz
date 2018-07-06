@@ -1,13 +1,15 @@
 import delay from 'await-delay'
 
-// import crypto from 'crypto';
+import crypto from 'crypto';
 
 import Web3 from 'web3';
 import bip39 from 'bip39';
 import hdkey from 'ethereumjs-wallet/hdkey';
 
-const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
+// const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
 // console.log(JSON.stringify(secretQuizinfo,null,1))
+
+const IPFS_GATEWAY     = 'https://ipfs.io/ipfs/'
 
 const DEVMODE          = true
 
@@ -45,18 +47,53 @@ pubquizContract.deployed().then(instance => {
     console.error('Pubquiz.sol is not deployed on', providerUrl, ' . Error:', e.message)
 })
 
-const getQuiz = async (store) => {
+const getQuiz = async (store) => { // XXX this should be called 'getRound' 
+    store.quiz.reset('Blockchain quiz')
+
+    const currentPlayerInfoHash = await pubquiz.currentPlayerInfoHash()
+    const currentPlayerInfo = await (await fetch(IPFS_GATEWAY + currentPlayerInfoHash)).json()
+    // const currentRoundForQuestions = (await pubquiz.getCurrentRoundForQuestions()).toNumber()
+    // console.log('currentRoundForQuestions', currentRoundForQuestions)
+
+    const { rounds } = currentPlayerInfo
+    for (const roundIndex in rounds) {
+        const round = rounds[roundIndex]
+        // console.log(roundIndex, round)
+
+        const password = await pubquiz.getPasswordForQuestionsInRound(roundIndex)
+        if (!password) {
+            console.log('no password for questions in round', roundIndex)
+            continue
+        }
+
+        const questionsEncrypted = await (await fetch(IPFS_GATEWAY + round.questions)).text()
+        // console.log(questionsEncrypted)
+
+        const questions = JSON.parse( decrypt(questionsEncrypted, password) )
+            .map(q => {return {question: q}})
+        // console.log(questions)
+        console.log(questions.length.toString(), 'questions in round', roundIndex)
+
+        store.quiz.pushRound({name:'round.title', questions})
+    }
+
     await delay(1000)
 
-    store.quiz.reset('Blockchain quiz')
-    const { rounds } = secretQuizinfo.oracleinfo
 
-    for (const roundIndex in rounds) {
-        const round = rounds[roundIndex].info
-        // console.log(roundIndex, round.questions)
-        const questions = round.questions.map(q => {return {question: q.question}})
-        store.quiz.pushRound({name:round.title, questions})
-    }
+
+
+    // const { rounds } = secretQuizinfo.oracleinfo
+
+    // for (const roundIndex in rounds) {
+    //     const round = rounds[roundIndex].info
+    //     // console.log(roundIndex, round.questions)
+    //     const questions = round.questions.map(q => {return {question: q.question}})
+    //     store.quiz.pushRound({name:round.title, questions})
+    // }
+
+
+
+
 
     // const pubquizGatewayUrl = IPFS_GATEWAY + secretQuizinfo.playerinfoHash
     // console.log(pubquizGatewayUrl)
@@ -77,12 +114,12 @@ const getQuiz = async (store) => {
     // this.question = 0
 }
 
-// const decrypt = (text, password, algorithm='aes-256-ctr') => {
-//     var decipher = crypto.createDecipher(algorithm,password);
-//     var dec = decipher.update(text,'hex','utf8');
-//     dec += decipher.final('utf8');
-//     return dec;
-// }
+const decrypt = (text, password, algorithm='aes-256-ctr') => {
+    var decipher = crypto.createDecipher(algorithm,password);
+    var dec = decipher.update(text,'hex','utf8');
+    dec += decipher.final('utf8');
+    return dec;
+}
 
 // const getRound = (roundidx) => {
 //     const questionsGatewayUrl = IPFS_GATEWAY + this.pubquiz.rounds[roundidx].questions

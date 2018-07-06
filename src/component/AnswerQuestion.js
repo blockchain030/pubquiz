@@ -88,6 +88,8 @@ import GradeIcon from '@material-ui/icons/Grade';
           </Typography>
 
           {this.renderMedia(question_media)}
+          
+          <p></p>
 
           <Typography variant='subheading'>
             {question_text}

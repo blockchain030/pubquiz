@@ -48,7 +48,8 @@ import SendIcon from '@material-ui/icons/Send';
   renderTeam = (teamIndex, gradedAnswer) => {
     return (
       <ListItem key={teamIndex}>
-        <ListItemText primary={gradedAnswer.answer} secondary={gradedAnswer.teamName} />
+        {/* <ListItemText primary={gradedAnswer.answer} secondary={gradedAnswer.teamName} /> */}
+        <ListItemText primary={gradedAnswer.answer} />
         <Checkbox
             checked={gradedAnswer.grade > 0}
             onChange={this.handleChange(teamIndex)}

@@ -18,7 +18,7 @@ contract Pubquiz {
   mapping (uint => bytes) passwordAnswers;
 
   function Pubquiz() public {
-    currentPlayerInfoHash = "0xQmQA243ye7X6sSTbCtKPaau2zLSriHyKHXfVE43GJvAP2N";
+    currentPlayerInfoHash = "QmQA243ye7X6sSTbCtKPaau2zLSriHyKHXfVE43GJvAP2N";
     var _password1 = "grIu1Gh6";
     passwordQuestions[0] = bytes(_password1);
   }
