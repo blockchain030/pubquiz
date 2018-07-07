@@ -21,4 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 
 #data
-oracle/quizinfo
+oracle/datasets-test
+oracle/datasets/2018*
+oracle/datasets/gameinfo.json

@@ -20,6 +20,14 @@ try {
   app.route('/quiz/create')
     .get(pubquizOracle.createQuiz)
 
+  // create a new quiz, store data on ipfs, setup smart contract, return smart contract address
+  app.route('/quiz/uploaddemo')
+    .get(pubquizOracle.uploadDemoQuiz)
+
+  // store hash of the current quiz smart contract address
+  app.route('/quiz/setaddress/:contractaddress')
+    .get(pubquizOracle.setAddress)
+
   // return hash of the current quiz smart contract address
   app.route('/quiz/getaddress')
     .get(pubquizOracle.getAddress)

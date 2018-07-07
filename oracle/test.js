@@ -14,14 +14,14 @@ test = async () => {
   var questionlist = quiz.makeQuestionlist(5,3);
   var quizinfo = quiz.makePubquiz(questionlist);
 
-  const quizfolder = "./quizinfo"
+  const quizfolder = "./datasets-test"
   if(!fs.existsSync(quizfolder)) {
     fs.mkdirSync(quizfolder)
   }
 
   require("datejs")
   var ts = new Date();
-  var filename = './quizinfo/' + ts.toString("yyyyMMdd_hhmmss") + '-quiz.json';
+  var filename = './datasets-test/' + ts.toString("yyyyMMdd_hhmmss") + '-quiz.json';
   fs.writeFileSync(filename, JSON.stringify(quizinfo,0,2));
 
   // retrieve files from IPFS

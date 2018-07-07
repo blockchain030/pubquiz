@@ -3,31 +3,12 @@ import { inject, observer } from 'mobx-react'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import Button from '@material-ui/core/Button';
+import { doApiCall } from '../apitools.js';
 
 @inject('store') @observer class TestContract extends Component {
-  doApiCall = (apicall, callback) => {
-    try {
-      const request = require('request');
-
-      var url = "https://pubquiz.fun/api" + apicall;
-
-      // use local node API during testing
-      if(process.env.NODE_ENV==='development') {   // &&false -> use server during development
-        url = "http://localhost:3001" + apicall;
-      }
-      console.log('call pubquiz API : ', url)
-      request(url, { json: true }, callback);
-
-      return true;
-    } catch(ex) {
-      console.log('TestConstract.doApiCall: error ' + ex.message)
-      return false;
-    }
-  }
-
   onClickedCreateQuiz = () => {
     var apicall = "/quiz/create";
-    this.doApiCall(apicall, (err, res, body) => {
+    doApiCall(apicall, (err, res, body) => {
       if (err) {
         console.log(apicall + ' failed: ' + err);
         return false;
@@ -45,7 +26,7 @@ import Button from '@material-ui/core/Button';
 
   onClickedGetAddress = () => {
     var apicall = "/quiz/getaddress";
-    this.doApiCall(apicall, (err, res, body) => {
+    doApiCall(apicall, (err, res, body) => {
       if (err) {
         console.log(apicall + ' failed: ' + err);
         return false;
@@ -63,7 +44,7 @@ import Button from '@material-ui/core/Button';
 
   onClickedNext = () => {
     var apicall = "/quiz/nextstep";
-    this.doApiCall(apicall, (err, res, body) => {
+    doApiCall(apicall, (err, res, body) => {
       if (err) {
         console.log(apicall + ' failed: ' + err);
         return false;

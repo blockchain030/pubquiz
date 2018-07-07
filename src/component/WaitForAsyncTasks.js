@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import registerTeam from '../async-tasks/registerTeam'
 import getQuiz from '../async-tasks/getQuiz'
 import getGradedAnswers from '../async-tasks/getGradedAnswers';
 import submitMyAnswers from '../async-tasks/submitMyAnswers';
@@ -25,7 +26,11 @@ import getScores from '../async-tasks/getScores'
     const task = store.tasks[0]
     // console.log('TASK', task)
 
-    switch (task) { 
+    switch (task) {
+      case 'registerTeam':
+        await registerTeam(store)
+        break
+
       case 'getQuiz':
         await getQuiz(store)
         break
@@ -33,11 +38,11 @@ import getScores from '../async-tasks/getScores'
       case 'submitMyAnswers':
         await submitMyAnswers(store)
         break
-    
+
       case 'getSomeFuckingAnswers':
         await getSomeFuckingAnswers(store)
         break
-    
+
       case 'getGradedAnswers':
         await getGradedAnswers(store)
         break
@@ -56,7 +61,7 @@ import getScores from '../async-tasks/getScores'
     }
 
     store.shiftTask()  // remove this task from the FIFO queue
-    this.taskManager() // execute the next task 
+    this.taskManager() // execute the next task
   } // end of taskManager
 
   componentDidMount() {
@@ -66,7 +71,7 @@ import getScores from '../async-tasks/getScores'
   onClickedContinue = () => {
     const { store } = this.props
     // console.log('nextPage', store.nextPage)
-    
+
     if (store.nextPage === 'home-after-next-round') {
       store.hideModal()
       store.quiz.setRoundIndex(store.quiz.roundIndex + 1, 0)
@@ -83,8 +88,8 @@ import getScores from '../async-tasks/getScores'
 
   render() {
     const { store } = this.props
-       
-    return (        
+
+    return (
       <center>
         <Typography paragraph={true} variant='caption'>Waiting for smart contract</Typography>
         <CircularProgress size={50}/>
