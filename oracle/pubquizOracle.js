@@ -75,11 +75,11 @@ exports.getAddress = function(req, res) {
     const fs = require('fs');
     var currentfilename = './datasets/gameinfo.json';
     var json = JSON.parse(fs.readFileSync(currentfilename));
-    result = { result:true, address: json.address };
+    result = { result:true, address: json.address, abiaddress: json.abiaddress };
   } catch(ex) {
     // file does not exist
     console.log('pubquizOracle.getAddress error: quiz contract address unknown (probably not deployed yet) []' + ex.message + "]");
-    result = { result:false, address: '' };
+    result = { result:false, address: '', abiaddress: '' };
   }
 
   res.json(result);
@@ -91,18 +91,17 @@ exports.setAddress = function(req, res) {
     const fs = require('fs');
 
     var address = req.params.contractaddress;
+    var hash = req.params.abiaddress;
     // add some kind of validation here?
 
-    var gameinfo = { address: req.params.contractaddress}
+    var result = { address: address, abiaddress: hash };
+
+    console.log('++++++++', result)
 
     var ts = new Date();
-    // // write twice: one for logging, one for current value
-    // var archivefilename = './datasets/' + ts.toString("yyyyMMdd_hhmmss") + '-gameinfo.json';
     var currentfilename = './datasets/gameinfo.json';
-    // fs.writeFileSync(archivefilename, JSON.stringify(gameinfo,0,2));
-    fs.writeFileSync(currentfilename, JSON.stringify(gameinfo,0,2));
+    fs.writeFileSync(currentfilename, JSON.stringify(result,0,2));
 
-    var result = { result:true, address: address };
     res.json(result);
   } catch(ex) {
     var result = { result:false, error: ex.message };

@@ -12,8 +12,8 @@ module.exports = function(deployer) {
 
           var abiInfo = JSON.parse(fs.readFileSync('./build/contracts/Pubquiz.json'));
 
-          var hashAbiInfo = ipfsAddPlain(JSON.stringify(abiInfo));
-          if(hashAbiInfo===false) {
+          var abiaddress = ipfsAddPlain(JSON.stringify(abiInfo));
+          if(abiaddress===false) {
             console.log('truffle deploy error: unable to add ABI info to IPFS. Is the IPFS daemon running??')
             return false;
           }
@@ -21,9 +21,9 @@ module.exports = function(deployer) {
           const doApiCall = require('../../apitools.js').doApiCall;
 
           console.log("Use API to store contract address : " + Pubquiz.address);
-          console.log("abi" + JSON.stringify(Pubquiz.abi,0,2));
+          // console.log("abi" + JSON.stringify(Pubquiz.abi,0,2));
 
-          var apicall = "/quiz/setaddress/"+Pubquiz.address+'/'+hashAbiInfo;
+          var apicall = "/quiz/setaddress/"+Pubquiz.address+'/'+abiaddress;
           doApiCall(apicall, (err, res, body) => {
               if (err) {
                 console.log(apicall + ' failed: ' + err);
