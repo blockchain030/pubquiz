@@ -26,4 +26,4 @@ oracle/datasets/2018*
 oracle/datasets/gameinfo.json
 
 #truffle
-truffle/builds/contracts/
+src/truffle/build
