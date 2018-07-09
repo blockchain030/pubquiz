@@ -30,11 +30,14 @@ const getRound = async (store) => {
 
     const questions = JSON.parse( decrypt(questionsEncrypted, password) )
         .map(q => {return {question: q}})
-    console.log(questions.length.toString(), 'questions in round', currentRoundForQuestions)
+    // console.log(questions.length.toString(), 'questions in round', currentRoundForQuestions)
 
     store.quiz.pushRound({name:'round.title', questions})
 
+    // test
+    
 
+    // nog een test
 
 
 
