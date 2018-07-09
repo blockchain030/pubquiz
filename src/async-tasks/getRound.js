@@ -1,7 +1,5 @@
-import crypto from 'crypto'
+import { decrypt, IPFS_GATEWAY } from '../smartcontractInterface'
 
-
-const IPFS_GATEWAY     = 'https://ipfs.io/ipfs/'
 
 const getRound = async (store) => {
     const { pubquiz } = global
@@ -66,13 +64,6 @@ const getRound = async (store) => {
 
     // this.round = 0
     // this.question = 0
-}
-
-const decrypt = (text, password, algorithm='aes-256-ctr') => {
-    var decipher = crypto.createDecipher(algorithm,password);
-    var dec = decipher.update(text,'hex','utf8');
-    dec += decipher.final('utf8');
-    return dec;
 }
 
 // const getRound = (roundidx) => {

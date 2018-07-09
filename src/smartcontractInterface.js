@@ -1,6 +1,7 @@
 import Web3 from 'web3'
 import bip39 from 'bip39'
 import hdkey from 'ethereumjs-wallet/hdkey'
+import crypto from 'crypto'
 
 
 const DEVMODE          = true
@@ -38,3 +39,36 @@ pubquizContract.deployed().then(instance => {
     global.pubquiz = pubquiz;
     console.error('Pubquiz.sol is not deployed on', providerUrl, ' . Error:', e.message)
 })
+
+
+//
+export const encrypt = (text, password, algorithm = 'aes-256-ctr') => {
+    try {
+        var cipher = crypto.createCipher(algorithm,password);
+        var crypted = cipher.update(text,'utf8','hex');
+        crypted += cipher.final('hex');
+        return crypted;
+    } catch(ex) {
+        console.log("ipfsfunctions.encrypt - error: ", ex.message);
+        return false;
+    }
+}
+
+export const decrypt = (text, password, algorithm = 'aes-256-ctr') => {
+    try {
+        var decipher = crypto.createDecipher(algorithm,password);
+        var dec = decipher.update(text,'hex','utf8');
+        dec += decipher.final('utf8');
+        return dec;
+    } catch(ex) {
+        console.log("ipfsfunctions.decrypt - error: ", ex.message);
+        return false;
+    }
+}
+
+export const generatePassword = (nCharacters=8) => {
+    const pw = Math.random().toString(36)
+    return pw.substring(pw.length - nCharacters)
+}
+
+export const IPFS_GATEWAY = 'https://ipfs.io/ipfs/'

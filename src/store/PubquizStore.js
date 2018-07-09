@@ -71,6 +71,7 @@ const Question = types.model({
 const Round = types.model({
     name: '',
     questions: types.optional(types.array(Question), []),
+    answersPassword: '',
 }).views(self => ({
 
     get myAnswers() {
@@ -97,7 +98,11 @@ const Round = types.model({
         }
     }
 
-    return {pushQuestion, setAnswers}
+    function setAnswersPassword(answersPassword) {
+        self.answersPassword = answersPassword
+    }
+
+    return {pushQuestion, setAnswers, setAnswersPassword}
 })
 
 
