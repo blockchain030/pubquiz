@@ -36,8 +36,6 @@ const getRound = async (store) => {
 
 
 
-
-
     // const { rounds } = secretQuizinfo.oracleinfo
 
     // for (const roundIndex in rounds) {

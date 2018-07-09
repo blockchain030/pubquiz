@@ -24,3 +24,6 @@ yarn-error.log*
 oracle/datasets-test
 oracle/datasets/2018*
 oracle/datasets/gameinfo.json
+
+#truffle
+truffle/builds/contracts/
