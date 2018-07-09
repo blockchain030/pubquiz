@@ -25,7 +25,7 @@ try {
     .get(pubquizOracle.uploadDemoQuiz)
 
   // store hash of the current quiz smart contract address
-  app.route('/quiz/setaddress/:contractaddress')
+  app.route('/quiz/setaddress/:contractaddress/:abiaddress')
     .get(pubquizOracle.setAddress)
 
   // return hash of the current quiz smart contract address
