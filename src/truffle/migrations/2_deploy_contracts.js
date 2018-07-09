@@ -23,7 +23,7 @@ module.exports = function(deployer) {
           console.log("Use API to store contract address : " + Pubquiz.address);
           // console.log("abi" + JSON.stringify(Pubquiz.abi,0,2));
 
-          var apicall = "/quiz/setaddress/"+Pubquiz.address+'/'+abiaddress;
+          var apicall = "/quiz/setaddress/"+Pubquiz.address+'/'+abiaddress+'/';
           doApiCall(apicall, (err, res, body) => {
               if (err) {
                 console.log(apicall + ' failed: ' + err);
