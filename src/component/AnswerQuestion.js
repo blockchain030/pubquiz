@@ -34,7 +34,7 @@ import GradeIcon from '@material-ui/icons/Grade';
     const { store } = this.props
 
     store.pushTask('submitMyAnswers')
-    store.pushTask('getSomeFuckingAnswers')
+    store.pushTask('getAnswers')
     store.pushTask('getGradedAnswers')
     
     store.quiz.setQuestionIndex(0)

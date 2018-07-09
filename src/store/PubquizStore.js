@@ -173,22 +173,22 @@ const TeamScores = types.model({
 })
 
 
-const Snackbar = types.model({
-    text: '',
-    type: types.optional(types.enumeration('SnackbarInfo', ['log','info','warning','error']), 'log')
-}).actions(self => {
+// const Snackbar = types.model({
+//     text: '',
+//     type: types.optional(types.enumeration('SnackbarInfo', ['log','info','warning','error']), 'log')
+// }).actions(self => {
 
-    function show(text, type='log') {
-        self.text = text
-        self.type = type
-    }
+//     function show(text, type='log') {
+//         self.text = text
+//         self.type = type
+//     }
 
-    function hide() {
-        show('')
-    }
+//     function hide() {
+//         show('')
+//     }
 
-    return {show, hide}
-})
+//     return {show, hide}
+// })
 
 
 const RootStore = types.model({
@@ -197,7 +197,7 @@ const RootStore = types.model({
     modal: '',
     nModalsShown: 0,
     tasks: types.optional(types.array(types.string), []), // tasks are performed by the Waiting modal
-    snackbar: types.optional(Snackbar, {}),
+    // snackbar: types.optional(Snackbar, {}),
     team: types.optional(Team, {}),
     quiz: types.optional(Quiz, {}),
     teamScores: types.optional(TeamScores, {}),

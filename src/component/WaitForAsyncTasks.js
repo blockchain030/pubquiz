@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import delay from 'await-delay'
+
 import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import getQuiz from '../async-tasks/getQuiz'
+import getRound from '../async-tasks/getRound'
 import getGradedAnswers from '../async-tasks/getGradedAnswers';
 import submitMyAnswers from '../async-tasks/submitMyAnswers';
-import getSomeFuckingAnswers from '../async-tasks/getSomeFuckingAnswers';
+import getAnswers from '../async-tasks/getAnswers';
 import submitGrades from '../async-tasks/submitGrades'
 import getScores from '../async-tasks/getScores'
 
@@ -26,16 +28,16 @@ import getScores from '../async-tasks/getScores'
     // console.log('TASK', task)
 
     switch (task) { 
-      case 'getQuiz':
-        await getQuiz(store)
+      case 'getRound':
+        await getRound(store)
         break
 
       case 'submitMyAnswers':
         await submitMyAnswers(store)
         break
     
-      case 'getSomeFuckingAnswers':
-        await getSomeFuckingAnswers(store)
+      case 'getAnswers':
+        await getAnswers(store)
         break
     
       case 'getGradedAnswers':
@@ -55,6 +57,7 @@ import getScores from '../async-tasks/getScores'
         break
     }
 
+    await delay(1000)  // extra delay until we talk with the actual blockchain
     store.shiftTask()  // remove this task from the FIFO queue
     this.taskManager() // execute the next task 
   } // end of taskManager
