@@ -22,7 +22,7 @@ import Button from '@material-ui/core/Button';
 
   onClickedJoinGame = () => {
     const { store } = this.props
-    store.pushTask('getQuiz')
+    store.pushTask('getRound')
     store.team.setRegistered(true)
     store.setModal('waitForAsyncTasks')
     store.setNextPage('home')

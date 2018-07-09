@@ -1,10 +1,7 @@
 import { values } from "mobx";
-import delay from 'await-delay'
 
 
 const getGradedAnswers = async (store) => {
-    await delay(1000)
-
     // console.log(currentQuestion.myAnswer)
 
     const teams = [

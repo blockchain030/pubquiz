@@ -1,83 +1,39 @@
-import delay from 'await-delay'
+import crypto from 'crypto'
 
-import crypto from 'crypto';
-
-import Web3 from 'web3';
-import bip39 from 'bip39';
-import hdkey from 'ethereumjs-wallet/hdkey';
-
-// const secretQuizinfo = require('./20180320-quiz.json'); // XXX this is a copy!
-// console.log(JSON.stringify(secretQuizinfo,null,1))
 
 const IPFS_GATEWAY     = 'https://ipfs.io/ipfs/'
 
-const DEVMODE          = true
+const getRound = async (store) => {
+    const { pubquiz } = global
 
-const providerUrl      = DEVMODE ? 'http://localhost:9545' : 'https://ropsten.infura.io/sCQUO1V3FOoOUWGZBtig'
-const provider         = new Web3.providers.HttpProvider(providerUrl);
-const contract         = require('truffle-contract');
-const pubquizJSON      = require('../truffle/build/contracts/Pubquiz.json')
-const pubquizContract  = contract(pubquizJSON);
-pubquizContract.setProvider(provider);
-global.pubquizContract = pubquizContract;
-
-function generateKeys(_mnemonic, _slot) {
-    const path = "m/44'/60'/0'/0/" + _slot;
-    const wallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(_mnemonic)).derivePath(path).getWallet();
-
-    return {
-        "private": '0x' + wallet.getPrivateKey().toString('hex'),
-        "address": '0x' + wallet.getAddress().toString('hex'),
-    }
-}
-
-var pubquiz;
-
-pubquizContract.deployed().then(instance => {
-    var info = generateKeys(global.store.team.seed, 0);
-
-    pubquizContract.defaults({from: info.address, gas: 1 * 750000, gasPrice: 5 * 2000000000});
-
-    pubquiz = instance;
-    global.pubquiz = pubquiz;
-    console.log('Pubquiz.sol is deployed at', pubquiz.address, 'on', providerUrl)
-}).catch(e => {
-    pubquiz = undefined
-    global.pubquiz = pubquiz;
-    console.error('Pubquiz.sol is not deployed on', providerUrl, ' . Error:', e.message)
-})
-
-const getQuiz = async (store) => { // XXX this should be called 'getRound' 
     store.quiz.reset('Blockchain quiz')
 
     const currentPlayerInfoHash = await pubquiz.currentPlayerInfoHash()
     const currentPlayerInfo = await (await fetch(IPFS_GATEWAY + currentPlayerInfoHash)).json()
-    // const currentRoundForQuestions = (await pubquiz.getCurrentRoundForQuestions()).toNumber()
+    const { rounds } = currentPlayerInfo
+    // console.log('rounds', rounds)
+    // console.log('currentPlayerInfo', currentPlayerInfo)
+
+    const currentRoundForQuestions = (await pubquiz.getCurrentRoundForQuestions()).toNumber()
     // console.log('currentRoundForQuestions', currentRoundForQuestions)
 
-    const { rounds } = currentPlayerInfo
-    for (const roundIndex in rounds) {
-        const round = rounds[roundIndex]
-        // console.log(roundIndex, round)
+    const round = rounds[currentRoundForQuestions]
+    // console.log('round', round)  
 
-        const password = await pubquiz.getPasswordForQuestionsInRound(roundIndex)
-        if (!password) {
-            console.log('no password for questions in round', roundIndex)
-            continue
-        }
-
-        const questionsEncrypted = await (await fetch(IPFS_GATEWAY + round.questions)).text()
-        // console.log(questionsEncrypted)
-
-        const questions = JSON.parse( decrypt(questionsEncrypted, password) )
-            .map(q => {return {question: q}})
-        // console.log(questions)
-        console.log(questions.length.toString(), 'questions in round', roundIndex)
-
-        store.quiz.pushRound({name:'round.title', questions})
+    const password = await pubquiz.getPasswordForQuestionsInRound(currentRoundForQuestions)
+    if (!password) {
+        console.log('no password for questions in round', currentRoundForQuestions)
+        return
     }
 
-    await delay(1000)
+    const questionsEncrypted = await (await fetch(IPFS_GATEWAY + round.questions)).text()
+
+    const questions = JSON.parse( decrypt(questionsEncrypted, password) )
+        .map(q => {return {question: q}})
+    console.log(questions.length.toString(), 'questions in round', currentRoundForQuestions)
+
+    store.quiz.pushRound({name:'round.title', questions})
+
 
 
 
@@ -153,4 +109,4 @@ const decrypt = (text, password, algorithm='aes-256-ctr') => {
 
 // } // end of getRound(roundidx)
 
-export default getQuiz
+export default getRound

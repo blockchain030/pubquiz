@@ -6,7 +6,7 @@ import AsyncComponent from './component/AsyncComponent'
 
 import PubquizTheme from './PubquizTheme';
 import MyAppBar from './component/MyAppBar';
-import Snackbar from './component/Snackbar';
+// import Snackbar from './component/Snackbar';
 
 import Register from './component/Register';
 import AnswerQuestion from './component/AnswerQuestion';
@@ -38,7 +38,7 @@ const Modals = AsyncComponent(() => import(/* webpackChunkName: "Modals" */ "./c
         </div>
 
         {store.nModalsShown > 0 && <Modals />}
-        <Snackbar snackbar={store.snackbar} />
+        {/* <Snackbar snackbar={store.snackbar} /> */}
 
       </MuiThemeProvider>
     );

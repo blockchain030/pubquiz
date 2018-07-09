@@ -1,9 +1,4 @@
-import delay from 'await-delay'
-
-
 const getScores = async (store) => {
-    await delay(1000)
-
     // note: get answers for this round only of course
 
     const teams = [
