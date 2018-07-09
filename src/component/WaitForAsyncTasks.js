@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'; // https://material-ui.co
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import getRound from '../async-tasks/getRound'
+import registerTeam from '../async-tasks/registerTeam'
 import getGradedAnswers from '../async-tasks/getGradedAnswers';
 import submitMyAnswers from '../async-tasks/submitMyAnswers';
 import getAnswers from '../async-tasks/getAnswers';
@@ -28,6 +29,10 @@ import getScores from '../async-tasks/getScores'
     // console.log('TASK', task)
 
     switch (task) { 
+      case 'registerTeam':
+        await registerTeam(store)
+        break
+
       case 'getRound':
         await getRound(store)
         break
@@ -39,7 +44,7 @@ import getScores from '../async-tasks/getScores'
       case 'getAnswers':
         await getAnswers(store)
         break
-    
+
       case 'getGradedAnswers':
         await getGradedAnswers(store)
         break
@@ -59,7 +64,7 @@ import getScores from '../async-tasks/getScores'
 
     await delay(1000)  // extra delay until we talk with the actual blockchain
     store.shiftTask()  // remove this task from the FIFO queue
-    this.taskManager() // execute the next task 
+    this.taskManager() // execute the next task
   } // end of taskManager
 
   componentDidMount() {
@@ -69,7 +74,7 @@ import getScores from '../async-tasks/getScores'
   onClickedContinue = () => {
     const { store } = this.props
     // console.log('nextPage', store.nextPage)
-    
+
     if (store.nextPage === 'home-after-next-round') {
       store.hideModal()
       store.quiz.setRoundIndex(store.quiz.roundIndex + 1, 0)
@@ -86,8 +91,8 @@ import getScores from '../async-tasks/getScores'
 
   render() {
     const { store } = this.props
-       
-    return (        
+
+    return (
       <center>
         <Typography paragraph={true} variant='caption'>Waiting for smart contract</Typography>
         <CircularProgress size={50}/>

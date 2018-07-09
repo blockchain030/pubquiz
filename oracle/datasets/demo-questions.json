@@ -1,0 +1,49 @@
+{
+  "rounds": [
+    {
+      "title": "Algemene Vragen",
+      "questions": [
+        {
+          "number": "1.1",
+          "question": "Wat is de naam van de premier?|http://i.dailymail.co.uk/1/2017/03/13/13/wire-211163-1489413285-950_634x823.jpg",
+          "answer": "Mark Rutte"
+        },
+        {
+          "number": "1.2",
+          "question": "Wat is de hoofdstad van Nederland?|https://www.youtube.com/watch?v=lG7j3G7lAGk",
+          "answer": "Amsterdam"
+        }
+      ]
+    },
+    {
+      "title": "Ethereum Vragen",
+      "questions": [
+        {
+          "number": "2.1",
+          "question": "Wie heeft Ethereum bedacht?",
+          "answer": "Vitalik Buterin"
+        },
+        {
+          "number": "2.2",
+          "question": "Hoeveel karakters heeft een Ethereum adres?",
+          "answer": "20"
+        }
+      ]
+    },
+    {
+      "title": "Bitcoin Vragen",
+      "questions": [
+        {
+          "number": "3.1",
+          "question": "Wat is de gemiddelde blocktijd van Bitcoin?",
+          "answer": "10 minuten"
+        },
+        {
+          "number": "3.2",
+          "question": "Wat is een vork",
+          "answer": "Een stuk bestek"
+        }
+      ]
+    }
+  ]
+}

@@ -29,6 +29,33 @@ module.exports = class makePubQuiz {
     return questionlist;
   }
 
+  loadQuestionlist() {
+    var loremIpsum = require('lorem-ipsum');
+
+    // create new dummy questions for each run
+    // required to test with ipfs
+    var questionlist = { rounds: [] };
+    for(var roundidx=1;roundidx<=nrounds;roundidx++) {
+      var title = loremIpsum({count: 4, units: 'words', format: 'plain'});
+      var round = { "title": title, "questions": [] }
+      for(var questionidx=1;questionidx<=questionsperround;questionidx++) {
+        var question = loremIpsum({count: 6, units: 'words', format: 'plain'}) + '?';
+        var answer = loremIpsum({count: 12, units: 'words', format: 'plain'});
+
+        round.questions.push({
+          "number": roundidx+'.'+questionidx,
+          "question": question,
+          "answer": answer
+        })
+      }
+      questionlist.rounds.push(round);
+    }
+
+    console.log(JSON.stringify(questionlist,0,2));
+
+    return questionlist;
+  }
+
   makePubquiz(questionlist) {
     const ipfsAddEncrypted = require('./ipfsfunctions').ipfsAddEncrypted;
     const ipfsAddPlain = require('./ipfsfunctions').ipfsAddPlain;

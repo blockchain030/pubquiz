@@ -39,3 +39,17 @@ in this case you dont have to start IPFS / api.js
 There is a (temporary) page in the main menu "Test contract" for testing
 functions in the backend.
 
+
+================================================================================
+Interacting with the oracle
+
+The backend for the oracle is operated through a separate express based API.
+
+Open a shell and cd to the oracle subfolder. Start the API server with node api.js
+
+now you can use http calls to perform actions in the API. see api.js for details
+examples:
+http://localhost:3001/quiz/create -> create lorem ipsum demo questions (and upload to IPFS)
+http://localhost:3001/quiz/uploaddemo -> create "Mark Rutte" demo questions (and upload to IPFS)
+
+These calls are also accesible with buttons on the test page in the app.
