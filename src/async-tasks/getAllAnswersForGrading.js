@@ -1,10 +1,10 @@
 import { values } from "mobx";
 
 
-const getGradedAnswers = async (store) => {
+const getAllAnswersForGrading = async (store) => {
     // console.log(currentQuestion.myAnswer)
 
-    console.log('getGradedAnswers: TODO: get answers from other teams')
+    console.log('getAllAnswersForGrading: TODO: get answers from other teams')
 
     const teams = [
         { name: 'Team 1' , answer: 'Answer one'   },
@@ -35,4 +35,4 @@ const getGradedAnswers = async (store) => {
     }
 }
 
-export default getGradedAnswers
+export default getAllAnswersForGrading

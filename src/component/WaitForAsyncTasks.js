@@ -5,9 +5,9 @@ import delay from 'await-delay'
 import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import getRound from '../async-tasks/getRound'
+import getQuestions from '../async-tasks/getQuestions'
 import registerTeam from '../async-tasks/registerTeam'
-import getGradedAnswers from '../async-tasks/getGradedAnswers';
+import getAllAnswersForGrading from '../async-tasks/getAllAnswersForGrading';
 import submitMyAnswers from '../async-tasks/submitMyAnswers';
 import getAnswers from '../async-tasks/getAnswers';
 import submitGrades from '../async-tasks/submitGrades'
@@ -33,8 +33,8 @@ import getScores from '../async-tasks/getScores'
         await registerTeam(store)
         break
 
-      case 'getRound':
-        await getRound(store)
+      case 'getQuestions':
+        await getQuestions(store)
         break
 
       case 'submitMyAnswers':
@@ -45,8 +45,8 @@ import getScores from '../async-tasks/getScores'
         await getAnswers(store)
         break
 
-      case 'getGradedAnswers':
-        await getGradedAnswers(store)
+      case 'getAllAnswersForGrading':
+        await getAllAnswersForGrading(store)
         break
 
       case 'submitGrades':

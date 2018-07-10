@@ -35,7 +35,7 @@ import GradeIcon from '@material-ui/icons/Grade';
 
     store.pushTask('submitMyAnswers')
     store.pushTask('getAnswers')
-    store.pushTask('getGradedAnswers')
+    store.pushTask('getAllAnswersForGrading')
     
     store.quiz.setQuestionIndex(0)
     store.setModal('waitForAsyncTasks')

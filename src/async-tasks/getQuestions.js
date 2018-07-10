@@ -2,7 +2,7 @@ import { decrypt } from '../smartcontractInterface'
 import { asText, asJSON } from '../ipfsInterface'
 
 
-const getRound = async (store) => {
+const getQuestions = async (store) => {
     const { pubquiz } = global
 
     store.quiz.reset('Blockchain quiz')
@@ -10,18 +10,18 @@ const getRound = async (store) => {
     const currentPlayerInfoHash = await pubquiz.currentPlayerInfoHash()
     const currentPlayerInfo = await asJSON(currentPlayerInfoHash)
     const { rounds } = currentPlayerInfo
-    // console.log('rounds', rounds)
-    // console.log('currentPlayerInfo', currentPlayerInfo)
+    // console.log('getQuestions: rounds', rounds)
+    // console.log('getQuestions: currentPlayerInfo', currentPlayerInfo)
 
     const currentRoundForQuestions = (await pubquiz.getCurrentRoundForQuestions()).toNumber()
-    // console.log('currentRoundForQuestions', currentRoundForQuestions)
+    // console.log('getQuestions: currentRoundForQuestions', currentRoundForQuestions)
 
     const round = rounds[currentRoundForQuestions]
-    // console.log('round', round)  
+    // console.log('getQuestions: round', round)  
 
     const password = await pubquiz.getPasswordForQuestionsInRound(currentRoundForQuestions)
     if (!password) {
-        console.log('no password for questions in round', currentRoundForQuestions)
+        console.log('getQuestions: no password for questions in round', currentRoundForQuestions)
         return
     }
 
@@ -29,7 +29,7 @@ const getRound = async (store) => {
 
     const questions = JSON.parse( decrypt(questionsEncrypted, password) )
         .map(q => {return {question: q}})
-    console.log('getRound:', questions.length, 'questions in round', currentRoundForQuestions)
+    console.log('getQuestions:', questions.length, 'questions in round', currentRoundForQuestions)
 
     store.quiz.pushRound({name:'round.title', questions})
 
@@ -99,4 +99,4 @@ const getRound = async (store) => {
 
 // } // end of getRound(roundidx)
 
-export default getRound
+export default getQuestions

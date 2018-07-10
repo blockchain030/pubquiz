@@ -47,7 +47,7 @@ pubquizContract.deployed().then(instance => {
     console.error('Pubquiz.sol is not deployed on', providerUrl, ' . Error:', e.message)
 })
 
-const registerTeam = async (store) => { // XXX this should be called 'getRound'
+const registerTeam = async (store) => {
     store.quiz.reset('Blockchain quiz')
 
     const currentPlayerInfoHash = await pubquiz.currentPlayerInfoHash()
