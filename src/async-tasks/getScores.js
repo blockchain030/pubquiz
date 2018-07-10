@@ -1,6 +1,8 @@
 const getScores = async (store) => {
     // note: get answers for this round only of course
 
+    console.log('getScores: TODO: get current scores from smartcontract')
+
     const teams = [
         { name: 'Team 1' , answer: 'Answer one'   },
         { name: 'Team 2' , answer: 'Answer two'   },

@@ -70,5 +70,3 @@ export const generatePassword = (nCharacters=8) => {
     const pw = Math.random().toString(36)
     return pw.substring(pw.length - nCharacters)
 }
-
-export const IPFS_GATEWAY = 'https://ipfs.io/ipfs/'

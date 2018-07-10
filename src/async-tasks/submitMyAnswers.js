@@ -3,16 +3,16 @@ import { generatePassword, encrypt } from '../smartcontractInterface'
 
 const submitMyAnswers = async (store) => {
     const myAnswers = store.quiz.currentRound.myAnswers.toString()
-    console.log('myAnswers', myAnswers)
 
     const answersPassword = generatePassword()
-    // console.log('answersPassword', answersPassword)
     store.quiz.currentRound.setAnswersPassword(answersPassword)
 
     const myAnswersEncrypted = encrypt(myAnswers, answersPassword)
-    console.log('myAnswersEncrypted', myAnswersEncrypted)
+    console.log('submitMyAnswers: myAnswersEncrypted', myAnswersEncrypted)
 
-    // console.log('->', decrypt('4fad62a98573', password))
+    console.log('submitMyAnswers: TODO: wait for signal from smartcontract (via oracle) that answering is finished')
+
+    console.log('submitMyAnswers: TODO: submit answersPassword')
 }
 
 export default submitMyAnswers

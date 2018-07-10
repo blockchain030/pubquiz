@@ -4,6 +4,8 @@ import { values } from "mobx";
 const getGradedAnswers = async (store) => {
     // console.log(currentQuestion.myAnswer)
 
+    console.log('getGradedAnswers: TODO: get answers from other teams')
+
     const teams = [
         { name: 'Team 1' , answer: 'Answer one'   },
         { name: 'Team 2' , answer: 'Answer two'   },

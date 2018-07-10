@@ -1,4 +1,5 @@
-import { decrypt, IPFS_GATEWAY } from '../smartcontractInterface'
+import { decrypt } from '../smartcontractInterface'
+import { asText, asJSON } from '../ipfsInterface'
 
 
 const getRound = async (store) => {
@@ -7,7 +8,7 @@ const getRound = async (store) => {
     store.quiz.reset('Blockchain quiz')
 
     const currentPlayerInfoHash = await pubquiz.currentPlayerInfoHash()
-    const currentPlayerInfo = await (await fetch(IPFS_GATEWAY + currentPlayerInfoHash)).json()
+    const currentPlayerInfo = await asJSON(currentPlayerInfoHash)
     const { rounds } = currentPlayerInfo
     // console.log('rounds', rounds)
     // console.log('currentPlayerInfo', currentPlayerInfo)
@@ -24,11 +25,11 @@ const getRound = async (store) => {
         return
     }
 
-    const questionsEncrypted = await (await fetch(IPFS_GATEWAY + round.questions)).text()
+    const questionsEncrypted = await asText(round.questions)
 
     const questions = JSON.parse( decrypt(questionsEncrypted, password) )
         .map(q => {return {question: q}})
-    console.log(questions.length.toString(), 'questions in round', currentRoundForQuestions)
+    console.log('getRound:', questions.length, 'questions in round', currentRoundForQuestions)
 
     store.quiz.pushRound({name:'round.title', questions})
 
