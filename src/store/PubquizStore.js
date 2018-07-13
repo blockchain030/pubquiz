@@ -107,6 +107,8 @@ const Round = types.model({
 
 
 const Quiz = types.model({
+    contractaddress: '',
+    contractinfohash: '',
     name: '',
     roundIndex: 0,
     questionIndex: 0,
@@ -132,6 +134,8 @@ const Quiz = types.model({
 })).actions(self => {
 
     function reset(name) {
+        self.contractaddress = ''
+        self.contractinfohash = ''
         self.name = name
         self.roundIndex = 0
         self.questionIndex = 0
@@ -151,7 +155,12 @@ const Quiz = types.model({
         self.questionIndex = questionIndex
     }
 
-    return {reset, pushRound, setRoundIndex, setQuestionIndex}
+    function setContractInfo(address, infohash) {
+        self.contractaddress = address
+        self.contractinfohash = infohash
+    }
+
+    return {reset, pushRound, setRoundIndex, setQuestionIndex, setContractInfo}
 })
 
 

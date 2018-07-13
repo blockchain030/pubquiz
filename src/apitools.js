@@ -1,6 +1,6 @@
-module.exports.doApiCall = (apicall, callback) => {
+export const doApiCall = async (apicall, callback) => {
   try {
-    const request = require('request');
+    const rp = require('request-promise-native');
 
     var url = "https://pubquiz.fun/api" + apicall;
 
@@ -8,10 +8,8 @@ module.exports.doApiCall = (apicall, callback) => {
     if(true||process.env.NODE_ENV==='development') {   // &&false -> use server during development
       url = "http://localhost:3001" + apicall;
     }
-    console.log('call pubquiz API : ', url)
-    request(url, { json: true }, callback);
 
-    return true;
+    return  await rp({uri: url,  json: true }, callback);
   } catch(ex) {
     console.log('TestConstract.doApiCall: error ' + ex.message)
     return false;

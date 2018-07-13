@@ -5,6 +5,7 @@ import delay from 'await-delay'
 import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import loadPubquizContract from '../async-tasks/loadPubquizContract'
 import getQuestions from '../async-tasks/getQuestions'
 import registerTeam from '../async-tasks/registerTeam'
 import getAllAnswersForGrading from '../async-tasks/getAllAnswersForGrading';
@@ -12,7 +13,6 @@ import submitMyAnswers from '../async-tasks/submitMyAnswers';
 import getAnswers from '../async-tasks/getAnswers';
 import submitGrades from '../async-tasks/submitGrades'
 import getScores from '../async-tasks/getScores'
-
 
 @inject('store') @observer class Waiting extends Component {
 
@@ -28,9 +28,13 @@ import getScores from '../async-tasks/getScores'
     const task = store.tasks[0]
     // console.log('TASK', task)
 
-    switch (task) { 
+    switch (task) {
       case 'registerTeam':
         await registerTeam(store)
+        break
+
+      case 'loadPubquizContract':
+        await loadPubquizContract(store)
         break
 
       case 'getQuestions':
@@ -40,7 +44,7 @@ import getScores from '../async-tasks/getScores'
       case 'submitMyAnswers':
         await submitMyAnswers(store)
         break
-    
+
       case 'getAnswers':
         await getAnswers(store)
         break

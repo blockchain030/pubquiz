@@ -1,42 +1,20 @@
 import React, { Component } from 'react';
+import { doApiCall } from '../apitools';
 import { inject, observer } from 'mobx-react'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography'; // https://material-ui.com/api/typography/
 import Button from '@material-ui/core/Button';
-import { doApiCall } from '../apitools.js';
 
 @inject('store') @observer class TestContract extends Component {
   onClickedCreateQuiz = () => {
     var apicall = "/quiz/create";
-    doApiCall(apicall, (err, res, body) => {
-      if (err) {
-        console.log(apicall + ' failed: ' + err);
-        return false;
-      }
-
+    doApiCall(apicall).then((body) => {
       console.log(body)
-
       alert('Tada! I created a quiz!' + JSON.stringify(body,0,2));
 
       return true;
-    });
-
-    return true;
-  }
-
-  onClickedGetAddress = () => {
-    var apicall = "/quiz/getaddress";
-    doApiCall(apicall, (err, res, body) => {
-      if (err) {
-        console.log(apicall + ' failed: ' + err);
-        return false;
-      }
-
-      console.log(body)
-
-      alert(JSON.stringify(body,0,2));
-
-      return true;
+    }).catch((ex)=>{
+      console.log('create quiz failed: ', ex);
     });
 
     return true;
@@ -44,18 +22,18 @@ import { doApiCall } from '../apitools.js';
 
   onClickedNext = () => {
     var apicall = "/quiz/nextstep";
-    doApiCall(apicall, (err, res, body) => {
-      if (err) {
-        console.log(apicall + ' failed: ' + err);
-        return false;
-      }
 
+    doApiCall(apicall).then((body) => {
       console.log(body)
 
       alert(JSON.stringify(body,0,2));
 
       return true;
+    }).catch((ex)=>{
+      console.log('OnClickedNext failed: ', ex);
     });
+
+    return true;
   }
 
   onClickedTestTestTest = () => {
@@ -80,9 +58,6 @@ import { doApiCall } from '../apitools.js';
 
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedCreateQuiz}>
             Create Quiz
-          </Button><br/><br/>
-          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedGetAddress}>
-            Get Address
           </Button><br/><br/>
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedNext}>
             Next Step

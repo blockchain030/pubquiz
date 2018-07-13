@@ -1,5 +1,5 @@
-import { generatePassword, encrypt } from '../smartcontractInterface'
-
+import { generatePassword } from '../smartcontractInterface'
+import { encrypt } from '../ipfsInterface'
 
 const submitMyAnswers = async (store) => {
     const myAnswers = store.quiz.currentRound.myAnswers.toString()

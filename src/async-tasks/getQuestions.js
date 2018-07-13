@@ -1,4 +1,4 @@
-import { decrypt } from '../smartcontractInterface'
+import { decrypt } from '../ipfsInterface'
 import { asText, asJSON } from '../ipfsInterface'
 
 
@@ -17,7 +17,7 @@ const getQuestions = async (store) => {
     // console.log('getQuestions: currentRoundForQuestions', currentRoundForQuestions)
 
     const round = rounds[currentRoundForQuestions]
-    // console.log('getQuestions: round', round)  
+    // console.log('getQuestions: round', round)
 
     const password = await pubquiz.getPasswordForQuestionsInRound(currentRoundForQuestions)
     if (!password) {
