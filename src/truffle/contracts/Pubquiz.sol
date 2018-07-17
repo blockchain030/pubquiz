@@ -2,6 +2,7 @@ pragma solidity ^0.4.18;
 // We have to specify what version of compiler this code will compile with
 
 contract Pubquiz {
+  event TeamRegistered(address _address, string _name);
 
   /* team related functions */
 
@@ -65,13 +66,15 @@ contract Pubquiz {
     return currentround;
   }
 
-  function setTeam(address _address, string _teamname) public {
-      require(!validTeam(_address));
+  function setTeam(string _teamname) public {
+      require(!validTeam(msg.sender));
 
-      var team = teams[_address];
+      var team = teams[msg.sender];
       team.name = _teamname;
       team.score = 0;
-      teamAccts.push(_address);
+      teamAccts.push(msg.sender);
+
+      TeamRegistered(msg.sender, teams[msg.sender].name);
   }
 
   function getTeamAccts() view public returns (address[]) {
@@ -91,6 +94,10 @@ contract Pubquiz {
     var team = teams[_address];
 
     return (team.name, team.score);
+  }
+
+  function getSender() view public returns (address) {
+    return msg.sender;
   }
 
   /* round related functions */

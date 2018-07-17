@@ -1,6 +1,6 @@
 import { types } from "mobx-state-tree"
 import { values } from "mobx";
-
+import { generateKeys } from '../smartcontractInterface'
 
 // https://github.com/mobxjs/mobx-state-tree/blob/master/docs/getting-started.md#getting-started
 
@@ -8,6 +8,8 @@ import { values } from "mobx";
 const Team = types.model({
     name: localStorage.name ? localStorage.name : 'Team Name',
     seed: localStorage.seed ? localStorage.seed : '',
+    private: localStorage.private ? localStorage.private : '',
+    address: localStorage.address ? localStorage.address : '',
     registered: false,
 }).actions(self => {
 
@@ -19,13 +21,34 @@ const Team = types.model({
     function setSeed(seed) {
         self.seed =
         localStorage.seed = seed
+
+        var keyinfo = generateKeys(seed, 0)
+
+        self.private =
+        localStorage.private = keyinfo.private
+        self.address =
+        localStorage.address = keyinfo.address
+
+        console.log('private:', self.private, 'address:', self.address)
     }
 
     function setRegistered(registered) {
         self.registered = registered
     }
 
-    return {setName, setSeed, setRegistered}
+    function signOut() {
+      localStorage.removeItem('name')
+      localStorage.removeItem('seed')
+      localStorage.removeItem('private')
+      localStorage.removeItem('address')
+      self.name = ''
+      self.seed = ''
+      self.private = ''
+      self.address = ''
+      self.registered= false
+    }
+
+    return {setName, setSeed, setRegistered, signOut}
 })
 
 
@@ -114,7 +137,6 @@ const Quiz = types.model({
     questionIndex: 0,
     rounds: types.optional(types.array(Round), []),
 }).views(self => ({
-
     get currentRound() {
         return self.rounds[self.roundIndex]
     },
@@ -130,7 +152,6 @@ const Quiz = types.model({
     get nQuestions() { // of currentRound
         return self.currentRound.questions.length
     },
-
 })).actions(self => {
 
     function reset(name) {
@@ -156,6 +177,7 @@ const Quiz = types.model({
     }
 
     function setContractInfo(address, infohash) {
+        console.log('setContractInfo:@' + address + '@/@' + infohash + '@')
         self.contractaddress = address
         self.contractinfohash = infohash
     }

@@ -69,6 +69,7 @@ import getScores from '../async-tasks/getScores'
     await delay(1000)  // extra delay until we talk with the actual blockchain
     store.shiftTask()  // remove this task from the FIFO queue
     this.taskManager() // execute the next task
+
   } // end of taskManager
 
   componentDidMount() {

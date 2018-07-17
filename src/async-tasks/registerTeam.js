@@ -1,6 +1,6 @@
-import delay from 'await-delay'
-import { asText, asJSON } from '../ipfsInterface'
-import { decrypt } from '../ipfsInterface'
+// import delay from 'await-delay'
+// import { asText, asJSON } from '../ipfsInterface'
+// import { decrypt } from '../ipfsInterface'
 
 
 // import crypto from 'crypto';
@@ -14,69 +14,78 @@ import { decrypt } from '../ipfsInterface'
 // const providerUrl      = DEVMODE ? 'http://localhost:9545' : 'https://ropsten.infura.io/sCQUO1V3FOoOUWGZBtig'
 
 const registerTeam = async (store) => {
-  const { pubquiz } = global
+  try {
+    const { pubquiz } = global
 
-  store.quiz.reset('Blockchain quiz')
+    // register the team in the current contract\
+    console.log('setteam sending from ', store.team.address );
+    var result = await pubquiz.setTeam(store.team.name);
+    console.log(result);
 
-  const currentPlayerInfoHash = await pubquiz.currentPlayerInfoHash()
-  const currentPlayerInfo = asJSON(currentPlayerInfoHash);
-  // const currentRoundForQuestions = (await pubquiz.getCurrentRoundForQuestions()).toNumber()
-  // console.log('currentRoundForQuestions', currentRoundForQuestions)
+    // store.quiz.reset('Blockchain quiz')
+    //
+    // const currentPlayerInfoHash = await pubquiz.currentPlayerInfoHash()
+    // const currentPlayerInfo = asJSON(currentPlayerInfoHash);
+    // // const currentRoundForQuestions = (await pubquiz.getCurrentRoundForQuestions()).toNumber()
+    // // console.log('currentRoundForQuestions', currentRoundForQuestions)
+    //
+    // const { rounds } = currentPlayerInfo
+    // for (const roundIndex in rounds) {
+    //     const round = rounds[roundIndex]
+    //     // console.log(roundIndex, round)
+    //
+    //     const password = await pubquiz.getPasswordForQuestionsInRound(roundIndex)
+    //     if (!password) {
+    //         console.log('no password for questions in round', roundIndex)
+    //         continue
+    //     }
+    //
+    //     const questionsEncrypted = asText(round.questions)
+    //     // console.log(questionsEncrypted)
+    //
+    //     const questions = JSON.parse( decrypt(questionsEncrypted, password) )
+    //         .map(q => {return {question: q}})
+    //     // console.log(questions)
+    //     console.log(questions.length.toString(), 'questions in round', roundIndex)
+    //
+    //     store.quiz.pushRound({name:'round.title', questions})
+    // }
+    //
+    // await delay(1000)
 
-  const { rounds } = currentPlayerInfo
-  for (const roundIndex in rounds) {
-      const round = rounds[roundIndex]
-      // console.log(roundIndex, round)
+    // const { rounds } = secretQuizinfo.oracleinfo
 
-      const password = await pubquiz.getPasswordForQuestionsInRound(roundIndex)
-      if (!password) {
-          console.log('no password for questions in round', roundIndex)
-          continue
-      }
+    // for (const roundIndex in rounds) {
+    //     const round = rounds[roundIndex].info
+    //     // console.log(roundIndex, round.questions)
+    //     const questions = round.questions.map(q => {return {question: q.question}})
+    //     store.quiz.pushRound({name:round.title, questions})
+    // }
 
-      const questionsEncrypted = asText(round.questions)
-      // console.log(questionsEncrypted)
 
-      const questions = JSON.parse( decrypt(questionsEncrypted, password) )
-          .map(q => {return {question: q}})
-      // console.log(questions)
-      console.log(questions.length.toString(), 'questions in round', roundIndex)
 
-      store.quiz.pushRound({name:'round.title', questions})
+
+
+    // const pubquizGatewayUrl = IPFS_GATEWAY + secretQuizinfo.playerinfoHash
+    // console.log(pubquizGatewayUrl)
+    // fetch(pubquizGatewayUrl)
+    //   .then(res => res.json())
+    //   .then(json => {
+    //     console.log(JSON.stringify(json,null,1))
+    //     this.pubquiz = json
+
+    //     for(var roundidx=0; roundidx<this.pubquiz.rounds.length; roundidx++) {
+    //       this.pubquiz.rounds[roundidx].title = 'Round ' + (roundidx + 1) // XXX this is currently missing from the puquiz json in ipfs
+    //       this.getRound(roundidx)
+    //     }
+    //   })
+    //   .catch(err => console.error(err));
+
+    // this.round = 0
+    // this.question = 0
+  } catch(ex) {
+    console.log(ex);
   }
-
-  await delay(1000)
-
-  // const { rounds } = secretQuizinfo.oracleinfo
-
-  // for (const roundIndex in rounds) {
-  //     const round = rounds[roundIndex].info
-  //     // console.log(roundIndex, round.questions)
-  //     const questions = round.questions.map(q => {return {question: q.question}})
-  //     store.quiz.pushRound({name:round.title, questions})
-  // }
-
-
-
-
-
-  // const pubquizGatewayUrl = IPFS_GATEWAY + secretQuizinfo.playerinfoHash
-  // console.log(pubquizGatewayUrl)
-  // fetch(pubquizGatewayUrl)
-  //   .then(res => res.json())
-  //   .then(json => {
-  //     console.log(JSON.stringify(json,null,1))
-  //     this.pubquiz = json
-
-  //     for(var roundidx=0; roundidx<this.pubquiz.rounds.length; roundidx++) {
-  //       this.pubquiz.rounds[roundidx].title = 'Round ' + (roundidx + 1) // XXX this is currently missing from the puquiz json in ipfs
-  //       this.getRound(roundidx)
-  //     }
-  //   })
-  //   .catch(err => console.error(err));
-
-  // this.round = 0
-  // this.question = 0
 }
 
 // const getRound = (roundidx) => {

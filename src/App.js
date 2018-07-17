@@ -11,7 +11,8 @@ import MyAppBar from './component/MyAppBar';
 import Register from './component/Register';
 import AnswerQuestion from './component/AnswerQuestion';
 import Grade from './component/Grade';
-import { doApiCall } from './apitools.js';
+// import { doApiCall } from './apitools.js';
+import pollCheckStatus from './async-tasks/pollCheckStatus.js';
 
 const EnterSeed = AsyncComponent(() => import(/* webpackChunkName: "EnterSeed" */ "./component/EnterSeed"));
 const TestContract = AsyncComponent(() => import(/* webpackChunkName: "TestContract" */ "./component/TestContract"));
@@ -22,26 +23,13 @@ const Modals = AsyncComponent(() => import(/* webpackChunkName: "Modals" */ "./c
 
 @inject('store') @observer class App extends Component {
   componentWillMount() {
-    // first ask the oracle for the current quiz address
-    var apicall = "/quiz/getaddress";
-    doApiCall(apicall).then((body)=> {
-      if(body.result===true) {
-        const { store } = this.props
-        store.quiz.setContractInfo(body.address, body.abiaddress)
+    const { store } = this.props
 
-        store.pushTask('loadPubquizContract')
-        store.setModal('waitForAsyncTasks')
+    // start polling the oracle
+    store.setModal('waitForAsyncTasks')
 
-        return true;
-      } else {
-        const { store } = this.props;
-        console.log(JSON.stringify(store.quiz,0,2));
-        alert('I am unable to talk to the oracle. The quiz can\'t be started!');
-
-      }
-    }).catch((error) => {
-      alert('I am unable to talk to the oracle now. The quiz can\'t be started!');
-    });
+    pollCheckStatus();
+    setInterval(pollCheckStatus, 3000);
 
     return false;
   }

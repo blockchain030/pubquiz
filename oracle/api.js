@@ -43,7 +43,10 @@ try {
   app.route('/quiz/create')
     .get(pubquizOracle.createQuiz)
 
-  // create a new quiz, store data on ipfs, setup smart contract, return smart contract address
+  // end quiz, oracle will return empty contract address after this
+  app.route('/quiz/end')
+    .get(pubquizOracle.endQuiz)
+
   app.route('/quiz/uploaddemo')
     .get(pubquizOracle.uploadDemoQuiz)
 
@@ -75,5 +78,5 @@ try {
     });
   }
 } catch(ex) {
-  console.log("api.js - fatal error" + ex.message);
+  console.log("api.js - fatal error", ex);
 }

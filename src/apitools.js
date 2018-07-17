@@ -1,4 +1,4 @@
-export const doApiCall = async (apicall, callback) => {
+export const doApiCall = async (apicall) => {
   try {
     const rp = require('request-promise-native');
 
@@ -9,7 +9,7 @@ export const doApiCall = async (apicall, callback) => {
       url = "http://localhost:3001" + apicall;
     }
 
-    return  await rp({uri: url,  json: true }, callback);
+    return  await rp({uri: url,  json: true });
   } catch(ex) {
     console.log('TestConstract.doApiCall: error ' + ex.message)
     return false;

@@ -20,6 +20,31 @@ import Button from '@material-ui/core/Button';
     return true;
   }
 
+  onClickedEndQuiz = () => {
+    var apicall = "/quiz/end";
+    doApiCall(apicall).then((body) => {
+      console.log(body)
+      alert('Tada! I ended a quiz!' + JSON.stringify(body,0,2));
+
+      return true;
+    }).catch((ex)=>{
+      console.log('create quiz failed: ', ex);
+    });
+
+    return true;
+  }
+
+  onClickedShowTeams = async () => {
+    const { pubquiz } = global
+    // get a list of teams from the contract, for each team, look up the team name
+    var teams = await pubquiz.getTeamAccts();
+    teams.forEach(async (team) => {
+      var info = await pubquiz.getTeam(team)
+      console.log(info[0], info[1].toString());
+      // console.log(info.name, info.score.toString());
+    });
+  }
+
   onClickedNext = () => {
     var apicall = "/quiz/nextstep";
 
@@ -39,7 +64,13 @@ import Button from '@material-ui/core/Button';
   onClickedTestTestTest = () => {
     console.log("env: " + process.env.NODE_ENV);
 
-    alert("zie console log");
+    var doSomething = async () => {
+      const { pubquiz } = global
+      // register the team in the current contract\
+      console.log(await pubquiz.getTeamAccts());
+    }
+
+    doSomething();
 
     return true;
   };
@@ -59,8 +90,14 @@ import Button from '@material-ui/core/Button';
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedCreateQuiz}>
             Create Quiz
           </Button><br/><br/>
+          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedShowTeams}>
+            Show Teams
+          </Button><br/><br/>
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedNext}>
             Next Step
+          </Button><br/><br/>
+          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedEndQuiz}>
+            End Quiz
           </Button><br/><br/>
           <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedTestTestTest}>
             Test Test Test

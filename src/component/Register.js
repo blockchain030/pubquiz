@@ -6,12 +6,12 @@ import Button from '@material-ui/core/Button';
 
 
 @inject('store') @observer class Register extends Component {
-  
+
   handleNameChange = (name) => {
     // console.log('handleNameChange', name)
     this.props.store.team.setName(name) // update UI now
   }
-  
+
   handleNameChangeEvent = (event) => {
     this.handleNameChange(event.target.value)
   }
@@ -22,18 +22,33 @@ import Button from '@material-ui/core/Button';
 
   onClickedJoinGame = () => {
     const { store } = this.props
-    store.pushTask('getQuestions')
-    store.team.setRegistered(true)
+
+    store.pushTask('registerTeam')
     store.setModal('waitForAsyncTasks')
-    store.setNextPage('home')
+
+    // store.pushTask('getQuestions')
+    // store.team.setRegistered(true)
+    // store.setModal('waitForAsyncTasks')
+    // store.setNextPage('home')
+
+    //
   }
 
+onClickedSignout  = () => {
+  const { store } = this.props
+
+  store.team.signOut();
+
+  store.pushTask('registerTeam')
+  store.setModal('waitForAsyncTasks')
+}
+
   render() {
-    const { team } = this.props.store
-    
+    const { team, quiz } = this.props.store
+
     return (
       <center>
-        
+
         <Paper style={{width:'90%', padding:'15px', position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)'}}>
           <TextField
             id="name"
@@ -42,15 +57,27 @@ import Button from '@material-ui/core/Button';
             value={team.name}
             onChange={this.handleNameChangeEvent}
             margin="normal"
+            disabled={team.registered}
           /><br/><br/>
 
-          <Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
+          { team.address==='' ?
+            <div><Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedEnterSeed}>
             Scan QR code of seed
-          </Button><br/><br/>
+            </Button><br/><br/></div>: null
+          }
 
-          <Button style={{width:'100%'}} variant="contained" color="secondary" onClick={this.onClickedJoinGame}>
-            Join Quiz
-          </Button>
+          { team.registered===false ?
+            <div><Button style={{width:'100%'}} variant="contained" color="secondary" onClick={this.onClickedJoinGame}  disabled={quiz.contractaddress===''}>
+              { (quiz.contractaddress!=='') ? 'Join Quiz' : 'Waiting for registration to open' }
+            </Button><br/><br/></div>:null
+          }
+
+          { team.address!=='' ?
+            <div><Button style={{width:'100%'}} variant="contained" color="primary" onClick={this.onClickedSignout}>
+            Sign out
+            </Button><br/><br/></div> : null
+          }
+
         </Paper>
 
       </center>

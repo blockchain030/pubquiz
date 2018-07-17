@@ -1,3 +1,21 @@
+var doApiCall = async (apicall) => {
+  try {
+    const rp = require('request-promise-native');
+
+    var url = "https://pubquiz.fun/api" + apicall;
+
+    // use local node API during testing
+    if(true||process.env.NODE_ENV==='development') {   // &&false -> use server during development
+      url = "http://localhost:3001" + apicall;
+    }
+
+    return  await rp({uri: url,  json: true });
+  } catch(ex) {
+    console.log('TestConstract.doApiCall: error ' + ex.message)
+    return false;
+  }
+}
+
 var Pubquiz = artifacts.require("./Pubquiz.sol");
 
 module.exports = function(deployer) {
@@ -8,20 +26,12 @@ module.exports = function(deployer) {
           const fs = require('fs');
           const ipfsAddPlain = require('../../../oracle/ipfsfunctions').ipfsAddPlain;
 
-          console.log(process.cwd());
-
-          var abiInfo = JSON.parse(fs.readFileSync('./build/contracts/Pubquiz.json'));
-
-          var abiaddress = ipfsAddPlain(JSON.stringify(abiInfo));
+          var abiaddress = ipfsAddPlain(JSON.stringify(Pubquiz,0,2));
           if(abiaddress===false) {
             console.log('truffle deploy error: unable to add ABI info to IPFS. Is the IPFS daemon running??')
             return false;
           }
-
-          const doApiCall = require('../../apitools.js').doApiCall;
-
-          console.log("Use API to store contract address : " + Pubquiz.address);
-          // console.log("abi" + JSON.stringify(Pubquiz.abi,0,2));
+          console.log("Use API to store contract address/infohash : " + Pubquiz.address + "/" + abiaddress);
 
           var apicall = "/quiz/setaddress/"+Pubquiz.address+'/'+abiaddress+'/';
           doApiCall(apicall, (err, res, body) => {
@@ -30,14 +40,10 @@ module.exports = function(deployer) {
                 return false;
               }
 
-              console.log(body)
-
-              console.log(JSON.stringify(body,0,2));
-
               return true;
           })
         } catch(ex)  {
-          console.log('contract info not stored (' + ex.message() + ')')
+          console.log('contract info not stored (' + ex + ')')
         }
       });
 };
