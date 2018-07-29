@@ -11,6 +11,8 @@ open a few terminal windows from .../pubquiz root
 
 1. client
 
+npm install
+cd src
 npm start
 
 2. oracle
